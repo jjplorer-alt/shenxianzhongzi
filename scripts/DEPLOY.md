@@ -4,14 +4,21 @@
 
 推送到 `main` 分支后自动构建并部署到 GitHub Pages。
 
-### 启用步骤
+### 首次启用
 
-1. 将代码推送到 GitHub 仓库
-2. 在仓库 **Settings → Pages**
-3. **Source** 选择 **GitHub Actions**
-4. 推送后访问：`https://<你的用户名>.github.io/<仓库名>/`
+1. 添加远程：`git remote add origin https://github.com/用户名/仓库名.git`
+2. 推送：`git push -u origin main`
+3. 仓库 **Settings → Pages** → **Source** 选 **GitHub Actions**
 
-若只需 GitHub Pages，可删除 `.github/workflows/deploy.yml`（Vercel 工作流）。
+### 日常部署（一键）
+
+```bash
+npm run deploy
+```
+
+会自动提交更改、推送到 main，触发 GitHub Actions 部署。
+
+站点地址：`https://<用户名>.github.io/<仓库名>/`
 
 ---
 

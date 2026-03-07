@@ -1,0 +1,9 @@
+{
+  "name": "shenxianzhongzi",
+  "private": true,
+  "scripts": {
+    "deploy": "node scripts/deploy-pages.js",
+    "deploy:pages": "node scripts/deploy-pages.js",
+    "build": "cd app && npm run build"
+  }
+}
