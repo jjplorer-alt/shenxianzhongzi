@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 /**
- * 监控 Cloudflare Pages 构建直到完成
+ * 监控 Vercel 部署 workflow 直到完成
  */
 const https = require("https");
 
 const REPO = "jjplorer-alt/shenxianzhongzi";
-const WORKFLOW = "deploy-cloudflare-pages.yml";
+const WORKFLOW = "deploy-vercel.yml";
 const POLL_INTERVAL = 8000;
 const MAX_WAIT = 300000;
 
@@ -32,7 +32,7 @@ async function getLatestRun() {
 }
 
 async function main() {
-  console.log("⏳ 监控 Cloudflare Pages 构建...\n");
+  console.log("⏳ 监控 Vercel 构建...\n");
   const start = Date.now();
 
   while (Date.now() - start < MAX_WAIT) {
@@ -43,8 +43,8 @@ async function main() {
       continue;
     }
 
-    const { status, conclusion, html_url, created_at } = run;
-    const elapsed = Math.round((Date.now() - new Date(created_at).getTime()) / 1000);
+    const { status, conclusion, html_url } = run;
+    const elapsed = Math.round((Date.now() - new Date(run.created_at).getTime()) / 1000);
 
     if (status === "queued") {
       console.log(`   [${elapsed}s] 排队中...`);
@@ -53,20 +53,19 @@ async function main() {
     } else if (status === "completed") {
       console.log("\n" + "=".repeat(50));
       if (conclusion === "success") {
-        console.log("✅ Cloudflare Pages 部署成功");
+        console.log("✅ Vercel 部署成功");
         console.log("=".repeat(50));
-        console.log("\n🌐 站点: https://shenxianzhongzi.pages.dev");
+        console.log("\n🌐 站点: https://shenxianzhongzi.vercel.app");
         process.exit(0);
       } else {
         console.log("❌ 部署失败");
         console.log("=".repeat(50));
         console.log("\n📋 查看日志:", html_url);
-        console.log("\n💡 若未配置 Secrets，请添加 CLOUDFLARE_API_TOKEN 和 CLOUDFLARE_ACCOUNT_ID");
-        console.log("   或使用 Dashboard 连接: https://dash.cloudflare.com → Workers & Pages → Connect to Git");
+        console.log("\n💡 请添加 GitHub Secrets: VERCEL_TOKEN, VERCEL_ORG_ID, VERCEL_PROJECT_ID");
+        console.log("   或使用: npm run deploy:vercel:setup 通过 Vercel 导入（无需 Secrets）");
         const { exec } = require("child_process");
-        const url = "https://dash.cloudflare.com";
         const cmd = process.platform === "win32" ? "start" : process.platform === "darwin" ? "open" : "xdg-open";
-        exec(`${cmd} "${url}"`, () => {});
+        exec(`${cmd} "https://vercel.com/new/import?repository-url=https%3A%2F%2Fgithub.com%2Fjjplorer-alt%2Fshenxianzhongzi"`, () => {});
         process.exit(1);
       }
     }

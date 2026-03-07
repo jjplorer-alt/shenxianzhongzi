@@ -5,7 +5,8 @@
     "check:cloudflare": "node scripts/check-cloudflare-git.mjs",
     "deploy": "node scripts/deploy-pages.js",
     "deploy:pages": "node scripts/deploy-pages.js",
-    "deploy:vercel": "node scripts/deploy-vercel-import.js",
+    "deploy:vercel": "node scripts/deploy-vercel-pages.js",
+    "deploy:vercel:setup": "node scripts/deploy-vercel-import.js",
     "deploy:cloudflare": "node scripts/deploy-cloudflare-pages.js",
     "build": "cd app && npm run build",
     "pdf:to-images": "node scripts/pdf-to-images.mjs"
