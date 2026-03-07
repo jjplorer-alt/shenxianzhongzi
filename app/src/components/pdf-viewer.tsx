@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
@@ -11,12 +11,15 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/b
 interface PdfViewerProps {
   src: string;
   scale?: number;
+  fitWidth?: boolean;
   className?: string;
 }
 
-export function PdfViewer({ src, scale = 1, className = "" }: PdfViewerProps) {
+export function PdfViewer({ src, scale = 1, fitWidth = false, className = "" }: PdfViewerProps) {
   const [numPages, setNumPages] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
+  const [containerWidth, setContainerWidth] = useState<number>(0);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const onLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
@@ -30,6 +33,16 @@ export function PdfViewer({ src, scale = 1, className = "" }: PdfViewerProps) {
   useEffect(() => {
     setError(null);
   }, [src]);
+
+  useEffect(() => {
+    if (!fitWidth || !containerRef.current) return;
+    const el = containerRef.current;
+    const updateWidth = () => setContainerWidth(el.offsetWidth);
+    updateWidth();
+    const ro = new ResizeObserver(updateWidth);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [fitWidth, numPages]);
 
   if (error) {
     return (
@@ -47,7 +60,7 @@ export function PdfViewer({ src, scale = 1, className = "" }: PdfViewerProps) {
   }
 
   return (
-    <div className={`overflow-auto ${className}`}>
+    <div ref={containerRef} className={`overflow-auto ${className}`}>
       <Document
         file={src}
         onLoadSuccess={onLoadSuccess}
@@ -62,7 +75,9 @@ export function PdfViewer({ src, scale = 1, className = "" }: PdfViewerProps) {
           <Page
             key={i}
             pageNumber={i + 1}
-            scale={scale}
+            scale={fitWidth && containerWidth > 0 ? undefined : scale}
+            width={fitWidth && containerWidth > 0 ? containerWidth : undefined}
+            key={`${i}-${fitWidth}-${containerWidth}`}
             renderTextLayer
             renderAnnotationLayer
             className="!mb-4"

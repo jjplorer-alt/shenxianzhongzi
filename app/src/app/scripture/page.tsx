@@ -3,7 +3,7 @@
 import dynamic from "next/dynamic";
 import { useState } from "react";
 import { motion } from "framer-motion";
-import { Download, ZoomIn, ZoomOut, RotateCcw } from "lucide-react";
+import { Download, ZoomIn, ZoomOut, RotateCcw, Maximize2 } from "lucide-react";
 import { SCRIPTURE_INTRO } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 
@@ -18,6 +18,7 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
 export default function ScripturePage() {
   const [zoom, setZoom] = useState(100);
+  const [fitWidth, setFitWidth] = useState(false);
   const pdfUrl = `${basePath}/beidou-pinyin.pdf`;
 
   return (
@@ -63,6 +64,15 @@ export default function ScripturePage() {
           >
             <ZoomIn className="h-3.5 w-3.5" />
           </Button>
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => setFitWidth((f) => !f)}
+            className={`h-7 gap-1 px-2 text-[12px] hover:text-foreground ${fitWidth ? "text-gold" : "text-muted-foreground"}`}
+            title="自适应页面宽度"
+          >
+            <Maximize2 className="h-3.5 w-3.5" />
+          </Button>
         </div>
 
         <a href={pdfUrl} download className="ml-auto">
@@ -78,7 +88,7 @@ export default function ScripturePage() {
 
       {/* ─── PDF Viewer (PDF.js 渲染，支持移动端阅读) ─── */}
       <div className="glass mt-3 overflow-hidden rounded-xl" style={{ minHeight: "80vh" }}>
-        <PdfViewer src={pdfUrl} scale={zoom / 100} className="max-h-[80vh]" />
+        <PdfViewer src={pdfUrl} scale={zoom / 100} fitWidth={fitWidth} className="max-h-[80vh]" />
       </div>
 
       <p className="mt-2 text-center text-[11px] text-muted-foreground/85">
