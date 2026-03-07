@@ -26,7 +26,8 @@ function fetch(url) {
 }
 
 async function getLatestRun() {
-  const url = `https://api.github.com/repos/${REPO}/actions/runs?per_page=1`;
+  // 仅监控 GitHub Pages 部署，不因 Cloudflare 等其它 workflow 失败而误报
+  const url = `https://api.github.com/repos/${REPO}/actions/workflows/deploy-pages.yml/runs?per_page=1`;
   const data = await fetch(url);
   return data.workflow_runs?.[0] || null;
 }
