@@ -77,7 +77,6 @@ export function PdfViewer({ src, scale = 1, fitWidth = false, className = "" }: 
             pageNumber={i + 1}
             scale={fitWidth && containerWidth > 0 ? undefined : scale}
             width={fitWidth && containerWidth > 0 ? containerWidth : undefined}
-            key={`${i}-${fitWidth}-${containerWidth}`}
             renderTextLayer
             renderAnnotationLayer
             className="!mb-4"
