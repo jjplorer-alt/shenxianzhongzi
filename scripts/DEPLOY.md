@@ -47,6 +47,23 @@
 
 ---
 
+## 一、Netlify 部署（免备案）
+
+项目根目录已有 `netlify.toml`，导入 GitHub 后通常可自动识别。若出现 **Page not found** 404，请检查：
+
+1. **Site settings → Build & deploy → Build settings**
+   - **Base directory**：**留空**（必须从仓库根目录构建）
+   - **Build command**：`npm ci && node scripts/pdf-to-images.mjs && cd app && npm ci && npm run build`
+   - **Publish directory**：`app/out`
+
+2. **Environment variables**（Settings → Environment variables）
+   - `NEXT_PUBLIC_BASE_PATH` = ``（空）
+   - `NEXT_PUBLIC_SITE_URL` = `https://<你的站点>.netlify.app`
+
+3. 若仍 404：查看 **Deploys** 中最新部署的 **Build log**，确认构建成功且 `app/out` 中有 `index.html`。
+
+---
+
 ## 二、免备案部署（不备案首选）
 
 **Cloudflare Pages、Vercel、GitHub Pages** 均为境外托管，**无需 ICP 备案**。

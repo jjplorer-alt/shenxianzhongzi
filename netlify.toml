@@ -1,0 +1,9 @@
+# Netlify 部署：Base directory 必须在 UI 中留空（仓库根目录）
+[build]
+  command = "npm ci && node scripts/pdf-to-images.mjs && cd app && npm ci && npm run build"
+  publish = "app/out"
+
+[build.environment]
+  NODE_VERSION = "20"
+  NEXT_PUBLIC_BASE_PATH = ""
+  NPM_FLAGS = "--legacy-peer-deps"
