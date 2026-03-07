@@ -1,0 +1,5 @@
+# Cloudflare Pages 配置
+# Next.js 静态导出输出目录
+name = "shenxianzhongzi"
+pages_build_output_dir = "app/out"
+compatibility_date = "2026-03-07"
