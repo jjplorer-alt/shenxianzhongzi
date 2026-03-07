@@ -1,0 +1,57 @@
+# 部署到 Cloudflare Pages
+# 推送到 main 分支后自动构建并部署
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  deployments: write
+
+concurrency:
+  group: "cloudflare-pages"
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    name: Build and Deploy
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+          cache-dependency-path: package-lock.json
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: PDF 转图片
+        run: node scripts/pdf-to-images.mjs
+
+      - name: Build
+        working-directory: app
+        env:
+          NEXT_PUBLIC_BASE_PATH: ""
+          NEXT_PUBLIC_SITE_URL: https://${{ github.event.repository.name }}.pages.dev
+        run: npm ci && npm run build
+
+      - name: Deploy to Cloudflare Pages
+        id: deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy app/out --project-name=${{ github.event.repository.name }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Deployment URL
+        run: |
+          echo "✅ 部署成功！"
+          echo "站点地址: ${{ steps.deploy.outputs.deployment-url }}"

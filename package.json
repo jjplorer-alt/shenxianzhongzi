@@ -2,6 +2,7 @@
   "name": "shenxianzhongzi",
   "private": true,
   "scripts": {
+    "check:cloudflare": "node scripts/check-cloudflare-git.mjs",
     "deploy": "node scripts/deploy-pages.js",
     "deploy:pages": "node scripts/deploy-pages.js",
     "build": "cd app && npm run build",

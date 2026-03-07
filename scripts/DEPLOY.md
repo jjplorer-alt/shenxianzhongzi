@@ -1,6 +1,49 @@
 # 自动化部署配置指南
 
-## 一、GitHub Pages 部署
+## 一、Cloudflare Pages 部署（推荐）
+
+推送到 `main` 分支后自动构建并部署到 Cloudflare Pages，全球 CDN 加速。
+
+### 方式 A：Dashboard 绑定 Git（推荐，无需 Token）
+
+在 Cloudflare 控制台连接 GitHub，每次 push 自动部署，无需配置 API Token。
+
+1. 登录 [Cloudflare Dashboard](https://dash.cloudflare.com) → **Workers & Pages** → **Create application** → **Pages** → **Connect to Git**
+2. 授权 [Cloudflare Workers & Pages](https://github.com/apps/cloudflare-workers-and-pages) 访问你的 GitHub，选择本仓库
+3. 配置构建：
+   - **Production branch**：`main`
+   - **Build command**：`npm ci && node scripts/pdf-to-images.mjs && cd app && npm ci && npm run build`
+   - **Build output directory**：`app/out`
+   - **Root directory**：留空（仓库根目录）
+   - **Environment variables**（Settings → Environment variables）：
+     - `NEXT_PUBLIC_BASE_PATH` = ``（空）
+     - `NEXT_PUBLIC_SITE_URL` = `https://<项目名>.pages.dev`（如 `https://shenxianzhongzi.pages.dev`）
+
+4. 保存后，首次部署会自动开始。之后每次 push 到 `main` 都会自动部署。
+
+### 方式 B：GitHub Actions 部署（需 API Token）
+
+使用仓库内的 `.github/workflows/deploy-cloudflare-pages.yml`，在 GitHub Actions 中构建并上传到 Cloudflare。
+
+1. **创建空 Pages 项目**
+   - Dashboard → **Workers & Pages** → **Create** → **Pages** → **Direct Upload**
+   - 项目名与仓库名一致（如 `shenxianzhongzi`）
+
+2. **获取 API 凭证**
+   - **Account ID**：Dashboard 右侧边栏
+   - **API Token**：[API Tokens](https://dash.cloudflare.com/profile/api-tokens) → **Create Token** → 使用 **Edit Cloudflare Workers** 模板，勾选 **Account - Cloudflare Pages - Edit**
+
+3. **添加 GitHub Secrets**
+   - 仓库 **Settings** → **Secrets and variables** → **Actions**
+   - 添加 `CLOUDFLARE_API_TOKEN` 和 `CLOUDFLARE_ACCOUNT_ID`
+
+4. 推送到 `main` 或手动运行 **Actions** → **Deploy to Cloudflare Pages** → **Run workflow**
+
+站点地址：`https://<项目名>.pages.dev`（如 `https://shenxianzhongzi.pages.dev`）
+
+---
+
+## 二、GitHub Pages 部署
 
 推送到 `main` 分支后自动构建并部署到 GitHub Pages。
 
