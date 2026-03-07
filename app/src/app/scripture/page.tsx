@@ -1,8 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import { motion } from "framer-motion";
-import { Download, ZoomIn, ZoomOut, RotateCcw, Maximize2 } from "lucide-react";
+import { Download } from "lucide-react";
 import { SCRIPTURE_INTRO } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 
@@ -10,8 +9,6 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 const NUM_PAGES = 16;
 
 export default function ScripturePage() {
-  const [zoom, setZoom] = useState(100);
-  const [fitWidth, setFitWidth] = useState(false);
   const pdfUrl = `${basePath}/beidou-pinyin.pdf`;
 
   return (
@@ -29,47 +26,9 @@ export default function ScripturePage() {
         {SCRIPTURE_INTRO}
       </div>
 
-      {/* ─── Toolbar ─── */}
-      <div className="mt-8 flex flex-wrap items-center gap-1.5">
-        <div className="glass-subtle flex items-center gap-1 rounded-lg p-0.5">
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setZoom((z) => Math.max(50, z - 25))}
-            className="h-7 gap-1 px-2 text-[12px] text-muted-foreground hover:text-foreground"
-          >
-            <ZoomOut className="h-3.5 w-3.5" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setZoom(100)}
-            className="h-7 gap-1 px-2.5 text-[12px] tabular-nums text-muted-foreground hover:text-foreground"
-          >
-            <RotateCcw className="h-3 w-3" />
-            {zoom}%
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setZoom((z) => Math.min(300, z + 25))}
-            className="h-7 gap-1 px-2 text-[12px] text-muted-foreground hover:text-foreground"
-          >
-            <ZoomIn className="h-3.5 w-3.5" />
-          </Button>
-          <Button
-            variant="ghost"
-            size="sm"
-            onClick={() => setFitWidth((f) => !f)}
-            className={`h-7 gap-1 px-2 text-[12px] hover:text-foreground ${fitWidth ? "text-gold" : "text-muted-foreground"}`}
-            title="自适应页面宽度"
-          >
-            <Maximize2 className="h-3.5 w-3.5" />
-            自适应
-          </Button>
-        </div>
-
-        <a href={pdfUrl} download className="ml-auto">
+      {/* ─── 下载 PDF ─── */}
+      <div className="mt-8 flex justify-end">
+        <a href={pdfUrl} download>
           <Button
             size="sm"
             className="h-7 gap-1.5 rounded-lg bg-gold px-3 text-[12px] text-background hover:bg-gold-light"
@@ -88,8 +47,7 @@ export default function ScripturePage() {
               <img
                 src={`${basePath}/beidou-pages/page-${i + 1}.png`}
                 alt={`《北斗经》第 ${i + 1} 页`}
-                className={fitWidth ? "w-full" : ""}
-                style={fitWidth ? {} : { width: `${zoom}%` }}
+                className="w-full max-w-full"
                 loading="lazy"
               />
             </div>

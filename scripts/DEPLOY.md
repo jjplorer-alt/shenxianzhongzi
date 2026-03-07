@@ -1,6 +1,10 @@
 # 自动化部署配置指南
 
-## 一、Cloudflare Pages 部署（推荐）
+> **不想备案？** 使用 **Cloudflare Pages**、**Vercel** 或 **GitHub Pages**（见下文）——均为境外托管，无需 ICP 备案。国内访问速度尚可，绑定自定义域名可提升稳定性。
+
+---
+
+## 一、Cloudflare Pages 部署（推荐，免备案）
 
 推送到 `main` 分支后自动构建并部署到 Cloudflare Pages，全球 CDN 加速。
 
@@ -43,7 +47,38 @@
 
 ---
 
-## 二、GitHub Pages 部署
+## 二、免备案部署（不备案首选）
+
+**Cloudflare Pages、Vercel、GitHub Pages** 均为境外托管，**无需 ICP 备案**。
+
+| 平台           | 免备案 | 国内速度 | 免费额度   |
+|----------------|--------|----------|------------|
+| **Cloudflare Pages** | ✅     | ⭐⭐⭐    | 无限带宽   |
+| **Vercel**     | ✅     | ⭐⭐     | 100GB/月   |
+| **GitHub Pages** | ✅   | ⭐⭐     | 无限制     |
+
+**国内访问建议**：绑定自定义域名（如 `shenxianzhongzi.me`），避免使用 `.vercel.app` / `.pages.dev` 等易被干扰的默认域名；可将域名 DNS 解析到 Cloudflare，利用其全球 CDN 提升稳定性。
+
+---
+
+## 三、中国访问最快部署（需备案）
+
+> ⚠️ 腾讯云、Gitee 等国内平台使用自定义域名通常需 **ICP 备案**。若不想备案，请用上方的 Cloudflare / Vercel / GitHub Pages。
+
+### 方案 A：腾讯云 CloudBase
+
+- **200+ 国内 CDN 节点**，首包 <50ms
+- **免费额度**：1GB 存储 + 5GB 流量/月
+- 自定义域名需备案
+
+### 方案 B：Gitee Pages
+
+- 国内服务器，需实名认证
+- 部署后需**手动点击更新**
+
+---
+
+## 三、GitHub Pages 部署
 
 推送到 `main` 分支后自动构建并部署到 GitHub Pages。
 
@@ -124,7 +159,7 @@ npx dotenv -e .env.deploy -- node scripts/setup-namecheap-dns.js
 
 ---
 
-## 三、手动部署
+## 四、手动部署
 
 ```bash
 cd app
