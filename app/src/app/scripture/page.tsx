@@ -6,8 +6,11 @@ import { Download, ZoomIn, ZoomOut, RotateCcw } from "lucide-react";
 import { SCRIPTURE_INTRO } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+
 export default function ScripturePage() {
   const [zoom, setZoom] = useState(100);
+  const pdfUrl = `${basePath}/beidou-pinyin.pdf`;
 
   return (
     <motion.div
@@ -54,7 +57,7 @@ export default function ScripturePage() {
           </Button>
         </div>
 
-        <a href="/beidou-pinyin.pdf" download className="ml-auto">
+        <a href={pdfUrl} download className="ml-auto">
           <Button
             size="sm"
             className="h-7 gap-1.5 rounded-lg bg-gold px-3 text-[12px] text-background hover:bg-gold-light"
@@ -69,7 +72,7 @@ export default function ScripturePage() {
       <div className="glass mt-3 overflow-hidden rounded-xl">
         <iframe
           key={zoom}
-          src={`/beidou-pinyin.pdf#zoom=${zoom}`}
+          src={`${pdfUrl}#zoom=${zoom}`}
           className="w-full border-0"
           style={{ height: "80vh" }}
           title="《北斗经》简体拼音基础版"

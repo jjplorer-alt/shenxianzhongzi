@@ -69,7 +69,7 @@ if (!hasRemote()) {
 
 console.log("📤 提交并推送...");
 run("git add -A");
-const status = run("git status --porcelain");
+const status = run("git status --porcelain", { inherit: false }) || "";
 if (status.trim()) {
   run('git commit -m "deploy: update"');
 } else {
