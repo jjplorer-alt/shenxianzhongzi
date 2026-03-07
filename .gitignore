@@ -1,0 +1,21 @@
+# Dependencies
+**/node_modules/
+
+# Build / cache
+app/.next/
+app/out/
+**/.vercel/
+.wrangler/
+
+# Env & secrets
+.env*
+!.env.deploy.example
+
+# Misc
+.DS_Store
+*.log
+**/.cursor/
+
+# 其他子项目（非本站）
+KuGouMusicApi/
+player/

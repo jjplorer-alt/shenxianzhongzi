@@ -1,0 +1,44 @@
+{
+  "name": "北斗真经 · 修学助手",
+  "short_name": "北斗真经",
+  "description": "道教北斗经学习资源聚合 — 经文原文、名家注解、音视频、修行日历",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#09090b",
+  "theme_color": "#7c6af7",
+  "lang": "zh-CN",
+  "categories": ["education", "lifestyle"],
+  "icons": [
+    {
+      "src": "/icon-192.svg",
+      "sizes": "192x192",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "经文",
+      "short_name": "经文",
+      "description": "阅读北斗经原文",
+      "url": "/#scripture",
+      "icons": [{ "src": "/icon-192.svg", "sizes": "192x192" }]
+    },
+    {
+      "name": "修行日历",
+      "short_name": "日历",
+      "description": "查看今日修行指引",
+      "url": "/#calendar",
+      "icons": [{ "src": "/icon-192.svg", "sizes": "192x192" }]
+    }
+  ]
+}
