@@ -114,25 +114,6 @@ if (status.trim()) {
   console.log("无新更改，直接推送");
 }
 
-function getRepoInfo() {
-  try {
-    const url = execSync(`git remote get-url ${REMOTE}`, { encoding: "utf8" }).trim();
-    const m = url.match(/github\.com[:/]([^/]+)\/([^/.]+)/);
-    return m ? { owner: m[1], repo: m[2].replace(/\.git$/, "") } : null;
-  } catch {
-    return null;
-  }
-}
-
-function checkGhInstalled() {
-  try {
-    execSync("gh --version", { stdio: "pipe" });
-    return true;
-  } catch {
-    return false;
-  }
-}
-
 try {
   run(`git push -u ${REMOTE} ${BRANCH}`);
 } catch (e) {
