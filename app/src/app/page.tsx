@@ -70,20 +70,17 @@ export default function Home() {
 
             <div className="grid grid-cols-2 gap-px bg-white/[0.03] md:grid-cols-4">
               {[
-                { label: "干支年", value: `${cal.yearGanZhi}${cal.zodiac}年` },
-                { label: "农历", value: cal.lunarDate },
-                { label: "月日", value: `${cal.monthGanZhi}月 ${cal.dayGanZhi}日` },
-                { label: "时辰", value: cal.timeZhi },
-              ].map((item) => (
+                `${cal.yearGanZhi}${cal.zodiac}年`,
+                cal.lunarDate,
+                `${cal.monthGanZhi}月 ${cal.dayGanZhi}日`,
+                cal.timeZhi,
+              ].map((value, i) => (
                 <div
-                  key={item.label}
+                  key={i}
                   className="bg-background px-3 py-2.5 text-center"
                 >
-                  <div className="text-[10px] text-muted-foreground/90">
-                    {item.label}
-                  </div>
-                  <div className="mt-px text-[13px] font-medium">
-                    {item.value}
+                  <div className="text-[13px] font-medium">
+                    {value}
                   </div>
                 </div>
               ))}
