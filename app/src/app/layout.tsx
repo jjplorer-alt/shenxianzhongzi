@@ -19,7 +19,12 @@ export const viewport: Viewport = {
   minimumScale: 1,
 };
 
+const siteUrl =
+  process.env.NEXT_PUBLIC_SITE_URL ??
+  "https://jjplorer-alt.github.io/shenxianzhongzi";
+
 export const metadata: Metadata = {
+  metadataBase: new URL(siteUrl),
   title: "神仙种子 · 道经入门学习资源",
   description:
     "道教北斗经学习资源聚合 — 经文原文、名家注解、音视频、公众号文章索引",

@@ -2,8 +2,8 @@
   "name": "神仙种子 · 道经入门学习资源",
   "short_name": "道经入门学习资源",
   "description": "道教北斗经学习资源聚合 — 经文原文、名家注解、音视频、公众号文章索引",
-  "start_url": "/",
-  "scope": "/",
+  "start_url": "./",
+  "scope": "./",
   "display": "standalone",
   "orientation": "portrait-primary",
   "background_color": "#09090b",
@@ -12,13 +12,13 @@
   "categories": ["education", "lifestyle"],
   "icons": [
     {
-      "src": "/icon-192.svg",
+      "src": "./icon-192.svg",
       "sizes": "192x192",
       "type": "image/svg+xml",
       "purpose": "any"
     },
     {
-      "src": "/icon-512.svg",
+      "src": "./icon-512.svg",
       "sizes": "512x512",
       "type": "image/svg+xml",
       "purpose": "any maskable"
@@ -29,22 +29,22 @@
       "name": "经文原文",
       "short_name": "经文",
       "description": "阅读北斗经原文",
-      "url": "/scripture/",
-      "icons": [{ "src": "/icon-192.svg", "sizes": "192x192" }]
+      "url": "./scripture/",
+      "icons": [{ "src": "./icon-192.svg", "sizes": "192x192" }]
     },
     {
       "name": "注解",
       "short_name": "注解",
       "description": "名家注解",
-      "url": "/commentary/",
-      "icons": [{ "src": "/icon-192.svg", "sizes": "192x192" }]
+      "url": "./commentary/",
+      "icons": [{ "src": "./icon-192.svg", "sizes": "192x192" }]
     },
     {
       "name": "资源",
       "short_name": "资源",
       "description": "音视频资源",
-      "url": "/resources/",
-      "icons": [{ "src": "/icon-192.svg", "sizes": "192x192" }]
+      "url": "./resources/",
+      "icons": [{ "src": "./icon-192.svg", "sizes": "192x192" }]
     }
   ]
 }

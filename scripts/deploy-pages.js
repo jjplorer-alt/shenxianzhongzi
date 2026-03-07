@@ -48,6 +48,16 @@ function openUrl(url) {
   spawn(start, [url], { stdio: "ignore", detached: true });
 }
 
+function getRepoInfo() {
+  try {
+    const url = execSync(`git remote get-url ${REMOTE}`, { encoding: "utf8" }).trim();
+    const m = url.match(/github\.com[:/]([^/]+)\/([^/.]+)/);
+    return m ? { owner: m[1], repo: m[2].replace(/\.git$/, "") } : null;
+  } catch {
+    return null;
+  }
+}
+
 console.log("📦 GitHub Pages 部署\n");
 
 // 部署前自动审查：build 必须通过，lint 仅提示
@@ -59,10 +69,18 @@ try {
 } catch {
   console.warn("⚠️ Lint 有告警，建议修复后再部署\n");
 }
+const repoForBuild = getRepoInfo();
+const siteUrlForBuild = repoForBuild
+  ? `https://${repoForBuild.owner}.github.io/${repoForBuild.repo}`
+  : "https://jjplorer-alt.github.io/shenxianzhongzi";
 try {
   run("npm run build", {
     cwd: appDir,
-    env: { ...process.env, NEXT_PUBLIC_BASE_PATH: "/shenxianzhongzi" },
+    env: {
+      ...process.env,
+      NEXT_PUBLIC_BASE_PATH: "/shenxianzhongzi",
+      NEXT_PUBLIC_SITE_URL: siteUrlForBuild,
+    },
   });
 } catch (e) {
   console.error("\n❌ 构建失败，请修复后再部署");
