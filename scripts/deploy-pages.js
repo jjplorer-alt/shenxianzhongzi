@@ -96,17 +96,64 @@ if (status.trim()) {
   console.log("无新更改，直接推送");
 }
 
+function getRepoInfo() {
+  try {
+    const url = execSync(`git remote get-url ${REMOTE}`, { encoding: "utf8" }).trim();
+    const m = url.match(/github\.com[:/]([^/]+)\/([^/.]+)/);
+    return m ? { owner: m[1], repo: m[2].replace(/\.git$/, "") } : null;
+  } catch {
+    return null;
+  }
+}
+
+function checkGhInstalled() {
+  try {
+    execSync("gh --version", { stdio: "pipe" });
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 try {
   run(`git push -u ${REMOTE} ${BRANCH}`);
-  console.log("\n✅ 推送成功，GitHub Actions 正在构建部署");
-  console.log("   查看进度: 仓库 → Actions");
-  console.log("   Settings → Pages → Source 选 GitHub Actions");
-  console.log("   访问: https://<用户名>.github.io/shenxianzhongzi/");
 } catch (e) {
   if (e.stderr && (e.stderr.includes("could not read") || e.stderr.includes("failed to push"))) {
-    console.log("\n推送失败，可能是远程仓库不存在或未登录。请：");
+    console.log("\n❌ 推送失败，可能是远程仓库不存在或未登录。请：");
     console.log("1. 在 GitHub 创建仓库 shenxianzhongzi");
     console.log("2. 确保已登录: git config --global credential.helper");
   }
   process.exit(1);
+}
+
+// 部署结果反馈
+const repo = getRepoInfo();
+const siteUrl = repo ? `https://${repo.owner}.github.io/${repo.repo}/` : null;
+const actionsUrl = repo ? `https://github.com/${repo.owner}/${repo.repo}/actions` : null;
+
+console.log("\n" + "=".repeat(50));
+console.log("📤 推送成功，GitHub Actions 已触发");
+console.log("=".repeat(50));
+
+if (checkGhInstalled()) {
+  console.log("\n⏳ 等待 GitHub Actions 构建完成...\n");
+  try {
+    run("gh run watch --exit-status", { cwd: path.join(__dirname, "..") });
+    console.log("\n" + "=".repeat(50));
+    console.log("✅ 部署成功");
+    console.log("=".repeat(50));
+    if (siteUrl) console.log("\n🌐 访问: " + siteUrl);
+  } catch (e) {
+    console.log("\n" + "=".repeat(50));
+    console.log("❌ 部署失败");
+    console.log("=".repeat(50));
+    if (actionsUrl) console.log("\n📋 查看日志: " + actionsUrl);
+    process.exit(1);
+  }
+} else {
+  console.log("\n💡 安装 GitHub CLI (gh) 可自动等待并反馈部署结果");
+  console.log("   安装: https://cli.github.com/");
+  if (siteUrl) console.log("\n🌐 站点: " + siteUrl);
+  if (actionsUrl) console.log("📋 查看构建: " + actionsUrl);
+  console.log("\n   约 1–2 分钟后访问站点确认部署是否成功");
 }

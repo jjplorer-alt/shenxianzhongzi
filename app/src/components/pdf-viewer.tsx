@@ -5,8 +5,8 @@ import { Document, Page, pdfjs } from "react-pdf";
 import "react-pdf/dist/Page/AnnotationLayer.css";
 import "react-pdf/dist/Page/TextLayer.css";
 
-// PDF.js worker - 使用 CDN 以支持静态导出和移动端
-pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
+// PDF.js worker - 使用 jsDelivr（国内访问更快）
+pdfjs.GlobalWorkerOptions.workerSrc = `https://cdn.jsdelivr.net/npm/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 interface PdfViewerProps {
   src: string;
@@ -15,15 +15,19 @@ interface PdfViewerProps {
   className?: string;
 }
 
+const LOAD_TIMEOUT_MS = 12000; // 12 秒后提示
+
 export function PdfViewer({ src, scale = 1, fitWidth = false, className = "" }: PdfViewerProps) {
   const [numPages, setNumPages] = useState<number>(0);
   const [error, setError] = useState<string | null>(null);
   const [containerWidth, setContainerWidth] = useState<number>(0);
+  const [loadSlow, setLoadSlow] = useState(false);
   const containerRef = useRef<HTMLDivElement>(null);
 
   const onLoadSuccess = ({ numPages }: { numPages: number }) => {
     setNumPages(numPages);
     setError(null);
+    setLoadSlow(false);
   };
 
   const onLoadError = (e: Error) => {
@@ -32,6 +36,9 @@ export function PdfViewer({ src, scale = 1, fitWidth = false, className = "" }: 
 
   useEffect(() => {
     setError(null);
+    setLoadSlow(false);
+    const t = setTimeout(() => setLoadSlow(true), LOAD_TIMEOUT_MS);
+    return () => clearTimeout(t);
   }, [src]);
 
   useEffect(() => {
@@ -66,8 +73,17 @@ export function PdfViewer({ src, scale = 1, fitWidth = false, className = "" }: 
         onLoadSuccess={onLoadSuccess}
         onLoadError={onLoadError}
         loading={
-          <div className="flex items-center justify-center py-16 text-muted-foreground">
-            加载中…
+          <div className="flex flex-col items-center justify-center gap-4 py-16 text-muted-foreground">
+            <div className="text-sm">加载中…</div>
+            {loadSlow && (
+              <a
+                href={src}
+                download
+                className="rounded-lg bg-gold px-4 py-2 text-sm font-medium text-background hover:bg-gold-light"
+              >
+                加载较慢？直接下载
+              </a>
+            )}
           </div>
         }
       >
