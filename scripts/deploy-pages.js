@@ -50,6 +50,26 @@ function openUrl(url) {
 
 console.log("📦 GitHub Pages 部署\n");
 
+// 部署前自动审查：build 必须通过，lint 仅提示
+console.log("🔍 部署前检查...\n");
+const appDir = path.join(__dirname, "..", "app");
+try {
+  run("npm run lint", { cwd: appDir });
+  console.log("✅ Lint 通过\n");
+} catch {
+  console.warn("⚠️ Lint 有告警，建议修复后再部署\n");
+}
+try {
+  run("npm run build", {
+    cwd: appDir,
+    env: { ...process.env, NEXT_PUBLIC_BASE_PATH: "/shenxianzhongzi" },
+  });
+} catch (e) {
+  console.error("\n❌ 构建失败，请修复后再部署");
+  process.exit(1);
+}
+console.log("✅ 构建通过，继续推送\n");
+
 if (!hasRemote()) {
   const user = getGitHubUser();
   if (user) {
