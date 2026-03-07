@@ -1,10 +1,18 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Download, ZoomIn, ZoomOut, RotateCcw } from "lucide-react";
 import { SCRIPTURE_INTRO } from "@/lib/data";
 import { Button } from "@/components/ui/button";
+
+const PdfViewer = dynamic(() => import("@/components/pdf-viewer").then((m) => ({ default: m.PdfViewer })), {
+  ssr: false,
+  loading: () => (
+    <div className="flex min-h-[60vh] items-center justify-center text-muted-foreground">加载中…</div>
+  ),
+});
 
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
 
@@ -68,19 +76,13 @@ export default function ScripturePage() {
         </a>
       </div>
 
-      {/* ─── PDF Viewer ─── */}
-      <div className="glass mt-3 overflow-hidden rounded-xl">
-        <iframe
-          key={zoom}
-          src={`${pdfUrl}#zoom=${zoom}`}
-          className="w-full border-0"
-          style={{ height: "80vh" }}
-          title="《北斗经》简体拼音基础版"
-        />
+      {/* ─── PDF Viewer (PDF.js 渲染，支持移动端阅读) ─── */}
+      <div className="glass mt-3 overflow-hidden rounded-xl" style={{ minHeight: "80vh" }}>
+        <PdfViewer src={pdfUrl} scale={zoom / 100} className="max-h-[80vh]" />
       </div>
 
       <p className="mt-2 text-center text-[11px] text-muted-foreground/85">
-        《北斗经》简体拼音基础版(打印本).pdf — 如无法预览请直接下载
+        《北斗经》简体拼音基础版(打印本).pdf — 支持手机端在线阅读
       </p>
     </motion.div>
   );
