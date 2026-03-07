@@ -72,6 +72,7 @@ export default function ScripturePage() {
             title="自适应页面宽度"
           >
             <Maximize2 className="h-3.5 w-3.5" />
+            自适应
           </Button>
         </div>
 
