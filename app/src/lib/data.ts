@@ -167,7 +167,3 @@ export const ABOUT_THANKS = `感谢我的师父、老师，带领我入门、教
 感谢本站引用的所有内容的创作者。`;
 
 export const ABOUT_DISCLAIMER = `本站内容仅供学习研究使用，经典原文来源于公开出版物，其他内容版权归原著作权人所有。`;
-
-export const ABOUT_CONTACT = `如有需求和疑问，欢迎联系微信：rushui13579。
-
-愿此一站，便利有缘~`;

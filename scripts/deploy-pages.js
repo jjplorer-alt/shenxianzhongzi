@@ -135,25 +135,10 @@ console.log("\n" + "=".repeat(50));
 console.log("📤 推送成功，GitHub Actions 已触发");
 console.log("=".repeat(50));
 
-if (checkGhInstalled()) {
-  console.log("\n⏳ 等待 GitHub Actions 构建完成...\n");
-  try {
-    run("gh run watch --exit-status", { cwd: path.join(__dirname, "..") });
-    console.log("\n" + "=".repeat(50));
-    console.log("✅ 部署成功");
-    console.log("=".repeat(50));
-    if (siteUrl) console.log("\n🌐 访问: " + siteUrl);
-  } catch (e) {
-    console.log("\n" + "=".repeat(50));
-    console.log("❌ 部署失败");
-    console.log("=".repeat(50));
-    if (actionsUrl) console.log("\n📋 查看日志: " + actionsUrl);
-    process.exit(1);
-  }
-} else {
-  console.log("\n💡 安装 GitHub CLI (gh) 可自动等待并反馈部署结果");
-  console.log("   安装: https://cli.github.com/");
-  if (siteUrl) console.log("\n🌐 站点: " + siteUrl);
-  if (actionsUrl) console.log("📋 查看构建: " + actionsUrl);
-  console.log("\n   约 1–2 分钟后访问站点确认部署是否成功");
+// 每次推送后监控直到 Actions 完成
+console.log("\n⏳ 监控构建直到完成...\n");
+try {
+  run("node scripts/watch-build.js", { cwd: path.join(__dirname, "..") });
+} catch (e) {
+  process.exit(1);
 }

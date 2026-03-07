@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { getDaoCalendar, type DaoCalendarInfo } from "@/lib/calendar";
-import { ABOUT_ORIGIN, ABOUT_THANKS, ABOUT_DISCLAIMER, ABOUT_CONTACT } from "@/lib/data";
+import { ABOUT_ORIGIN, ABOUT_THANKS, ABOUT_DISCLAIMER } from "@/lib/data";
 import { BookOpen, FileText, FolderOpen, ArrowUpRight } from "lucide-react";
 
 const fadeUp = {

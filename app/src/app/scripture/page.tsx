@@ -1,20 +1,13 @@
 "use client";
 
-import dynamic from "next/dynamic";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { Download, ZoomIn, ZoomOut, RotateCcw, Maximize2 } from "lucide-react";
 import { SCRIPTURE_INTRO } from "@/lib/data";
 import { Button } from "@/components/ui/button";
 
-const PdfViewer = dynamic(() => import("@/components/pdf-viewer").then((m) => ({ default: m.PdfViewer })), {
-  ssr: false,
-  loading: () => (
-    <div className="flex min-h-[60vh] items-center justify-center text-muted-foreground">加载中…</div>
-  ),
-});
-
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+const NUM_PAGES = 16;
 
 export default function ScripturePage() {
   const [zoom, setZoom] = useState(100);
@@ -87,13 +80,25 @@ export default function ScripturePage() {
         </a>
       </div>
 
-      {/* ─── PDF Viewer (PDF.js 渲染，支持移动端阅读) ─── */}
+      {/* ─── 图片展示（快速加载） ─── */}
       <div className="glass mt-3 overflow-hidden rounded-xl" style={{ minHeight: "80vh" }}>
-        <PdfViewer src={pdfUrl} scale={zoom / 100} fitWidth={fitWidth} className="max-h-[80vh]" />
+        <div className="max-h-[80vh] overflow-auto p-4">
+          {Array.from({ length: NUM_PAGES }, (_, i) => (
+            <div key={i} className="mb-4 last:mb-0">
+              <img
+                src={`${basePath}/beidou-pages/page-${i + 1}.png`}
+                alt={`《北斗经》第 ${i + 1} 页`}
+                className={fitWidth ? "w-full" : ""}
+                style={fitWidth ? {} : { width: `${zoom}%` }}
+                loading="lazy"
+              />
+            </div>
+          ))}
+        </div>
       </div>
 
       <p className="mt-2 text-center text-[11px] text-muted-foreground/85">
-        《北斗经》简体拼音基础版(打印本).pdf — 支持手机端在线阅读
+        《北斗经》简体拼音基础版(打印本) — 图片展示，加载更快
       </p>
     </motion.div>
   );

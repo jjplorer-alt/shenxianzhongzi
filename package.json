@@ -4,6 +4,10 @@
   "scripts": {
     "deploy": "node scripts/deploy-pages.js",
     "deploy:pages": "node scripts/deploy-pages.js",
-    "build": "cd app && npm run build"
+    "build": "cd app && npm run build",
+    "pdf:to-images": "node scripts/pdf-to-images.mjs"
+  },
+  "devDependencies": {
+    "pdf-to-img": "^5.0.0"
   }
 }
