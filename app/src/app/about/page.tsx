@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { SiteFooter } from "@/components/site-footer";
-import { ABOUT_ORIGIN, ABOUT_THANKS } from "@/lib/data";
+import { ABOUT_ORIGIN, ABOUT_THANKS, ABOUT_DISCLAIMER } from "@/lib/data";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
@@ -81,12 +81,32 @@ export default function AboutPage() {
             </div>
           </motion.div>
 
-          {/* 联系 */}
+          {/* 声明 */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             animate="visible"
             custom={0.15}
+            className="glass rounded-xl p-6 transition-all duration-300 hover:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.15)]"
+          >
+            <div className="mb-4 flex items-center gap-2.5">
+              <span className="text-[13px] text-gold/50">{"\u2726"}</span>
+              <h2 className="font-serif text-[12px] font-medium tracking-[0.2em] text-foreground/75">
+                声明
+              </h2>
+              <div className="h-px flex-1 bg-gradient-to-r from-white/[0.07] to-transparent" />
+            </div>
+            <p className="text-[13px] leading-[1.85] text-muted-foreground">
+              {ABOUT_DISCLAIMER}
+            </p>
+          </motion.div>
+
+          {/* 联系 */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={0.2}
             className="glass rounded-xl border border-gold/[0.12] bg-gradient-to-b from-gold/[0.04] to-gold/[0.01] px-6 py-7 transition-all duration-300 hover:border-gold/20 hover:shadow-[0_8px_30px_-6px_rgba(232,198,120,0.15)]"
           >
             <div className="mb-5 flex items-center gap-2.5">

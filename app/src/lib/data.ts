@@ -243,6 +243,7 @@ export const ABOUT_THANKS = `
 感谢本站引用的所有内容的创作者。
 感谢你的使用、支持、分享。`;
 
-export const ABOUT_DISCLAIMER = `本站内容仅供学习研究使用，经典原文来源于公开出版物，其他内容版权归原著作权人所有。`;
+export const ABOUT_DISCLAIMER = `本站内容仅供学习研究使用，经典原文来源于公开出版物，其他内容版权归原著作权人所有。
+如权利人认为本站内容侵犯其合法权益，请联系我们，将在核实后立即删除。`;
 
 export const FOOTER_COPYRIGHT = `© 2026 神仙种子`;
