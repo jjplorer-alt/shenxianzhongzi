@@ -47,7 +47,7 @@ export default function ResourcesPage() {
           资源索引
         </h1>
         <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
-          诵经修持、基础常识等综合学习资料，持续更新。
+          诵经修持、基础知识综合学习资料，持续更新。
         </p>
       </motion.div>
 

@@ -128,7 +128,7 @@ export default function Home() {
             },
             {
               title: "\u8d44\u6e90\u7d22\u5f15",
-              desc: "\u8bf5\u7ecf\u4fee\u6301\u3001\u57fa\u7840\u5e38\u8bc6\u7b49\u7efc\u5408\u8d44\u6599",
+              desc: "\u8bf5\u7ecf\u4fee\u6301\u3001\u57fa\u7840\u77e5\u8bc6\u7efc\u5408\u8d44\u6599",
               icon: FolderOpen,
               href: "/resources",
             },
