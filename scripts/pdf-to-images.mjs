@@ -1,9 +1,10 @@
 #!/usr/bin/env node
 /**
- * 将 beidou-pinyin.pdf 转为图片，用于快速加载
+ * 将 beidou-pinyin.pdf 转为 WebP 图片，用于快速加载（体积约减小 30%）
  */
 import { pdf } from "pdf-to-img";
-import { writeFile, mkdir } from "fs/promises";
+import sharp from "sharp";
+import { writeFile, mkdir, readdir, unlink } from "fs/promises";
 import { existsSync } from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
@@ -19,12 +20,23 @@ async function main() {
   }
   await mkdir(outDir, { recursive: true });
 
-  console.log("正在转换 PDF 为图片...");
+  // 清理旧 PNG 文件
+  if (existsSync(outDir)) {
+    const files = await readdir(outDir);
+    for (const f of files) {
+      if (f.endsWith(".png")) await unlink(path.join(outDir, f));
+    }
+  }
+
+  console.log("正在转换 PDF 为 WebP 图片...");
   const document = await pdf(pdfPath, { scale: 2 });
   let i = 1;
   for await (const image of document) {
-    const outPath = path.join(outDir, `page-${i}.png`);
-    await writeFile(outPath, image);
+    const webp = await sharp(image)
+      .webp({ quality: 85 })
+      .toBuffer();
+    const outPath = path.join(outDir, `page-${i}.webp`);
+    await writeFile(outPath, webp);
     console.log(`  页 ${i} 已保存`);
     i++;
   }

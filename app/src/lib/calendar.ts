@@ -28,7 +28,7 @@ export function getDaoCalendar(): DaoCalendarInfo {
 
   return {
     daoYear: numToCN(daoYear),
-    lunarYearMonthDay: `${lunar.getYearInGanZhi()}${lunar.getYearShengXiao()}年 ${lunar.getMonthInChinese()}月${lunar.getDayInChinese()}日`,
+    lunarYearMonthDay: `${lunar.getYearInGanZhi()}${lunar.getYearShengXiao()}年 ${lunar.getMonthInChinese()}月${lunar.getDayInChinese()}`,
     ganZhiMonthDayTime: `${lunar.getMonthInGanZhiExact()}月 ${lunar.getDayInGanZhi()}日 ${lunar.getTimeZhi()}时`,
     todayNote: getDaoistNote(lunar.getMonth(), lunar.getDay()),
   };

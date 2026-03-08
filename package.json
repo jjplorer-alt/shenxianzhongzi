@@ -12,6 +12,7 @@
     "pdf:to-images": "node scripts/pdf-to-images.mjs"
   },
   "devDependencies": {
-    "pdf-to-img": "^5.0.0"
+    "pdf-to-img": "^5.0.0",
+    "sharp": "^0.33.0"
   }
 }
