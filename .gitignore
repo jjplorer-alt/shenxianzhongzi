@@ -15,6 +15,3 @@ app/out/
 .DS_Store
 *.log
 **/.cursor/
-
-# 其他子项目（非本站）
-player/
