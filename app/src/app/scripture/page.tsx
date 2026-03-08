@@ -59,7 +59,7 @@ export default function ScripturePage() {
       </div>
 
       <p className="mt-2 text-center text-[11px] text-muted-foreground/85">
-        《北斗经》简体拼音基础版(打印本) — 图片展示，加载更快
+        《北斗经》简体拼音版 — 图片展示，加载更快
       </p>
     </motion.div>
   );

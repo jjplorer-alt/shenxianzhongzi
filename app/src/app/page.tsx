@@ -116,7 +116,7 @@ export default function Home() {
           {[
             {
               title: "\u5317\u6597\u539f\u6587",
-              desc: "\u5317\u6597\u7ecf\u7b80\u4ecb\u3001\u7b80\u4f53\u62a2\u97f3\u7248\u6d4f\u89c8",
+              desc: "\u5317\u6597\u7ecf\u7b80\u4ecb\u3001\u7b80\u4f53\u62fc\u97f3\u7248\u6d4f\u89c8",
               icon: BookOpen,
               href: "/scripture",
             },
