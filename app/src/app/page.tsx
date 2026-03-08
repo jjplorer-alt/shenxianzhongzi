@@ -145,10 +145,12 @@ export default function Home() {
                 href={item.href}
                 className="glass-card group flex h-full flex-col rounded-xl p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/15 hover:shadow-[0_8px_30px_-6px_rgba(232,198,120,0.12)]"
               >
-                <item.icon className="mb-2.5 h-5 w-5 text-gold/80 transition-transform duration-300 group-hover:scale-110" />
-                <h3 className="font-serif text-[15px] font-bold">
-                  {item.title}
-                </h3>
+                <div className="mb-2.5 flex items-center gap-2.5">
+                  <item.icon className="h-5 w-5 shrink-0 text-gold/80 transition-transform duration-300 group-hover:scale-110" />
+                  <h3 className="font-serif text-[15px] font-bold">
+                    {item.title}
+                  </h3>
+                </div>
                 <p className="mt-1 flex-1 text-[13px] leading-[1.85] text-muted-foreground">
                   {item.desc}
                 </p>
