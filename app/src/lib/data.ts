@@ -1,3 +1,24 @@
+/* ─────────────────────────────────────────────────
+ * Home page — 功能导航
+ * 中文集中放 data.ts，避免改 layout 时乱码
+ * ───────────────────────────────────────────────── */
+
+export interface NavCard {
+  title: string;
+  desc: string;
+  href: string;
+  iconKey: "scripture" | "commentary" | "resources" | "about";
+}
+
+export const NAV_CARDS: NavCard[] = [
+  { title: "北斗原文", desc: "北斗经简介、简体拼音版浏览", href: "/scripture", iconKey: "scripture" },
+  { title: "北斗经注", desc: "学经当解经意，三家注解汇总", href: "/commentary", iconKey: "commentary" },
+  { title: "资源索引", desc: "诵经修持、基础知识综合资料", href: "/resources", iconKey: "resources" },
+  { title: "关于本站", desc: "缘起、致谢、联系方式", href: "/about", iconKey: "about" },
+];
+
+/* ───────────────────────────────────────────────── */
+
 export const SCRIPTURE_INTRO = `《北斗经》，全称《太上玄灵北斗本命延生真经》。经中称：北斗七星君乃造化之枢机、人神之主宰，有回生注死之功、消灾度厄之力，凡人性命由本命星官主掌。清净身心、诚意诵经，自可消除罪业，福寿臻身，远离诸祸。
 
 《北斗经》乃昔日太上老君悲悯众生，传于张天师，宣说妙经以普度众生、脱离苦难。此经是入道必须习诵的功课。
@@ -223,3 +244,5 @@ export const ABOUT_THANKS = `
 感谢你的使用、支持、分享。`;
 
 export const ABOUT_DISCLAIMER = `本站内容仅供学习研究使用，经典原文来源于公开出版物，其他内容版权归原著作权人所有。`;
+
+export const FOOTER_COPYRIGHT = `© 2026 神仙种子`;

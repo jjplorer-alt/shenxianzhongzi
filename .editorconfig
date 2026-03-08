@@ -1,0 +1,8 @@
+# 确保项目文件统一使用 UTF-8，避免中文乱码
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_style = space
+indent_size = 2

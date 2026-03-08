@@ -11,6 +11,7 @@ const NAV_ITEMS = [
   { label: "北斗原文", href: "/scripture" },
   { label: "北斗经注", href: "/commentary" },
   { label: "资源索引", href: "/resources" },
+  { label: "关于本站", href: "/about" },
 ];
 
 function isActive(href: string, pathname: string) {
