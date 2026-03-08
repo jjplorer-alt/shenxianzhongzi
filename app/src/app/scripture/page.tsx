@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { Download } from "lucide-react";
 import { SCRIPTURE_INTRO } from "@/lib/data";
@@ -43,12 +44,14 @@ export default function ScripturePage() {
       <div className="glass mt-3 overflow-hidden rounded-xl" style={{ minHeight: "80vh" }}>
         <div className="max-h-[80vh] overflow-auto p-4">
           {Array.from({ length: NUM_PAGES }, (_, i) => (
-            <div key={i} className="mb-4 last:mb-0">
-              <img
+            <div key={i} className="relative mb-4 aspect-[595/842] w-full last:mb-0">
+              <Image
                 src={`${basePath}/beidou-pages/page-${i + 1}.png`}
                 alt={`《北斗经》第 ${i + 1} 页`}
-                className="w-full max-w-full"
+                fill
+                className="object-contain"
                 loading="lazy"
+                sizes="(max-width: 768px) 100vw, 800px"
               />
             </div>
           ))}

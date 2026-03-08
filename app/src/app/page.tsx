@@ -21,7 +21,7 @@ export default function Home() {
   const [cal, setCal] = useState<DaoCalendarInfo | null>(null);
 
   useEffect(() => {
-    setCal(getDaoCalendar());
+    queueMicrotask(() => setCal(getDaoCalendar()));
   }, []);
 
   return (
