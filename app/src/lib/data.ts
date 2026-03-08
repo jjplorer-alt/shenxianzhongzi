@@ -45,16 +45,27 @@ export interface AudioVideoItem {
   url: string;
 }
 
-export const AUDIO_VIDEO: AudioVideoItem[] = [
+export interface AudioVideoGroup {
+  groupTitle: string;
+  items: AudioVideoItem[];
+}
+
+export const AUDIO_VIDEO_GROUPS: AudioVideoGroup[] = [
   {
-    title: "孟圆辉道长《北斗经》",
-    platform: "酷狗音乐",
-    url: "https://m.kugou.com/share/song.html?chain=2jNA5fcFZV2",
+    groupTitle: "孟圆辉道长《北斗经》",
+    items: [
+      { title: "孟圆辉道长《北斗经》", platform: "酷狗音乐", url: "https://m.kugou.com/share/song.html?chain=2jNA5fcFZV2" },
+      { title: "孟圆辉道长《北斗经》", platform: "B站视频", url: "https://www.bilibili.com/video/BV1tL411G7JR/" },
+    ],
   },
   {
-    title: "孟圆辉道长《北斗经》",
-    platform: "B站视频",
-    url: "https://www.bilibili.com/video/BV1tL411G7JR/",
+    groupTitle: "上海道教学院王驰博士",
+    items: [
+      { title: "道教学修概述", platform: "B站视频", url: "https://www.bilibili.com/video/BV14o7dzYEzV/" },
+      { title: "道藏七部玄教发微", platform: "B站视频", url: "https://www.bilibili.com/video/BV1u64y1J79e/" },
+      { title: "道藏研读导论", platform: "B站视频", url: "https://www.bilibili.com/video/BV1Hz8bz5EFV/" },
+      { title: "道门经典研修导论", platform: "B站视频", url: "https://www.bilibili.com/video/BV1BN411x7yj/" },
+    ],
   },
 ];
 
@@ -78,19 +89,29 @@ export const ARTICLE_GROUPS: ArticleGroup[] = [
         url: "https://mp.weixin.qq.com/s/OQ8JBbzotxPqf7dsoTQ9Tw",
       },
       {
-        title: "【北斗降日】朝真礼斗，赐福消灾",
-        date: "2023.10",
-        url: "https://mp.weixin.qq.com/s/NCQ_iICNFyrUKBgCUuSb4g",
-      },
-      {
         title: "在家居士可以诵读哪些经书",
         date: "2025.10",
         url: "https://mp.weixin.qq.com/s/5kz9OhcUU7UQfwkyRVVffw",
       },
       {
+        title: "「经功浩力不思议」，道教为什么极为重视诵经功德？",
+        date: "2025.05",
+        url: "https://mp.weixin.qq.com/s/pPzYvzKElMFB8ytQb7zW2w",
+      },
+      {
         title: "持诵圣号的功德和利益",
         date: "2025.04",
         url: "https://mp.weixin.qq.com/s/ApoMPpG_tW0QB3HpM1AW4g",
+      },
+      {
+        title: "皈依三宝——入道之起点",
+        date: "2025.03",
+        url: "https://mp.weixin.qq.com/s/AxcNSAy0SrLsA5xLgsnT4A",
+      },
+      {
+        title: "【北斗降日】朝真礼斗，赐福消灾",
+        date: "2023.10",
+        url: "https://mp.weixin.qq.com/s/NCQ_iICNFyrUKBgCUuSb4g",
       },
     ],
   },
@@ -98,14 +119,14 @@ export const ARTICLE_GROUPS: ArticleGroup[] = [
     source: "上清崇宁靖室",
     articles: [
       {
-        title: "【经籍道典】诵北斗经诀",
-        date: "2022.03",
-        url: "https://mp.weixin.qq.com/s/6BfRHe7GW8uE02Dst6o16g",
-      },
-      {
         title: "【杂谈】初学答疑（一）",
         date: "2023.11",
         url: "https://mp.weixin.qq.com/s/QIlz70tNslL6Ujp3A9lnuQ",
+      },
+      {
+        title: "【杂谈】崇宁靖室诵读指南",
+        date: "2023.09",
+        url: "https://mp.weixin.qq.com/s/qhocgf0kUHx8JameRcpqiA",
       },
       {
         title: "【杂谈】关于\u201C在家修道\u201D的进一步讨论",
@@ -113,9 +134,9 @@ export const ARTICLE_GROUPS: ArticleGroup[] = [
         url: "https://mp.weixin.qq.com/s/9iSlAnf8a_CvUiz2s9d7uQ",
       },
       {
-        title: "【杂谈】崇宁靖室诵读指南",
-        date: "2023.09",
-        url: "https://mp.weixin.qq.com/s/qhocgf0kUHx8JameRcpqiA",
+        title: "【经籍道典】诵北斗经诀",
+        date: "2022.03",
+        url: "https://mp.weixin.qq.com/s/6BfRHe7GW8uE02Dst6o16g",
       },
     ],
   },
@@ -158,12 +179,21 @@ export const ABOUT_ORIGIN = `我是源逸，一个道教居士、初学者。
 
 省流就是：不好找、不好用。
 
-于是我想做一个资源聚合索引网站。我不会编程，所幸人工智能技术日新月异，尝试了多种AI生成工具、经历了许多失败后，最后我用Cursor开发环境+Claude模型完成了这个网站。本站先从《北斗经》开始，集合经文原文、名家注解、音频、视频、优质公众号文章等，慢慢扩充。
+于是我想做一个资源聚合索引网站，设想如下：
+核心理念：实用、精简、包容，对新手友好。
+运营定位：不生产内容，只做高质量内容的搬运工。
+使命：展示道教文化，减少误解与偏见。
+愿景：如有朋友对道教感兴趣、好奇，这个网站可省去千言万语。
 
-本站运用 PWA 技术，可将网站添加到桌面，如原生应用般便捷。`;
+我不会编程，所幸人工智能技术日新月异，尝试了多种AI生成工具、经历了许多失败后，最后用 Cursor 开发环境+ Claude 模型完成了这个网站。本站先从《北斗经》开始，集合经文原文、名家注解、音频、视频、优质公众号文章等，慢慢扩充、成长。
 
-export const ABOUT_THANKS = `感谢我的师父、老师，带领我入门、教我知识。
+独立思考、不盲从、不迷信，我们一同精进学习。
+`;
+
+export const ABOUT_THANKS = `
+感谢我的师父、老师，带领我入门、教我知识。
 感谢一路上认识的朋友，给我诸多帮助和鼓励。
-感谢本站引用的所有内容的创作者。`;
+感谢本站引用的所有内容的创作者。
+感谢你的使用和支持。`;
 
 export const ABOUT_DISCLAIMER = `本站内容仅供学习研究使用，经典原文来源于公开出版物，其他内容版权归原著作权人所有。`;

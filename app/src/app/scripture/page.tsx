@@ -18,7 +18,7 @@ export default function ScripturePage() {
       transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] as const }}
       className="mx-auto max-w-4xl px-4 py-10"
     >
-      <h1 className="font-serif text-2xl font-bold tracking-wider">
+      <h1 className="font-serif text-2xl font-bold tracking-wider text-gold">
         北斗原文
       </h1>
 

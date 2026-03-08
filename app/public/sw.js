@@ -1,8 +1,9 @@
 /* ── 神仙种子 · 北斗经资源站 PWA Service Worker ── */
 
-const CACHE_NAME   = 'beidou-app-v1';
-const STATIC_CACHE = 'beidou-app-static-v1';
-const FONT_CACHE   = 'beidou-app-fonts-v1';
+const CACHE_VERSION = '__CACHE_VERSION__';
+const CACHE_NAME   = `beidou-app-${CACHE_VERSION}`;
+const STATIC_CACHE = `beidou-app-static-${CACHE_VERSION}`;
+const FONT_CACHE   = `beidou-app-fonts-${CACHE_VERSION}`;
 
 /* 安装时预缓存的核心路由 */
 const PRECACHE_URLS = [

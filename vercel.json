@@ -3,6 +3,5 @@
   "framework": "nextjs",
   "buildCommand": "npm ci && node scripts/pdf-to-images.mjs && cd app && npm ci && npm run build",
   "outputDirectory": "app/out",
-  "installCommand": "npm ci",
-  "rootDirectory": "app"
+  "installCommand": "npm ci"
 }

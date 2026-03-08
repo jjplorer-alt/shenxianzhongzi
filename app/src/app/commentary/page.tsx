@@ -27,7 +27,7 @@ export default function CommentaryPage() {
       className="mx-auto max-w-3xl px-4 py-10"
     >
       <motion.div variants={fadeUp}>
-        <h1 className="font-serif text-2xl font-bold tracking-wider">
+        <h1 className="font-serif text-2xl font-bold tracking-wider text-gold">
           北斗经注
         </h1>
         <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">

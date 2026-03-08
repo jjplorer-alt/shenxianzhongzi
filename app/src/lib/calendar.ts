@@ -6,12 +6,10 @@ const CN = ["〇", "一", "二", "三", "四", "五", "六", "七", "八", "九"
 
 export interface DaoCalendarInfo {
   daoYear: string;
-  lunarDate: string;
-  yearGanZhi: string;
-  zodiac: string;
-  monthGanZhi: string;
-  dayGanZhi: string;
-  timeZhi: string;
+  /** 农历年月日合并：甲辰龙年正月十五 */
+  lunarYearMonthDay: string;
+  /** 干支月日时合并：丙寅月 甲子日 子时 */
+  ganZhiMonthDayTime: string;
   todayNote: string;
 }
 
@@ -30,12 +28,8 @@ export function getDaoCalendar(): DaoCalendarInfo {
 
   return {
     daoYear: numToCN(daoYear),
-    lunarDate: `${lunar.getMonthInChinese()}月${lunar.getDayInChinese()}`,
-    yearGanZhi: lunar.getYearInGanZhi(),
-    zodiac: lunar.getYearShengXiao(),
-    monthGanZhi: lunar.getMonthInGanZhiExact(),
-    dayGanZhi: lunar.getDayInGanZhi(),
-    timeZhi: `${lunar.getTimeZhi()}时`,
+    lunarYearMonthDay: `${lunar.getYearInGanZhi()}${lunar.getYearShengXiao()}年 ${lunar.getMonthInChinese()}月${lunar.getDayInChinese()}日`,
+    ganZhiMonthDayTime: `${lunar.getMonthInGanZhiExact()}月 ${lunar.getDayInGanZhi()}日 ${lunar.getTimeZhi()}时`,
     todayNote: getDaoistNote(lunar.getMonth(), lunar.getDay()),
   };
 }

@@ -11,10 +11,11 @@ import {
   ArrowUpRight,
 } from "lucide-react";
 import {
-  AUDIO_VIDEO,
+  AUDIO_VIDEO_GROUPS,
   ARTICLE_GROUPS,
   WEBSITES,
   type ArticleGroup,
+  type AudioVideoGroup,
   type WebsiteLink,
 } from "@/lib/data";
 import { cn } from "@/lib/utils";
@@ -42,7 +43,7 @@ export default function ResourcesPage() {
       className="mx-auto max-w-3xl px-4 py-10"
     >
       <motion.div variants={fadeUp}>
-        <h1 className="font-serif text-2xl font-bold tracking-wider">
+        <h1 className="font-serif text-2xl font-bold tracking-wider text-gold">
           资源索引
         </h1>
         <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
@@ -53,28 +54,9 @@ export default function ResourcesPage() {
       {/* ─── Audio / Video ─── */}
       <motion.section variants={fadeUp} className="mt-10">
         <SectionHead icon={Music} label="音视频" />
-        <div className="mt-3 grid gap-2 sm:grid-cols-2">
-          {AUDIO_VIDEO.map((item, i) => (
-            <a
-              key={i}
-              href={item.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="glass-card group flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/15 hover:shadow-[0_6px_24px_-6px_rgba(232,198,120,0.1)]"
-            >
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gold/8 transition-transform duration-300 group-hover:scale-110">
-                <Play className="h-3.5 w-3.5 text-gold" />
-              </div>
-              <div className="min-w-0 flex-1">
-                <div className="truncate text-[13px] font-medium">
-                  {item.title}
-                </div>
-                <div className="text-[11px] text-muted-foreground">
-                  {item.platform}
-                </div>
-              </div>
-              <ArrowUpRight className="h-3 w-3 shrink-0 text-muted-foreground/50 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-gold" />
-            </a>
+        <div className="mt-3 space-y-3">
+          {AUDIO_VIDEO_GROUPS.map((group) => (
+            <AudioVideoGroupCard key={group.groupTitle} group={group} />
           ))}
         </div>
       </motion.section>
@@ -123,6 +105,63 @@ function SectionHead({
     <div className="flex items-center gap-2">
       <Icon className="h-4 w-4 text-gold/80" />
       <h2 className="text-[13px] font-semibold tracking-wide">{label}</h2>
+    </div>
+  );
+}
+
+function AudioVideoGroupCard({ group }: { group: AudioVideoGroup }) {
+  const [open, setOpen] = useState(true);
+
+  return (
+    <div className="glass overflow-hidden rounded-xl">
+      <button
+        onClick={() => setOpen(!open)}
+        className="flex w-full items-center gap-2.5 px-4 py-3 text-left transition-all duration-200 hover:bg-white/[0.02] active:bg-white/[0.03]"
+      >
+        <span className="text-[13px] font-semibold">{group.groupTitle}</span>
+        <span className="rounded-full bg-white/[0.06] px-1.5 py-px text-[11px] tabular-nums text-muted-foreground">
+          {group.items.length}
+        </span>
+        <ChevronDown
+          className={cn(
+            "ml-auto h-3.5 w-3.5 text-muted-foreground/70 transition-transform duration-200",
+            open && "rotate-180"
+          )}
+        />
+      </button>
+
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] as const }}
+            className="overflow-hidden"
+          >
+            <div className="grid gap-2 border-t border-white/[0.04] p-3 sm:grid-cols-2">
+              {group.items.map((item, i) => (
+                <a
+                  key={i}
+                  href={item.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="glass-card group flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/15 hover:shadow-[0_6px_24px_-6px_rgba(232,198,120,0.1)]"
+                >
+                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gold/8 transition-transform duration-300 group-hover:scale-110">
+                    <Play className="h-3.5 w-3.5 text-gold" />
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <div className="truncate text-[13px] font-medium">{item.title}</div>
+                    <div className="text-[11px] text-muted-foreground">{item.platform}</div>
+                  </div>
+                  <ArrowUpRight className="h-3 w-3 shrink-0 text-muted-foreground/50 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-gold" />
+                </a>
+              ))}
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
