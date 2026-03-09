@@ -46,7 +46,7 @@ export const DAOJING_INTRO_GROUPS: IntroGroup[] = [
       {
         title: "晚坛功课经",
         url: "/intro/wantan",
-        desc: "信徒晚课时念诵，含步虚、吊挂、《太上洞玄灵宝救苦妙经》等。",
+        desc: "信徒晚课时念诵，主要有《太上洞玄灵宝救苦妙经》等。",
       },
       {
         title: "三官经",
