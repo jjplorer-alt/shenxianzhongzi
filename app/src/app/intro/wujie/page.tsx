@@ -18,8 +18,10 @@ export default function WujiePage() {
         太上老君传授的基本戒律，杀、盗、淫、妄、酒五戒，为出家在家共守。
       </p>
 
-      <div className="prose-beidou mt-8 whitespace-pre-line text-muted-foreground">
-        {LAOJUN_WUJIE_CONTENT}
+      <div className="glass mt-8 overflow-hidden rounded-xl border border-gold/10 px-5 py-5 sm:px-6 sm:py-6">
+        <div className="prose-beidou whitespace-pre-line text-muted-foreground">
+          {LAOJUN_WUJIE_CONTENT}
+        </div>
       </div>
     </motion.div>
   );

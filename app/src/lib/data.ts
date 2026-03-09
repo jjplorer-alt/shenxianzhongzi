@@ -299,9 +299,7 @@ export const SANGUAN_COMMENTARY: Commentator[] = [];
 /* ─────────────────────────────────────────────────
  * 老君五戒 — 太上老君说五戒经注
  * ───────────────────────────────────────────────── */
-
-export const LAOJUN_WUJIE_CONTENT = `
-《老君说五戒》
+export const LAOJUN_WUJIE_CONTENT = `《老君说五戒》
 
 老君曰：是五者，戒于此而顺于彼。
 
