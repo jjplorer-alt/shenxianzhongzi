@@ -8,8 +8,7 @@ import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
   { label: "首页", href: "/" },
-  { label: "北斗原文", href: "/scripture" },
-  { label: "北斗经注", href: "/commentary" },
+  { label: "道经入门", href: "/intro" },
   { label: "资源索引", href: "/resources" },
   { label: "关于本站", href: "/about" },
 ];
@@ -17,6 +16,7 @@ const NAV_ITEMS = [
 function isActive(href: string, pathname: string) {
   const p = pathname.replace(/\/$/, "") || "/";
   const h = href.replace(/\/$/, "") || "/";
+  if (h === "/intro") return p === h || p.startsWith("/intro/");
   return p === h;
 }
 

@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 import { getDaoCalendar, type DaoCalendarInfo } from "@/lib/calendar";
 import { NAV_CARDS } from "@/lib/data";
 import { SiteFooter } from "@/components/site-footer";
-import { BookOpen, FileText, FolderOpen, ArrowUpRight, Info } from "lucide-react";
+import { FolderOpen, ArrowUpRight, Info, BookMarked } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 const fadeUp = {
@@ -113,9 +113,10 @@ export default function Home() {
           </div>
         </motion.div>
 
-        <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+        <div className="grid gap-3 grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
           {NAV_CARDS.map((item, i) => {
-            const Icon = { scripture: BookOpen, commentary: FileText, resources: FolderOpen, about: Info }[item.iconKey];
+            const Icon = { intro: BookMarked, resources: FolderOpen, about: Info }[item.iconKey];
+            const isIntro = item.iconKey === "intro";
             return (
             <motion.div
               key={item.href}
@@ -124,6 +125,7 @@ export default function Home() {
               whileInView="visible"
               viewport={{ once: true, margin: "-40px" }}
               custom={i * 0.06}
+              className={cn(isIntro && "sm:col-span-2 lg:col-span-2")}
             >
               <Link
                 href={item.href}

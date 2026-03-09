@@ -117,7 +117,7 @@ export default function AboutPage() {
               <div className="h-px flex-1 bg-gradient-to-r from-gold/[0.15] to-transparent" />
             </div>
             <div className="mb-4 text-center text-[13px] leading-[1.85] text-muted-foreground">
-              如有需求和疑问，欢迎联系微信
+              如有需求、疑问、建议，如愿提供素材、共创内容，欢迎联系微信
               <span className="mx-1.5 inline-block rounded-md border border-gold/[0.2] bg-gold/[0.06] px-2 py-0.5 font-mono text-[12px] tracking-wide text-gold/70">
                 rushui13579
               </span>
