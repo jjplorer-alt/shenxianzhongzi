@@ -39,7 +39,7 @@ jobs:
         working-directory: app
         env:
           NEXT_PUBLIC_BASE_PATH: ""
-          NEXT_PUBLIC_SITE_URL: https://${{ github.event.repository.name }}.pages.dev
+          NEXT_PUBLIC_SITE_URL: https://shenxianzhongzi.pages.dev
         run: npm ci && npm run build
 
       - name: Deploy to Cloudflare Pages
@@ -48,7 +48,7 @@ jobs:
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy app/out --project-name=${{ github.event.repository.name }}
+          command: pages deploy app/out --project-name=shenxianzhongzi
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Deployment URL
