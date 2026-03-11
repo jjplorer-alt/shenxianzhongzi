@@ -34,7 +34,7 @@ export default function IntroPage() {
           道经入门
         </h1>
         <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
-         道教经典浩如烟海，本页展示的均为当下广为流传的典籍，人人皆可阅读。
+         道教经典浩如烟海，本页展示的均为当下广为流传的典籍，人人皆可阅读。部分经文提供注解和唱诵音频。
         </p>
       </motion.div>
 

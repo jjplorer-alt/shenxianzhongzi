@@ -35,6 +35,14 @@ const fadeUp = {
 };
 
 export default function ResourcesPage() {
+  const [audioOpen, setAudioOpen] = useState(true);
+  const [articleOpen, setArticleOpen] = useState(true);
+  const [siteOpen, setSiteOpen] = useState(true);
+
+  const audioCount = AUDIO_VIDEO_GROUPS.reduce((s, g) => s + g.items.length, 0);
+  const articleCount = ARTICLE_GROUPS.reduce((s, g) => s + g.articles.length, 0);
+  const siteCount = WEBSITES.length;
+
   return (
     <motion.div
       variants={stagger}
@@ -53,40 +61,61 @@ export default function ResourcesPage() {
 
       {/* ─── Audio / Video ─── */}
       <motion.section variants={fadeUp} className="mt-10">
-        <SectionHead icon={Music} label="音视频" />
-        <div className="mt-3 space-y-3">
-          {AUDIO_VIDEO_GROUPS.map((group) => (
-            <AudioVideoGroupCard key={group.groupTitle} group={group} />
-          ))}
-        </div>
+        <CollapsibleSection
+          icon={Music}
+          label="音视频"
+          open={audioOpen}
+          onToggle={() => setAudioOpen(!audioOpen)}
+          count={audioCount}
+        >
+          <div className="mt-3 space-y-3">
+            {AUDIO_VIDEO_GROUPS.map((group) => (
+              <AudioVideoGroupCard key={group.groupTitle} group={group} />
+            ))}
+          </div>
+        </CollapsibleSection>
       </motion.section>
 
       {/* ─── WeChat Articles (grouped by source) ─── */}
       <motion.section variants={fadeUp} className="mt-10">
-        <SectionHead icon={MessageSquare} label="公众号" />
-        <div className="mt-3 space-y-3">
-          {ARTICLE_GROUPS.map((group) => (
-            <ArticleGroupCard key={group.source} group={group} />
-          ))}
-        </div>
+        <CollapsibleSection
+          icon={MessageSquare}
+          label="公众号"
+          open={articleOpen}
+          onToggle={() => setArticleOpen(!articleOpen)}
+          count={articleCount}
+        >
+          <div className="mt-3 space-y-3">
+            {ARTICLE_GROUPS.map((group) => (
+              <ArticleGroupCard key={group.source} group={group} />
+            ))}
+          </div>
+        </CollapsibleSection>
       </motion.section>
 
       {/* ─── Websites (compact chip grid) ─── */}
       <motion.section variants={fadeUp} className="mt-10">
-        <SectionHead icon={Globe} label="网站链接" />
-        <div className="mt-3 space-y-2">
-          {/* flat links as chip grid */}
-          <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-3">
-            {WEBSITES.filter((s) => !s.children).map((site) => (
-              <SiteChip key={site.name} name={site.name} url={site.url} desc={site.desc} />
+        <CollapsibleSection
+          icon={Globe}
+          label="网站链接"
+          open={siteOpen}
+          onToggle={() => setSiteOpen(!siteOpen)}
+          count={siteCount}
+        >
+          <div className="mt-3 space-y-2">
+            {/* flat links as chip grid */}
+            <div className="grid grid-cols-2 gap-1.5 sm:grid-cols-3">
+              {WEBSITES.filter((s) => !s.children).map((site) => (
+                <SiteChip key={site.name} name={site.name} url={site.url} desc={site.desc} />
+              ))}
+            </div>
+
+            {/* grouped site: 白云深处人家 */}
+            {WEBSITES.filter((s) => s.children).map((site) => (
+              <SiteGroup key={site.name} site={site} />
             ))}
           </div>
-
-          {/* grouped site: 白云深处人家 */}
-          {WEBSITES.filter((s) => s.children).map((site) => (
-            <SiteGroup key={site.name} site={site} />
-          ))}
-        </div>
+        </CollapsibleSection>
       </motion.section>
     </motion.div>
   );
@@ -94,18 +123,87 @@ export default function ResourcesPage() {
 
 /* ── Primitives ────────────────────────────────── */
 
-function SectionHead({
-  icon: Icon,
+function CollapsibleSection({
+  icon,
   label,
+  open,
+  onToggle,
+  count,
+  children,
 }: {
   icon: React.ElementType;
   label: string;
+  open: boolean;
+  onToggle: () => void;
+  count?: number;
+  children: React.ReactNode;
 }) {
   return (
-    <div className="flex items-center gap-2">
-      <Icon className="h-4 w-4 text-gold/80" />
+    <>
+      <SectionHead
+        icon={icon}
+        label={label}
+        open={open}
+        onToggle={onToggle}
+        count={count}
+      />
+      <AnimatePresence initial={false}>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] as const }}
+            className="overflow-hidden"
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </>
+  );
+}
+
+function SectionHead({
+  icon: Icon,
+  label,
+  open,
+  onToggle,
+  count,
+}: {
+  icon: React.ElementType;
+  label: string;
+  open?: boolean;
+  onToggle?: () => void;
+  count?: number;
+}) {
+  const isCollapsible = onToggle !== undefined;
+
+  return (
+    <button
+      type="button"
+      onClick={isCollapsible ? onToggle : undefined}
+      className={cn(
+        "flex w-full items-center gap-2 text-left",
+        isCollapsible && "cursor-pointer transition-all duration-200 hover:opacity-90"
+      )}
+    >
+      <Icon className="h-4 w-4 shrink-0 text-gold/80" />
       <h2 className="text-[13px] font-semibold tracking-wide">{label}</h2>
-    </div>
+      {count !== undefined && (
+        <span className="rounded-full bg-white/[0.06] px-1.5 py-px text-[11px] tabular-nums text-muted-foreground">
+          {count}
+        </span>
+      )}
+      {isCollapsible && (
+        <ChevronDown
+          className={cn(
+            "ml-auto h-3.5 w-3.5 shrink-0 text-muted-foreground/70 transition-transform duration-200",
+            open && "rotate-180"
+          )}
+        />
+      )}
+    </button>
   );
 }
 
