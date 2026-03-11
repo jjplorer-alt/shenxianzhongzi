@@ -36,7 +36,7 @@ export interface IntroGroup {
 export const DAOJING_INTRO_GROUPS: IntroGroup[] = [
   {
     groupTitle: "玄门四品经",
-    groupDesc: "道教徒日常念诵的四部经《早课》、《晚课》、《三官》、《北斗》，是信众修学之根基。初学者、感兴趣者可在酷狗音乐、QQ音乐搜索孟圆辉道长，感受经韵唱诵的玄妙，他是当今道教音乐的代表人物。",
+    groupDesc: "道教徒日常念诵的四部经《早课》、《晚课》、《三官》、《北斗》，是信众修学之根基。初学者、感兴趣者可在酷狗音乐、QQ音乐聆听孟圆辉道长的唱诵，感受经韵的玄妙，他是当今道教音乐的代表人物。",
     items: [
       {
         title: "早坛功课经",
@@ -64,10 +64,11 @@ export const DAOJING_INTRO_GROUPS: IntroGroup[] = [
     groupTitle: "祖师语录",
     groupDesc: "历代祖师高道的开示、规诫与问答，为修行立身、持戒守规之根本。",
     items: [
-      { title: "重阳立教十五论", url: "https://zh.daoinfo.org/index.php?title=%E9%87%8D%E9%99%BD%E7%AB%8B%E6%95%99%E5%8D%81%E4%BA%94%E8%AB%96&variant=zh-hans", desc: "全真祖师王重阳阐述修炼立教的十五条基本原则。" },
+      { title: "重阳立教十五论", url: "https://www.daorenjia.com/daozang23-1106", desc: "全真祖师王重阳阐述修炼立教的十五条基本原则。" },
       { title: "邱祖垂训文", url: "https://www.sjzyes.com/lhsdj/9905.html", desc: "长春真人丘处机留给后世道士的垂诫与训示。" },
-      { title: "道门十规", url: "https://www.daorenjia.com/daozang27-1411", desc: "明代张宇初天师所定，规范道士修行与丛林生活的十条准则。" },
-      { title: "崆峒问答", url: "http://www.tangnet.cn/novel/87.html", desc: "五十四代天师张继宗所述正一道入门问答集录，共三百余问。" },
+      { title: "道门十规", url: "https://www.daorenjia.com/daozang27-1411", desc: "四十三代天师张宇初所定，规范道士修行与丛林生活的十条准则。" },
+      { title: "崆峒问答", url: "http://www.tangnet.cn/novel/87.html", desc: "五十四代天师张继宗所述，正一道入门问答集录，共三百余问。" },
+      { title: "陆先生道门科略", url: "https://www.daorenjia.com/daozang14-632", desc: "南朝高道陆修静撰，阐明早期天师道组织制度、行为规范等。" },
     ],
   },
   {
@@ -75,9 +76,10 @@ export const DAOJING_INTRO_GROUPS: IntroGroup[] = [
     groupDesc: "道教根本典籍与广为流传的劝善经典，为学道者必读。",
     items: [
       { title: "道德真经", url: "https://www.daorenjia.com/daozang15-649", desc: "太上老君所述，道家哲学之根源，在全球广为流传。" },
-      { title: "太上感应篇", url: "https://zh.wikisource.org/zh-hans/%E5%A4%AA%E4%B8%8A%E6%84%9F%E6%87%89%E7%AF%87", desc: "道教劝善经典，阐述善恶感应、因果报应，为民间流传极广的修身宝典。" },
-      { title: "朝真发愿忏悔文", url: "http://www.baxiangong.cn/index.php?a=show&c=index&catid=36&id=2695&m=content", desc: "用于诚心忏悔、改过迁善的发愿与忏悔文。" },
-      { title: "老君五戒", url: "/intro/wujie", desc: "太上老君传授的基本戒律，杀、盗、淫、妄、酒五戒，为出家在家共守。" },
+      { title: "清静经", url: "/intro/qingjingjing", desc: "全称《太上老君说常清静经》，早坛功课经核心经典之一，阐明清静之道与遣欲澄心之法，全文约四百字。本站提供经文原文及多家注解链接。" },
+      { title: "太上感应篇", url: "https://www.daorenjia.com/daozang27-1417", desc: "道教劝善经典，阐述善恶感应、因果报应，为民间流传极广的修身宝典。" },
+      { title: "朝真发愿忏悔文", url: "/intro/chaozhen", desc: "用于诚心忏悔、改过迁善的发愿与忏悔文。本站提供经文原文链接及诵经音频。" },
+      { title: "老君五戒", url: "/intro/wujie", desc: "太上老君传授的杀、盗、淫、妄、酒五大基本戒律，所有道教徒共守。" },
     ],
   },
 ];
@@ -96,6 +98,10 @@ export interface IntroQA {
 export const DAOJING_QA: IntroQA[] = [
   /* ── 入门与资格 ── */
   {
+    q: "不是道教信徒可以阅读道经吗？",
+    a: [{ t: "可以，不限信仰。只需保持恭敬心、清净身心即可。" }],
+  },
+  {
     q: "初学道经，应该从哪部开始？在家居士可以念哪些？",
     a: [
       { t: "建议从玄门四品经入手：" },
@@ -107,7 +113,7 @@ export const DAOJING_QA: IntroQA[] = [
       { t: "、" },
       { l: "北斗经", href: "/intro/beidou" },
       { t: "。本站「道经入门」提供这四部的经文原文、经文注解、诵经音频链接。祖师语录、" },
-      { l: "重阳立教十五论", href: "https://zh.daoinfo.org/index.php?title=%E9%87%8D%E9%99%BD%E7%AB%8B%E6%95%99%E5%8D%81%E4%BA%94%E8%AB%96&variant=zh-hans" },
+      { l: "重阳立教十五论", href: "https://www.daorenjia.com/daozang23-1106" },
       { t: "、" },
       { l: "邱祖垂训文", href: "https://www.sjzyes.com/lhsdj/9905.html" },
       { t: "等、道门经典（道德真经、太上感应篇）亦有原文链接可拓展阅读。北京白云观" },
@@ -118,16 +124,12 @@ export const DAOJING_QA: IntroQA[] = [
     ],
   },
   {
-    q: "不是道教信徒可以阅读道经吗？",
-    a: [{ t: "可以，不限信仰。只需保持恭敬心、清净身心即可。" }],
-  },
-  {
     q: "有没有道经不能读、不允许阅读？",
     a: [
       { t: "部分传统说法中，确有「某经需师传」「某时不宜诵」等讲究。但本页面所涉玄门四品经、" },
       { l: "道德真经", href: "https://www.daorenjia.com/daozang15-649" },
       { t: "、" },
-      { l: "太上感应篇", href: "https://zh.wikisource.org/zh-hans/%E5%A4%AA%E4%B8%8A%E6%84%9F%E6%87%89%E7%AF%87" },
+      { l: "太上感应篇", href: "https://www.daorenjia.com/daozang27-1417" },
       { t: "等，均为广为流传的入门经典，经中曰「凡有男女」可诵，一般人均可恭敬诵读。若有特殊顾虑（如特定传承要求），可咨询当地宫观或道长得明确解答。" },
     ],
   },
@@ -297,6 +299,44 @@ export const SANGUAN_SCRIPTURE_LINKS: { label: string; url: string }[] = [
 export const SANGUAN_COMMENTARY: Commentator[] = [];
 
 /* ─────────────────────────────────────────────────
+ * 清静经 — 道门经典子页面
+ * ───────────────────────────────────────────────── */
+
+export const QINGJING_INTRO = `《清静经》，全称《太上老君说常清静经》，早坛功课经核心经典之一，全文约四百字。经中阐明清静之道与遣欲澄心之法，谓「人能常清静，天地悉皆归」，为道教修炼性功的法宝。`;
+
+export const QINGJING_SCRIPTURE_LINKS: { label: string; url: string }[] = [
+  { label: "中华典藏", url: "https://www.zhonghuadiancang.com/xuanxuewushu/qingjingjing/" },
+  { label: "识典古籍·经文", url: "https://www.shidianguji.com/book/ZWDS0075" },
+];
+
+export const QINGJING_COMMENTATORS: Commentator[] = [
+  {
+    name: "侯善渊《太上老君说常清静经注》",
+    links: [{ label: "识典古籍", url: "https://www.shidianguji.com/book/DZ0758" }],
+  },
+  {
+    name: "林子《常清静经释略》",
+    links: [{ label: "识典古籍", url: "https://www.shidianguji.com/book/HY1525" }],
+  },
+  {
+    name: "《太上老君说常清静妙经纂图解注》",
+    links: [{ label: "识典古籍", url: "https://www.shidianguji.com/book/DZ0760" }],
+  },
+  {
+    name: "识典古籍·道藏",
+    links: [
+      { label: "识典古籍", url: "https://www.shidianguji.com/book/DZ0757/chapter/start" },
+    ],
+  },
+  {
+    name: "延伸阅读",
+    links: [
+      { label: "微信公众号", url: "https://mp.weixin.qq.com/s/3_W3ELP2ByyzrKl4_qtbuw" },
+    ],
+  },
+];
+
+/* ─────────────────────────────────────────────────
  * 老君五戒 — 太上老君说五戒经注
  * ───────────────────────────────────────────────── */
 export const LAOJUN_WUJIE_CONTENT = `《老君说五戒》
@@ -330,6 +370,18 @@ export const LAOJUN_WUJIE_CONTENT = `《老君说五戒》
 
 export const SANGUAN_AUDIO: AudioVideoItem[] = [
   { title: "三官经（孟圆辉）", platform: "酷狗音乐", url: "https://m.kugou.com/share/song.html?chain=3fain2fFZV2" },
+];
+
+/* ─────────────────────────────────────────────────
+ * 朝真发愿忏悔文 — 道门经典子页面（邱祖忏悔文）
+ * ───────────────────────────────────────────────── */
+
+export const CHAOZHEN_SCRIPTURE_LINKS: { label: string; url: string }[] = [
+  { label: "八仙宫", url: "http://www.baxiangong.cn/index.php?a=show&c=index&catid=36&id=2695&m=content" },
+];
+
+export const CHAOZHEN_AUDIO: AudioVideoItem[] = [
+  { title: "道家《邱祖忏悔文》孟圆辉、善为堂·陈玄之", platform: "酷狗音乐", url: "https://m.kugou.com/share/song.html?chain=4abo36bFZV2" },
 ];
 
 /* ───────────────────────────────────────────────── */
@@ -401,6 +453,26 @@ export const ARTICLE_GROUPS: ArticleGroup[] = [
   {
     source: "上清崇宁靖室",
     articles: [
+      {
+        title: "【杂谈】初学答疑（五）",
+        date: "2024.03",
+        url: "https://mp.weixin.qq.com/s/kBHbfb-BEuLlnovVC-aGZw",
+      },
+      {
+        title: "【杂谈】初学答疑（四）",
+        date: "2024.02",
+        url: "https://mp.weixin.qq.com/s/1AKNmGP_s7V9EiCiVTxSQA",
+      },
+      {
+        title: "【杂谈】初学答疑（三）",
+        date: "2024.01",
+        url: "https://mp.weixin.qq.com/s/PRzfWQX3DjXWQt0eTD1IZA",
+      },
+      {
+        title: "【杂谈】初学答疑（二）",
+        date: "2023.12",
+        url: "https://mp.weixin.qq.com/s/ZkImqHkAST3gUJEemt6l0A",
+      },
       {
         title: "【杂谈】初学答疑（一）",
         date: "2023.11",
@@ -476,16 +548,14 @@ export const ABOUT_ORIGIN = `你好，我是源逸，一个道教居士、初学
 省流就是：不好找、不好用。❌
 
 于是我想做一个资源聚合索引网站，设想如下：
-「网站定位」：道经入门学习资源索引。重点服务于刚开始接触道教文化的人群。
+「网站定位」：道经入门学习资源索引。重点服务刚开始接触道教文化的人群。
 「建站原则」：实用、精简、包容、新手友好，界面清爽、结构清晰、浏览舒适、加载快速。
 「运营模式」：只做高质量内容的搬运工。无广告、免费使用。
 「使命」：助推道教文化传播，减少误解与偏见。
 「愿景」：成为道教文化初学者可信赖的一块指路牌。
-
-我设想两种场景：💡
+「实用场景」：
 1.如有朋友对道教文化感兴趣/好奇，对ta说“去看神仙种子网站”，即可省去千言万语。
 2.若有朋友真的想学点什么，但不知道学什么、怎么学、去哪学，处于迷茫中，对ta说“去看神仙种子网站”，即能助其少走弯路。
-假设能做到这样，我便心满意足了。😊
 
 网站名为“神仙种子”，主要是为了朗朗上口，方便大家轻松找到本站。
 “神仙种子”是什么意思呢？🤔
@@ -494,7 +564,7 @@ export const ABOUT_ORIGIN = `你好，我是源逸，一个道教居士、初学
 而我，不过是一俗居小人，今生有幸皈依玄门之正教，希望这个网站能从一颗小小的种子开始，生根发芽，帮助更多的人了解道教文化。
 
 完成了以上设定，就得开始操作了，但我不会编程。🤣
-所幸人工智能技术日新月异，尝试了多种 AI 生成工具、经历了许多失败，我最后用 Cursor 开发环境+ Claude 模型做出了这个网站，部署于 netlify 云端，初步掌握了网站构建和部署技术。🥰
+所幸人工智能技术日新月异，尝试了多种 AI 生成工具、经历了许多失败，我最后用 Cursor 开发环境+ Claude 模型做出了这个网站，初步掌握了网站构建和部署技术。🥰
 本站先从《北斗经》开始，集合经文原文、名家注解、音频、视频、优质公众号文章等，慢慢扩充完善。
 
 面对浩瀚的知识之海，愿诸位独立思考、不盲从、不迷信，我们一同精进学习。✊
@@ -506,7 +576,6 @@ export const ABOUT_THANKS = `
 感谢本站引用的所有内容的创作者。
 感谢你的使用、支持、分享。`;
 
-export const ABOUT_DISCLAIMER = `本站内容仅供学习研究使用，经典原文来源于公开出版物，其他内容版权归原著作权人所有。
-如权利人认为本站内容侵犯其合法权益，请联系我们，将在核实后立即删除。`;
+export const ABOUT_DISCLAIMER = `本站内容仅供学习研究道教文化，经典原文来源于公开出版物，其他内容版权归原著作权人所有。如权利人认为本站内容侵犯其合法权益，请联系我们，将在核实后立即删除。`;
 
 export const FOOTER_COPYRIGHT = `© 2026 神仙种子`;
