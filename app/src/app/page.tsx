@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { getDaoCalendar, type DaoCalendarInfo } from "@/lib/calendar";
-import { getRandomChapter } from "@/lib/daodejing";
+import { getChapterOfDay } from "@/lib/daodejing";
 import { NAV_CARDS } from "@/lib/data";
 import { SiteFooter } from "@/components/site-footer";
 import { FolderOpen, ArrowUpRight, Info, BookMarked } from "lucide-react";
@@ -21,14 +21,14 @@ const fadeUp = {
 
 export default function Home() {
   const [cal, setCal] = useState<DaoCalendarInfo | null>(null);
-  const [randomChapter, setRandomChapter] = useState<ReturnType<typeof getRandomChapter> | null>(null);
+  const [chapterOfDay, setChapterOfDay] = useState<ReturnType<typeof getChapterOfDay> | null>(null);
 
   useEffect(() => {
     queueMicrotask(() => setCal(getDaoCalendar()));
   }, []);
 
   useEffect(() => {
-    setRandomChapter(getRandomChapter());
+    setChapterOfDay(getChapterOfDay());
   }, []);
 
   return (
@@ -85,20 +85,19 @@ export default function Home() {
             </div>
 
             <div className="flex flex-col items-center border-t border-white/[0.04] px-5 py-3 text-center">
-              {randomChapter ? (
+              {chapterOfDay ? (
                 <>
                   <div className="mb-1.5 text-[13px] font-medium text-foreground/95">
                     随缘读经 · 《道德经》
-                    {randomChapter.title.replace(/^.+?(第.+)$/, "$1章")}
+                    {chapterOfDay.title.replace(/^.+?(第.+)$/, "$1章")}
                   </div>
                   <p className="max-w-[18rem] text-[12px] leading-[1.9] text-muted-foreground">
-                    {randomChapter.content}
+                    {chapterOfDay.content}
                   </p>
                 </>
               ) : (
                 <div className="mb-1.5 text-[13px] text-muted-foreground">随缘读经 · 加载中…</div>
               )}
-              <div className="mt-2 text-[11px] text-muted-foreground/60">刷新页面，随机更新章节</div>
             </div>
           </motion.div>
         </section>
