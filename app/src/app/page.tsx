@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { getDaoCalendar, type DaoCalendarInfo } from "@/lib/calendar";
-import { getChapterOfDay } from "@/lib/daodejing";
+import { getChapterOfDay, formatScriptureBySentences } from "@/lib/daodejing";
 import { NAV_CARDS } from "@/lib/data";
 import { SiteFooter } from "@/components/site-footer";
 import { FolderOpen, ArrowUpRight, Info, BookMarked } from "lucide-react";
@@ -91,8 +91,8 @@ export default function Home() {
                     随缘读经 · 《道德经》
                     {chapterOfDay.title.replace(/^.+?(第.+)$/, "$1章")}
                   </div>
-                  <p className="max-w-[18rem] text-[12px] leading-[1.9] text-muted-foreground">
-                    {chapterOfDay.content}
+                  <p className="max-w-[18rem] whitespace-pre-line text-[12px] leading-[1.9] text-muted-foreground">
+                    {formatScriptureBySentences(chapterOfDay.content)}
                   </p>
                 </>
               ) : (

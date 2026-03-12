@@ -110,3 +110,12 @@ export function getRandomChapter(): DaodejingChapter {
   const index = Math.floor(Math.random() * DAODEJING_CHAPTERS.length);
   return DAODEJING_CHAPTERS[index]!;
 }
+
+/** 按句号分句，每行一整句（末尾是句号），便于读经时不错行 */
+export function formatScriptureBySentences(content: string): string {
+  return content
+    .split("。")
+    .filter(Boolean)
+    .map((s) => s + "。")
+    .join("\n");
+}
