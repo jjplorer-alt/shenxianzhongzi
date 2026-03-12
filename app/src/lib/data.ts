@@ -12,7 +12,7 @@ export interface NavCard {
 
 export const NAV_CARDS: NavCard[] = [
   { title: "道经入门", desc: "入门典籍、注解、音频、问答", href: "/intro", iconKey: "intro" },
-  { title: "资源索引", desc: "诵经修持、基础知识综合资料", href: "/resources", iconKey: "resources" },
+  { title: "资源索引", desc: "道经研修方法、道教基础知识", href: "/resources", iconKey: "resources" },
   { title: "关于本站", desc: "缘起、致谢、声明、联系方式", href: "/about", iconKey: "about" },
 ];
 
@@ -36,27 +36,27 @@ export interface IntroGroup {
 export const DAOJING_INTRO_GROUPS: IntroGroup[] = [
   {
     groupTitle: "玄门四品经",
-    groupDesc: "道教徒日常念诵的四部经《早课》、《晚课》、《三官》、《北斗》，是信众修学之根基。初学者、感兴趣者可在酷狗音乐、QQ音乐聆听孟圆辉道长的唱诵，感受经韵的玄妙，他是当今道教音乐的代表人物。",
+    groupDesc: "道教徒日常念诵、必修的四部经。一般要求常驻宫观的道士能够熟练背诵；对于普通信众而言，精研持诵“四品经”已足够一生修行运用。",
     items: [
       {
-        title: "早坛功课经",
+        title: "早坛功课经（早课）",
         url: "/intro/zaotan",
-        desc: "信徒早课时念诵，含八大神咒、《太上老君说常清静经》等诸品真经与宝诰。",
+        desc: "全称《太上玄门日诵早坛功课经》，于卯时（5-7点）讽诵，重在启迪道心、亲近仙真",
       },
       {
-        title: "晚坛功课经",
+        title: "晚坛功课经（晚课）",
         url: "/intro/wantan",
-        desc: "信徒晚课时念诵，主要有《太上洞玄灵宝救苦妙经》等。",
+        desc: "全称《太上玄门日诵晚坛功课经》，于酉时（17-19点）讽诵，重在济度幽冥、超拔先祖",
       },
       {
-        title: "三官经",
+        title: "《三官经》",
         url: "/intro/sanguan",
-        desc: "全称《太上三元赐福赦罪解厄消灾延生保命妙经》，天官赐福、地官赦罪、水官解厄。",
+        desc: "全称《太上三元赐福赦罪解厄消灾延生保命妙经》，天官赐福、地官赦罪、水官解厄，旨在忏悔祈福、利益人间众生",
       },
       {
-        title: "北斗经",
+        title: "《北斗经》",
         url: "/intro/beidou",
-        desc: "全称《太上玄灵北斗本命延生真经》，北斗七星为造化枢机，有消灾度厄、回生注死之功。本站提供原文、经注及拼音版。",
+        desc: "全称《太上玄灵北斗本命延生真经》，北斗为造化枢机、人神主宰，主消灾解厄、延生保命",
       },
     ],
   },
@@ -505,6 +505,16 @@ export const ARTICLE_GROUPS: ArticleGroup[] = [
         title: "【北斗降日】朝真礼斗，赐福消灾",
         date: "2023.10",
         url: "https://mp.weixin.qq.com/s/NCQ_iICNFyrUKBgCUuSb4g",
+      },
+    ],
+  },
+  {
+    source: "武当山道教学院",
+    articles: [
+      {
+        title: "凡入道者，必从四品经入手",
+        date: "2025.03",
+        url: "https://mp.weixin.qq.com/s/chAnfiL4QFA4BS1iv5Hp8w",
       },
     ],
   },
