@@ -32,9 +32,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: PDF 转图片
-        run: node app/scripts/pdf-to-images.mjs
-
       - name: Build
         working-directory: app
         env:

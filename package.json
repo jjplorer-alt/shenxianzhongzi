@@ -4,11 +4,6 @@
   "scripts": {
     "postinstall": "cd app && npm ci",
     "build": "cd app && npm run build",
-    "deploy": "node scripts/deploy-cloudflare-direct.mjs",
-    "pdf:to-images": "node app/scripts/pdf-to-images.mjs"
-  },
-  "devDependencies": {
-    "pdf-to-img": "^5.0.0",
-    "sharp": "^0.33.0"
+    "deploy": "node scripts/deploy-cloudflare-direct.mjs"
   }
 }
