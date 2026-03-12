@@ -33,7 +33,7 @@ jobs:
         run: npm ci
 
       - name: PDF 转图片
-        run: node scripts/pdf-to-images.mjs
+        run: node app/scripts/pdf-to-images.mjs
 
       - name: Build
         working-directory: app

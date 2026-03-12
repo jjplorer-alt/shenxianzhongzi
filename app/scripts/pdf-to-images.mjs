@@ -10,8 +10,8 @@ import path from "path";
 import { fileURLToPath } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
-const pdfPath = path.join(__dirname, "../app/public/beidou-pinyin.pdf");
-const outDir = path.join(__dirname, "../app/public/beidou-pages");
+const pdfPath = path.join(__dirname, "../public/beidou-pinyin.pdf");
+const outDir = path.join(__dirname, "../public/beidou-pages");
 
 async function main() {
   if (!existsSync(pdfPath)) {
