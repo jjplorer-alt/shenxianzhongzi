@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { getDaoCalendar, type DaoCalendarInfo } from "@/lib/calendar";
+import { getRandomChapter } from "@/lib/daodejing";
 import { NAV_CARDS } from "@/lib/data";
 import { SiteFooter } from "@/components/site-footer";
 import { FolderOpen, ArrowUpRight, Info, BookMarked } from "lucide-react";
@@ -20,9 +21,14 @@ const fadeUp = {
 
 export default function Home() {
   const [cal, setCal] = useState<DaoCalendarInfo | null>(null);
+  const [randomChapter, setRandomChapter] = useState<ReturnType<typeof getRandomChapter> | null>(null);
 
   useEffect(() => {
     queueMicrotask(() => setCal(getDaoCalendar()));
+  }, []);
+
+  useEffect(() => {
+    setRandomChapter(getRandomChapter());
   }, []);
 
   return (
@@ -67,28 +73,32 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid grid-cols-2">
-              {[
-                cal.lunarYearMonthDay,
-                cal.ganZhiMonthDayTime,
-              ].map((value, i) => (
-                <div
-                  key={i}
-                  className={cn(
-                    "px-3 py-2.5 text-center",
-                    i === 0 && "border-r border-white/[0.04]"
-                  )}
-                >
-                  <div className="text-[13px] font-medium">
-                    {value}
-                  </div>
-                </div>
-              ))}
+            <div className="px-4 py-3 text-center">
+              <div className="text-[13px] font-medium">
+                {cal.lunarYearMonthDay} · {cal.ganZhiMonthDayTime}
+              </div>
             </div>
 
             <div className="border-t border-white/[0.04] px-5 py-2.5 text-center text-[13px] text-muted-foreground">
               {"\u4eca\u65e5\u9053\u6559\u5927\u4e8b\u8bb0\uff1a"}
               <span className="text-foreground/95">{cal.todayNote}</span>
+            </div>
+
+            <div className="flex flex-col items-center border-t border-white/[0.04] px-5 py-3 text-center">
+              {randomChapter ? (
+                <>
+                  <div className="mb-1.5 text-[13px] font-medium text-foreground/95">
+                    随缘读经 · 《道德经》
+                    {randomChapter.title.replace(/^.+?(第.+)$/, "$1章")}
+                  </div>
+                  <p className="max-w-[18rem] text-[12px] leading-[1.9] text-muted-foreground">
+                    {randomChapter.content}
+                  </p>
+                </>
+              ) : (
+                <div className="mb-1.5 text-[13px] text-muted-foreground">随缘读经 · 加载中…</div>
+              )}
+              <div className="mt-2 text-[11px] text-muted-foreground/60">刷新页面，随机更新章节</div>
             </div>
           </motion.div>
         </section>

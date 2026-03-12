@@ -11,7 +11,7 @@ export interface NavCard {
 }
 
 export const NAV_CARDS: NavCard[] = [
-  { title: "道经入门", desc: "入门典籍及注解、常见问题", href: "/intro", iconKey: "intro" },
+  { title: "道经入门", desc: "入门典籍、注解、音频、问答", href: "/intro", iconKey: "intro" },
   { title: "资源索引", desc: "诵经修持、基础知识综合资料", href: "/resources", iconKey: "resources" },
   { title: "关于本站", desc: "缘起、致谢、声明、联系方式", href: "/about", iconKey: "about" },
 ];
