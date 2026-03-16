@@ -41,6 +41,7 @@ const DAOIST_DATES: Record<string, string> = {
   "1-13": "关圣帝君飞升",
   "1-15": "上元天官圣诞",
   "1-19": "长春祖师圣诞",
+  "1-28": "净明普化天尊圣诞",
   "2-1": "勾陈天皇大帝万寿",
   "2-2": "土地正神诞、姜太公圣诞",
   "2-3": "文昌帝君圣诞",
@@ -100,5 +101,10 @@ const DAOIST_DATES: Record<string, string> = {
 };
 
 function getDaoistNote(month: number, day: number): string {
-  return DAOIST_DATES[`${month}-${day}`] || "今日无特殊记事";
+  const fastingHint =
+    day === 1 ? "今日初一，宜持斋诵经" : day === 15 ? "今日十五，宜持斋诵经" : null;
+  const eventNote = DAOIST_DATES[`${month}-${day}`];
+  if (fastingHint && eventNote) return `${fastingHint}；${eventNote}`;
+  if (fastingHint) return fastingHint;
+  return eventNote || "今日无特殊记事";
 }
