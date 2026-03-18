@@ -12,15 +12,15 @@
   "categories": ["education", "lifestyle"],
   "icons": [
     {
-      "src": "./icon-192.svg",
+      "src": "./icon-192.png",
       "sizes": "192x192",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any"
     },
     {
-      "src": "./icon-512.svg",
+      "src": "./icon-512.png",
       "sizes": "512x512",
-      "type": "image/svg+xml",
+      "type": "image/png",
       "purpose": "any maskable"
     }
   ],
@@ -30,21 +30,21 @@
       "short_name": "经文",
       "description": "阅读北斗经原文",
       "url": "./scripture/",
-      "icons": [{ "src": "./icon-192.svg", "sizes": "192x192" }]
+      "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }]
     },
     {
       "name": "注解",
       "short_name": "注解",
       "description": "名家注解",
       "url": "./commentary/",
-      "icons": [{ "src": "./icon-192.svg", "sizes": "192x192" }]
+      "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }]
     },
     {
       "name": "资源",
       "short_name": "资源",
       "description": "音视频资源",
       "url": "./resources/",
-      "icons": [{ "src": "./icon-192.svg", "sizes": "192x192" }]
+      "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }]
     }
   ]
 }
