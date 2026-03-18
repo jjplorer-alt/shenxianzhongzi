@@ -7,6 +7,7 @@ import { getDaoCalendar, type DaoCalendarInfo } from "@/lib/calendar";
 import { getChapterOfDay, formatScriptureBySentences } from "@/lib/daodejing";
 import { NAV_CARDS } from "@/lib/data";
 import { SiteFooter } from "@/components/site-footer";
+import { PWAInstallButton } from "@/components/pwa-install-button";
 import { FolderOpen, ArrowUpRight, Info, BookMarked } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -153,6 +154,8 @@ export default function Home() {
             );
           })}
         </div>
+
+        <PWAInstallButton />
       </section>
 
       <SiteFooter />
