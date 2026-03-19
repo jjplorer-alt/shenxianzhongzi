@@ -35,7 +35,7 @@ export default function AboutPage() {
           </h1>
           <div className="flex items-center gap-2">
             <div className="h-px w-12 bg-gradient-to-r from-transparent to-gold/35" />
-            <span className="text-[10px] text-gold/60">{"\u25c6"}</span>
+            <span className="text-[10px] text-gold/60">✦</span>
             <div className="h-px w-12 bg-gradient-to-l from-transparent to-gold/35" />
           </div>
         </motion.div>

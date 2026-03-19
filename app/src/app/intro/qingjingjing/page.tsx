@@ -49,7 +49,7 @@ export default function IntroQingjingjingPage() {
         </h2>
         <div className="mt-3 flex gap-2">
           <div className="h-px flex-1 self-center bg-gradient-to-r from-gold/25 to-transparent" />
-          <span className="text-[10px] text-gold/50">◆</span>
+          <span className="text-[10px] text-gold/50">✦</span>
           <div className="h-px flex-1 self-center bg-gradient-to-l from-gold/25 to-transparent" />
         </div>
 
