@@ -165,7 +165,8 @@ export default function AboutPage() {
               </div>
             ) : (
               <p className="text-[13px] leading-[1.85] text-muted-foreground/70">
-                期待更多有缘人加入，共同完善本站内容。
+                星星之火可以燎原，期待更多有缘人加入，共同完善本站内容。
+                凡提供内容素材、纠正BUG、提供建议，即可将您的名字收录于此，以表感谢和纪念。您也可以加一些简短的身份介绍，宣传您的内容账号和道文化相关的组织机构，促进大家的联络互通。若您想保持神秘，亦可留一简短化名。
               </p>
             )}
           </motion.div>
