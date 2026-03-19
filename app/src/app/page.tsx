@@ -36,7 +36,7 @@ export default function Home() {
     <div className="min-h-screen">
 
       {/* Hero */}
-      <section className="relative flex min-h-[60vh] flex-col items-center justify-center px-4 text-center">
+      <section className="relative flex min-h-[45vh] flex-col items-center justify-center px-4 text-center sm:min-h-[60vh]">
         <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,oklch(0.75_0.14_75/5%)_0%,transparent_65%)]" />
 
         <motion.h1
@@ -60,7 +60,7 @@ export default function Home() {
 
       {/* Calendar */}
       {cal && (
-        <section className="mx-auto max-w-xl px-4 pb-20">
+        <section className="mx-auto max-w-xl px-4 pb-12 sm:pb-20">
           <motion.div
             variants={fadeUp}
             initial="hidden"
@@ -106,13 +106,13 @@ export default function Home() {
       )}
 
       {/* Navigation Cards */}
-      <section className="mx-auto max-w-3xl px-4 pb-24">
+      <section className="mx-auto max-w-3xl px-4 pb-16 sm:pb-24">
         <motion.div
           variants={fadeUp}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-60px" }}
-          className="mb-6 flex flex-col items-center gap-3"
+          className="mb-4 flex flex-col items-center gap-2 sm:mb-6 sm:gap-3"
         >
           <h2 className="font-serif text-xl font-bold tracking-wider text-gold md:text-2xl">
             {"\u529f\u80fd\u5bfc\u89c8"}
@@ -124,7 +124,7 @@ export default function Home() {
           </div>
         </motion.div>
 
-        <div className="grid gap-3 grid-cols-1 sm:grid-cols-3">
+        <div className="grid grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-3">
           {NAV_CARDS.map((item, i) => {
             const Icon = { intro: BookMarked, resources: FolderOpen, about: Info }[item.iconKey];
             return (
@@ -138,18 +138,18 @@ export default function Home() {
             >
               <Link
                 href={item.href}
-                className="glass-card group flex h-full flex-col rounded-xl p-5 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/15 hover:shadow-[0_8px_30px_-6px_rgba(232,198,120,0.12)]"
+                className="glass-card group relative flex flex-col rounded-xl px-4 py-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/15 hover:shadow-[0_8px_30px_-6px_rgba(232,198,120,0.12)] sm:p-5 sm:py-4"
               >
-                <div className="mb-2.5 flex items-center gap-2.5">
+                <ArrowUpRight className="absolute right-3 top-3 h-3.5 w-3.5 text-muted-foreground/50 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-gold sm:right-4 sm:top-4" />
+                <div className="flex items-center gap-2.5 pr-8">
                   <Icon className="h-5 w-5 shrink-0 text-gold/80 transition-transform duration-300 group-hover:scale-110" />
                   <h3 className="font-serif text-[15px] font-bold">
                     {item.title}
                   </h3>
                 </div>
-                <p className="mt-1 flex-1 text-[13px] leading-[1.85] text-muted-foreground">
+                <p className="mt-1 text-[13px] leading-[1.6] text-muted-foreground sm:leading-[1.85]">
                   {item.desc}
                 </p>
-                <ArrowUpRight className="mt-3 h-3 w-3 text-muted-foreground/50 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-gold" />
               </Link>
             </motion.div>
             );

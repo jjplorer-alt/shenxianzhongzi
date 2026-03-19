@@ -283,18 +283,23 @@ export function PWAInstallButton() {
             type="button"
             onClick={handleClick}
             className={cn(
-              "glass-card group inline-flex items-center gap-2.5 rounded-xl border border-gold/10 px-5 py-3",
+              "glass-card group flex w-full max-w-sm flex-col items-center gap-3 rounded-xl border border-gold/10 px-5 py-4 text-center",
               "transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/20 hover:shadow-[0_4px_16px_-4px_rgba(232,198,120,0.15)]",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/30"
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/30 sm:max-w-md"
             )}
           >
-            <Smartphone className="h-4 w-4 shrink-0 text-gold/80 transition-transform duration-300 group-hover:scale-110" />
-            <span className="font-serif text-[13px] text-foreground/90">
-              添加到主屏幕，像 APP 一样打开
-            </span>
-            <span className="text-[11px] text-muted-foreground/80">
-              点此获取安装指引
-            </span>
+            <Smartphone
+              className="h-5 w-5 shrink-0 text-gold/80 transition-transform duration-300 group-hover:scale-110"
+              aria-hidden
+            />
+            <div className="space-y-1.5 text-center">
+              <p className="font-serif text-[15px] leading-snug text-foreground/95">
+                添加到主屏幕 · 像 APP 一样打开
+              </p>
+              <p className="text-[12px] leading-relaxed text-gold/60 underline-offset-2 transition-colors group-hover:text-gold/80 group-hover:underline">
+                点此获取安装指引
+              </p>
+            </div>
           </button>
 
           <AnimatePresence>
