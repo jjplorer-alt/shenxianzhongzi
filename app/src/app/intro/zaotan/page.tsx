@@ -32,7 +32,7 @@ export default function ZaotanPage() {
         道经入门 · 早坛功课经
       </h1>
       <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-        清晨早课念诵，含八大神咒、《太上老君说常清静经》等诸品真经与宝诰。
+      全称《太上玄门日诵早坛功课经》，于卯时（5-7点）讽诵，重在启迪道心、亲近仙真。
       </p>
 
       <div className="prose-beidou mt-8 text-muted-foreground">{ZAOTAN_INTRO}</div>

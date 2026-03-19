@@ -52,22 +52,22 @@ export const DAOJING_INTRO_GROUPS: IntroGroup[] = [
       {
         title: "早坛功课经（早课）",
         url: "/intro/zaotan",
-        desc: "全称《太上玄门日诵早坛功课经》，于卯时（5-7点）讽诵，重在启迪道心、亲近仙真",
+        desc: "全称《太上玄门日诵早坛功课经》，于卯时（5-7点）讽诵，重在启迪道心、亲近仙真。",
       },
       {
         title: "晚坛功课经（晚课）",
         url: "/intro/wantan",
-        desc: "全称《太上玄门日诵晚坛功课经》，于酉时（17-19点）讽诵，重在济度幽冥、超拔先祖",
+        desc: "全称《太上玄门日诵晚坛功课经》，于酉时（17-19点）讽诵，重在济度幽冥、超拔先祖。",
       },
       {
         title: "《三官经》",
         url: "/intro/sanguan",
-        desc: "全称《太上三元赐福赦罪解厄消灾延生保命妙经》，天官赐福、地官赦罪、水官解厄，旨在忏悔祈福、利益人间众生",
+        desc: "全称《太上三元赐福赦罪解厄消灾延生保命妙经》，天官赐福、地官赦罪、水官解厄，旨在忏悔祈福、利益人间众生。",
       },
       {
         title: "《北斗经》",
         url: "/intro/beidou",
-        desc: "全称《太上玄灵北斗本命延生真经》，北斗为造化枢机、人神主宰，主消灾解厄、延生保命",
+        desc: "全称《太上玄灵北斗本命延生真经》，北斗为造化枢机、人神主宰，主消灾解厄、延生保命。",
       },
     ],
   },
@@ -87,8 +87,8 @@ export const DAOJING_INTRO_GROUPS: IntroGroup[] = [
     groupDesc: "道教根本典籍与广为流传的劝善经典，为学道者必读。",
     items: [
       { title: "道德真经", url: "https://www.daorenjia.com/daozang15-649", desc: "太上老君所述，道家哲学之根源，在全球广为流传。" },
-      { title: "清静经", url: "/intro/qingjingjing", desc: "全称《太上老君说常清静经》，早坛功课经核心经典之一，阐明清静之道与遣欲澄心之法，全文约四百字。本站提供经文原文及多家注解链接。" },
-      { title: "太上感应篇", url: "https://www.daorenjia.com/daozang27-1417", desc: "道教劝善经典，阐述善恶感应、因果报应，为民间流传极广的修身宝典。" },
+      { title: "清静经", url: "/intro/qingjingjing", desc: "全称《太上老君说常清静经》，阐明清静之道与遣欲澄心之法，全文约四百字。" },
+      { title: "太上感应篇", url: "https://mp.weixin.qq.com/s/PemvqJawxoUt8xf-lCIu_w", desc: "道教劝善经典，阐述善恶感应、因果报应，为民间流传极广的修身宝典。" },
       { title: "朝真发愿忏悔文", url: "/intro/chaozhen", desc: "用于诚心忏悔、改过迁善的发愿与忏悔文。本站提供经文原文链接及诵经音频。" },
       { title: "老君五戒", url: "/intro/wujie", desc: "太上老君传授的杀、盗、淫、妄、酒五大基本戒律，所有道教徒共守。" },
     ],
@@ -180,7 +180,7 @@ export const DAOJING_QA: IntroQA[] = [
   {
     q: "读经时走神、犯困是业障吗？",
     a: [
-      { t: "正常生理反应。初学气血调动会困倦，散乱是常态。发现走神拉回即可，这正是「炼心」的过程。" },
+      { t: "是正常生理反应。" },
     ],
   },
 ];
@@ -302,11 +302,8 @@ export const SANGUAN_COMMENTARY: Commentator[] = [];
  * 清静经 — 道门经典子页面
  * ───────────────────────────────────────────────── */
 
-export const QINGJING_INTRO = `《清静经》，全称《太上老君说常清静经》，早坛功课经核心经典之一，全文约四百字。经中阐明清静之道与遣欲澄心之法，谓「人能常清静，天地悉皆归」，为道教修炼性功的法宝。`;
-
 export const QINGJING_SCRIPTURE_LINKS: { label: string; url: string }[] = [
-  { label: "中华典藏", url: "https://www.zhonghuadiancang.com/xuanxuewushu/qingjingjing/" },
-  { label: "识典古籍·经文", url: "https://www.shidianguji.com/book/ZWDS0075" },
+  { label: "清静经原文", url: "https://mp.weixin.qq.com/s/azAzp7y6P5xHpNFpR8XHJg" },
 ];
 
 export const QINGJING_COMMENTATORS: Commentator[] = [
@@ -315,21 +312,7 @@ export const QINGJING_COMMENTATORS: Commentator[] = [
     links: [{ label: "识典古籍", url: "https://www.shidianguji.com/book/DZ0758" }],
   },
   {
-    name: "林子《常清静经释略》",
-    links: [{ label: "识典古籍", url: "https://www.shidianguji.com/book/HY1525" }],
-  },
-  {
-    name: "《太上老君说常清静妙经纂图解注》",
-    links: [{ label: "识典古籍", url: "https://www.shidianguji.com/book/DZ0760" }],
-  },
-  {
-    name: "识典古籍·道藏",
-    links: [
-      { label: "识典古籍", url: "https://www.shidianguji.com/book/DZ0757/chapter/start" },
-    ],
-  },
-  {
-    name: "延伸阅读",
+    name: "太上老君说常清静经注（杜光庭）",
     links: [
       { label: "微信公众号", url: "https://mp.weixin.qq.com/s/3_W3ELP2ByyzrKl4_qtbuw" },
     ],

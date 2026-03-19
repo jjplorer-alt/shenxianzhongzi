@@ -3,7 +3,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { BookOpen, FileText, ArrowUpRight } from "lucide-react";
-import { QINGJING_INTRO } from "@/lib/data";
 
 const SUB_PAGES = [
   {
@@ -40,13 +39,9 @@ export default function IntroQingjingjingPage() {
       <h1 className="font-serif text-2xl font-bold tracking-wider text-gold">
         道经入门 · 清静经
       </h1>
-      <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-        全称《太上老君说常清静经》，早坛功课经核心经典之一，全文约四百字。
+      <p className="prose-beidou mt-3 text-[15px] leading-relaxed text-muted-foreground">
+        全称《太上老君说常清静经》，阐明清静之道与遣欲澄心之法，全文约四百字。
       </p>
-
-      <div className="prose-beidou mt-8 text-muted-foreground">
-        {QINGJING_INTRO}
-      </div>
 
       <div className="mt-12">
         <h2 className="font-serif text-lg font-semibold tracking-wide text-gold/90">

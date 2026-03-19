@@ -4,8 +4,6 @@ import Link from "next/link";
 import { motion } from "framer-motion";
 import { BookOpen, Music, ArrowUpRight } from "lucide-react";
 
-const CHAOZHEN_INTRO = `《朝真发愿忏悔文》又称《邱祖忏悔文》或《邱祖忏悔罪业文》，为全真龙门派祖师邱处机所撰。经文用于诚心忏悔、改过迁善，是道教早晚功课中常用的发愿与忏悔文之一。`;
-
 const SUB_PAGES = [
   {
     title: "原文链接",
@@ -15,7 +13,7 @@ const SUB_PAGES = [
   },
   {
     title: "诵经音频",
-    desc: "跟随道长诵念邱祖忏悔文",
+    desc: "孟圆辉道长诵念音频",
     href: "/intro/chaozhen/audio",
     icon: Music,
   },
@@ -41,13 +39,9 @@ export default function IntroChaozhenPage() {
       <h1 className="font-serif text-2xl font-bold tracking-wider text-gold">
         道经入门 · 朝真发愿忏悔文
       </h1>
-      <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-        又称《邱祖忏悔文》，全真龙门派祖师邱处机所撰，用于诚心忏悔、改过迁善。
+      <p className="prose-beidou mt-3 text-[15px] leading-relaxed text-muted-foreground">
+        用于诚心忏悔、改过迁善的发愿与忏悔文。本站提供经文原文链接及诵经音频。
       </p>
-
-      <div className="prose-beidou mt-8 text-muted-foreground">
-        {CHAOZHEN_INTRO}
-      </div>
 
       <div className="mt-12">
         <h2 className="font-serif text-lg font-semibold tracking-wide text-gold/90">

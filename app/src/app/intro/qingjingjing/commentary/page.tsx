@@ -30,7 +30,7 @@ export default function QingjingjingCommentaryPage() {
         经文注解
       </h1>
       <p className="prose-beidou mt-4 text-[15px] leading-[1.9] text-muted-foreground">
-        学经当解经意。以下汇总历代注家对《太上老君说常清静经》的注解，可在识典古籍查阅全文。
+        学经当解经意。以下汇总历代注家对《太上老君说常清静经》的注解，可在外部网站查阅全文。
       </p>
 
       <div className="mt-8 space-y-4">
