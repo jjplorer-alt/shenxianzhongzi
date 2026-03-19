@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { BookOpen, FileText, Music, ArrowUpRight } from "lucide-react";
-import { SANGUAN_INTRO } from "@/lib/data";
-
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
   visible: (d: number = 0) => ({
@@ -32,10 +30,8 @@ export default function SanguanPage() {
         道经入门 · 三官经
       </h1>
       <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-        全称《太上三元赐福赦罪解厄消灾延生保命妙经》，天官赐福、地官赦罪、水官解厄。
+        全称《太上三元赐福赦罪解厄消灾延生保命妙经》，天官赐福、地官赦罪、水官解厄，旨在忏悔祈福、利益人间众生。
       </p>
-
-      <div className="prose-beidou mt-8 text-muted-foreground">{SANGUAN_INTRO}</div>
 
       <div className="mt-12">
         <h2 className="font-serif text-lg font-semibold tracking-wide text-gold/90">

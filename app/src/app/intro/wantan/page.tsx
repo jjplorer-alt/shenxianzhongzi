@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { BookOpen, FileText, Music, ArrowUpRight } from "lucide-react";
-import { WANTAN_INTRO } from "@/lib/data";
-
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
   visible: (d: number = 0) => ({
@@ -32,10 +30,8 @@ export default function WantanPage() {
         道经入门 · 晚坛功课经
       </h1>
       <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-        傍晚晚课时念诵，含《太上洞玄灵宝救苦妙经》等。
+        全称《太上玄门日诵晚坛功课经》，于酉时（17-19点）讽诵，重在济度幽冥、超拔先祖。
       </p>
-
-      <div className="prose-beidou mt-8 text-muted-foreground">{WANTAN_INTRO}</div>
 
       <div className="mt-12">
         <h2 className="font-serif text-lg font-semibold tracking-wide text-gold/90">

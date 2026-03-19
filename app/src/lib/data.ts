@@ -187,14 +187,6 @@ export const DAOJING_QA: IntroQA[] = [
 
 /* ───────────────────────────────────────────────── */
 
-export const SCRIPTURE_INTRO = `《北斗经》，全称《太上玄灵北斗本命延生真经》。经中称：北斗七星君乃造化之枢机、人神之主宰，有回生注死之功、消灾度厄之力，凡人性命由本命星官主掌。清净身心、诚意诵经，自可消除罪业，福寿臻身，远离诸祸。
-
-《北斗经》乃昔日太上老君悲悯众生，传于张天师，宣说妙经以普度众生、脱离苦难。此经是入道必须习诵的功课。
-
-另外，更为方便易行的是持诵七字圣号"大圣北斗七元君"，诚心持念即有不可思议功德，经云："念此大圣北斗七元真君名号，当得罪业消除，灾衰洗荡，福寿资命，善果臻身。"
-
-在此附上一份简体拼音版 PDF，可下载打印诵读，末尾有整理者署名。`;
-
 export interface Commentator {
   name: string;
   links: { label: string; url: string }[];
@@ -243,14 +235,6 @@ export interface AudioVideoGroup {
  * 早坛功课经 · 晚坛功课经 · 三官经 — 玄门四品经模块数据
  * ───────────────────────────────────────────────── */
 
-export const ZAOTAN_INTRO = `《早坛功课经》为信徒早课时必诵的经文集合，全真、正一两派皆有传承。常与晚坛功课经合刊为一本，统称早晚功课经。
-
-早坛含八大神咒、《太上老君说常清静经》等诸品真经与宝诰。`;
-
-export const WANTAN_INTRO = `《晚坛功课经》为信徒晚课时必诵的经文集合，全真、正一两派皆有传承。常与早坛功课经合刊为一本，统称早晚功课经。
-
-晚坛含步虚、吊挂、《太上洞玄灵宝救苦妙经》等。`;
-
 export const ZAOTAN_SCRIPTURE_LINKS: { label: string; url: string }[] = [
   { label: "道教文化中心", url: "https://zh.daoinfo.org/index.php?title=%E6%97%A9%E6%99%9A%E5%8A%9F%E8%AA%B2&variant=zh-hans" },
   { label: "识典古籍", url: "https://www.shidianguji.com/search?q=%E6%97%A9%E6%99%9A%E5%8A%9F%E8%AA%B2%E7%B6%93" },
@@ -286,10 +270,6 @@ export const ZAOTAN_AUDIO: AudioVideoItem[] = [
 export const WANTAN_AUDIO: AudioVideoItem[] = [
   { title: "晚坛功课经（孟圆辉）", platform: "酷狗音乐", url: "https://www.kugou.com/song-36/tgrei8e.html" },
 ];
-
-export const SANGUAN_INTRO = `《三官经》，全称《太上三元赐福赦罪解厄消灾延生保命妙经》，约出于明代，收入《万历续道藏》。三元即天官、地官、水官，合称三官大帝：天官赐福、地官赦罪、水官解厄。
-
-此经为道教入门必习功课之一，经文阐述诵持功德及三官大帝济度众生之愿力，信众常于三元节（上元正月十五、中元七月十五、下元十月十五）持诵。`;
 
 export const SANGUAN_SCRIPTURE_LINKS: { label: string; url: string }[] = [
   { label: "中华典藏", url: "https://www.zhonghuadiancang.com/xuanxuewushu/sanguanjing/" },

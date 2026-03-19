@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { BookOpen, FileText, Music, ArrowUpRight } from "lucide-react";
-import { SCRIPTURE_INTRO } from "@/lib/data";
-
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
   visible: (d: number = 0) => ({
@@ -47,12 +45,8 @@ export default function IntroBeidouPage() {
         道经入门 · 北斗经
       </h1>
       <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-        全称《太上玄灵北斗本命延生真经》。北斗七星为造化枢机，有消灾度厄、回生注死之功。
+        全称《太上玄灵北斗本命延生真经》，北斗为造化枢机、人神主宰，主消灾解厄、延生保命。
       </p>
-
-      <div className="prose-beidou mt-8 text-muted-foreground">
-        {SCRIPTURE_INTRO}
-      </div>
 
       <div className="mt-12">
         <h2 className="font-serif text-lg font-semibold tracking-wide text-gold/90">

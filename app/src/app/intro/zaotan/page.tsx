@@ -3,8 +3,6 @@
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { BookOpen, FileText, Music, ArrowUpRight } from "lucide-react";
-import { ZAOTAN_INTRO } from "@/lib/data";
-
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
   visible: (d: number = 0) => ({
@@ -34,8 +32,6 @@ export default function ZaotanPage() {
       <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
       全称《太上玄门日诵早坛功课经》，于卯时（5-7点）讽诵，重在启迪道心、亲近仙真。
       </p>
-
-      <div className="prose-beidou mt-8 text-muted-foreground">{ZAOTAN_INTRO}</div>
 
       <div className="mt-12">
         <h2 className="font-serif text-lg font-semibold tracking-wide text-gold/90">
