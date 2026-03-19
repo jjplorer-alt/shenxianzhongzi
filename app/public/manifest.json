@@ -1,7 +1,7 @@
 {
-  "name": "神仙种子 · 道经入门学习资源",
-  "short_name": "道经入门学习资源",
-  "description": "道教北斗经学习资源聚合 — 经文原文、名家注解、音视频、公众号文章索引",
+  "name": "神仙种子",
+  "short_name": "神仙种子",
+  "description": "道经入门学习资源聚合索引 — 经文原文、名家注解、音视频、公众号文章索引，节约时间、少走弯路",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
@@ -32,24 +32,31 @@
   ],
   "shortcuts": [
     {
-      "name": "经文原文",
-      "short_name": "经文",
-      "description": "阅读北斗经原文",
-      "url": "./scripture/",
+      "name": "道经入门",
+      "short_name": "道经入门",
+      "description": "入门典籍、注解、音频、问答",
+      "url": "./intro/",
       "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }]
     },
     {
-      "name": "注解",
-      "short_name": "注解",
-      "description": "名家注解",
-      "url": "./commentary/",
-      "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }]
-    },
-    {
-      "name": "资源",
+      "name": "资源索引",
       "short_name": "资源",
-      "description": "音视频资源",
+      "description": "道经研修方法、道教基础知识",
       "url": "./resources/",
+      "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "北斗经",
+      "short_name": "北斗经",
+      "description": "北斗经原文、注解与音频",
+      "url": "./intro/beidou/",
+      "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "关于本站",
+      "short_name": "关于",
+      "description": "缘起、致谢、声明、联系方式",
+      "url": "./about/",
       "icons": [{ "src": "./icon-192.png", "sizes": "192x192" }]
     }
   ]

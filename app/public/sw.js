@@ -1,9 +1,9 @@
-/* ── 神仙种子 · 北斗经资源站 PWA Service Worker ── */
+/* ── 神仙种子 · 道经入门学习资源 PWA Service Worker ── */
 
 const CACHE_VERSION = '__CACHE_VERSION__';
-const CACHE_NAME   = `beidou-app-${CACHE_VERSION}`;
-const STATIC_CACHE = `beidou-app-static-${CACHE_VERSION}`;
-const FONT_CACHE   = `beidou-app-fonts-${CACHE_VERSION}`;
+const CACHE_NAME   = `sxzz-app-${CACHE_VERSION}`;
+const STATIC_CACHE = `sxzz-app-static-${CACHE_VERSION}`;
+const FONT_CACHE   = `sxzz-app-fonts-${CACHE_VERSION}`;
 
 /* 安装时预缓存的核心路由 */
 const PRECACHE_URLS = [
@@ -12,9 +12,10 @@ const PRECACHE_URLS = [
   '/manifest.json',
   '/icon-192.png',
   '/icon-512.png',
-  '/scripture/',
-  '/commentary/',
+  '/intro/',
+  '/intro/beidou/',
   '/resources/',
+  '/about/',
 ];
 
 /* ── Install ── */
@@ -117,7 +118,7 @@ self.addEventListener('push', event => {
   if (!event.data) return;
   const data = event.data.json();
   event.waitUntil(
-    self.registration.showNotification(data.title || '北斗经', {
+    self.registration.showNotification(data.title || '神仙种子', {
       body:    data.body  || '',
       icon:    '/icon-192.png',
       badge:   '/icon-192.png',

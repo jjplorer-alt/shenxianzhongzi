@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useState } from "react";
 import { Menu, X } from "lucide-react";
+import { SITE_CONFIG } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
 const NAV_ITEMS = [
@@ -30,7 +31,7 @@ export function SiteHeader() {
         <Link href="/" className="flex items-center gap-2 transition-transform duration-200 hover:scale-[1.02]">
           <span className="text-gold/90 text-lg leading-none">✦</span>
           <span className="font-serif text-base font-semibold tracking-tight md:text-[17px]">
-            神仙种子 · 道经入门学习资源
+            {SITE_CONFIG.fullName}
           </span>
         </Link>
 

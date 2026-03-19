@@ -3,6 +3,7 @@ import { Noto_Serif_SC } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { PWARegister } from "@/components/pwa-register";
 import { MouseCursorGlow } from "@/components/mouse-cursor-glow";
+import { SITE_CONFIG } from "@/lib/data";
 import "./globals.css";
 
 const notoSerifSC = Noto_Serif_SC({
@@ -25,14 +26,13 @@ const siteUrl =
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
-  title: "神仙种子 · 道经入门学习资源",
-  description:
-    "道教北斗经学习资源聚合 — 经文原文、名家注解、音视频、公众号文章索引",
+  title: SITE_CONFIG.fullName,
+  description: SITE_CONFIG.description,
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "道经入门学习资源",
+    title: SITE_CONFIG.name,
   },
   other: {
     "mobile-web-app-capable": "yes",
