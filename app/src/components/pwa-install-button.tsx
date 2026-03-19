@@ -10,15 +10,94 @@ type BeforeInstallPromptEvent = Event & {
   userChoice: Promise<{ outcome: "accepted" | "dismissed" }>;
 };
 
+type PlatformGuide = {
+  title: string;
+  steps: string;
+};
+
+function getPlatformGuide(): PlatformGuide {
+  const ua = navigator.userAgent;
+  const isIOS =
+    /iPad|iPhone|iPod/.test(ua) ||
+    (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
+  const isAndroid = /Android/i.test(ua);
+  const isSafari = /Safari/i.test(ua) && !/Chrome|Chromium|Edg/i.test(ua);
+  const isChrome = /Chrome/i.test(ua) && !/Edg/i.test(ua);
+  const isEdge = /Edg/i.test(ua);
+  const isFirefox = /Firefox/i.test(ua);
+  const isSamsungBrowser = /SamsungBrowser/i.test(ua);
+
+  if (isIOS) {
+    return {
+      title: "iOS 添加到主屏幕",
+      steps:
+        "点击 Safari 底部的「分享」按钮（方框带向上箭头），向下滚动选择「添加到主屏幕」，然后点击「添加」。",
+    };
+  }
+
+  if (isAndroid) {
+    if (isChrome) {
+      return {
+        title: "Android Chrome 安装",
+        steps:
+          "点击浏览器右上角「⋮」菜单，选择「安装应用」或「添加到主屏幕」。若未看到该选项，请确保已满足安装条件（如使用 HTTPS）。",
+      };
+    }
+    if (isSamsungBrowser) {
+      return {
+        title: "Samsung 浏览器安装",
+        steps: "点击菜单按钮，选择「添加到主屏幕」或「添加到页面」。",
+      };
+    }
+    if (isFirefox) {
+      return {
+        title: "Android Firefox 安装",
+        steps: "点击右上角「⋮」菜单，选择「安装」或「添加到主屏幕」。",
+      };
+    }
+    return {
+      title: "Android 添加到主屏幕",
+      steps: "打开浏览器菜单（通常为右上角三点），查找「添加到主屏幕」「安装应用」或类似选项。",
+    };
+  }
+
+  // 桌面端
+  if (isChrome || isEdge) {
+    return {
+      title: "Chrome / Edge 安装",
+      steps:
+        "点击地址栏右侧的「⊕」安装图标，或打开菜单（⋮）→「安装 神仙种子」/「应用」→「安装此站点作为应用」。",
+    };
+  }
+  if (isFirefox) {
+    return {
+      title: "Firefox 安装",
+      steps: "点击地址栏左侧的「⋮」菜单，选择「安装」或「更多工具」→「安装」。",
+    };
+  }
+  if (isSafari) {
+    return {
+      title: "Safari 安装",
+      steps: "菜单栏选择「文件」→「添加到 Dock」，或使用「开发」菜单中的 PWA 相关选项。",
+    };
+  }
+
+  return {
+    title: "添加到主屏幕",
+    steps:
+      "请使用 Chrome、Edge 或 Safari 打开本页。Chrome/Edge 可在地址栏找到 ⊕ 安装图标；iOS 请用 Safari 的「分享」→「添加到主屏幕」。",
+  };
+}
+
 export function PWAInstallButton() {
   const [deferredPrompt, setDeferredPrompt] = useState<BeforeInstallPromptEvent | null>(null);
   const [showButton, setShowButton] = useState(false);
-  const [showIOSHint, setShowIOSHint] = useState(false);
+  const [showFallbackHint, setShowFallbackHint] = useState(false);
   const [dismissed, setDismissed] = useState(false);
-  const [showIOSInstructions, setShowIOSInstructions] = useState(false);
+  const [showInstructions, setShowInstructions] = useState(false);
+  const [platformGuide, setPlatformGuide] = useState<PlatformGuide | null>(null);
 
   useEffect(() => {
-    // 已安装为 PWA（standalone 模式）则不显示
     const isStandalone =
       window.matchMedia("(display-mode: standalone)").matches ||
       (window.navigator as Navigator & { standalone?: boolean }).standalone === true;
@@ -31,39 +110,36 @@ export function PWAInstallButton() {
       setShowButton(true);
     };
 
-    // Chrome/Edge: beforeinstallprompt（桌面/Android 满足条件时会触发）
     window.addEventListener("beforeinstallprompt", handler);
 
-    // iOS Safari: 无 beforeinstallprompt，但可添加主屏幕
+    // iOS、部分 Android 等不支持 beforeinstallprompt，需要手动指引
     const isIOS =
       /iPad|iPhone|iPod/.test(navigator.userAgent) ||
       (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-    if (isIOS) {
-      setShowIOSHint(true);
-    }
+    if (isIOS) setShowFallbackHint(true);
 
-    // 默认展示按钮（桌面端也能看到；点击时按能力执行）
     setShowButton(true);
+    setPlatformGuide(getPlatformGuide());
 
     return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
 
   const handleClick = async () => {
     if (deferredPrompt) {
-      await deferredPrompt.prompt();
-      const { outcome } = await deferredPrompt.userChoice;
-      if (outcome === "accepted") setDismissed(true);
-    } else if (showIOSHint) {
-      setShowIOSInstructions(true);
+      try {
+        await deferredPrompt.prompt();
+        const { outcome } = await deferredPrompt.userChoice;
+        if (outcome === "accepted") setDismissed(true);
+      } catch {
+        // 原生 prompt 失败时显示指引
+        setShowInstructions(true);
+      }
     } else {
-      // 桌面端无 prompt 时，也显示通用说明
-      setShowIOSInstructions(true);
+      setShowInstructions(true);
     }
   };
 
-  const handleDismiss = () => setDismissed(true);
-
-  const visible = (showButton || showIOSHint) && !dismissed;
+  const visible = (showButton || showFallbackHint) && !dismissed;
 
   return (
     <AnimatePresence>
@@ -85,20 +161,19 @@ export function PWAInstallButton() {
           >
             <Smartphone className="h-4 w-4 shrink-0 text-gold/80 transition-transform duration-300 group-hover:scale-110" />
             <span className="font-serif text-[13px] text-foreground/90">
-              将本站应用添加到设备主页
+              将本网页添加到设备主页成为APP
             </span>
           </button>
 
-          {/* 操作说明弹层 */}
           <AnimatePresence>
-            {showIOSInstructions && (
+            {showInstructions && (
               <>
                 <motion.div
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
                   className="fixed inset-0 z-40 bg-black/40 backdrop-blur-sm"
-                  onClick={() => setShowIOSInstructions(false)}
+                  onClick={() => setShowInstructions(false)}
                   aria-hidden
                 />
                 <motion.div
@@ -110,17 +185,16 @@ export function PWAInstallButton() {
                   <div className="flex items-start justify-between gap-3">
                     <div>
                       <p className="font-serif text-[15px] font-bold text-gold">
-                        {showIOSHint ? "iOS 添加到主屏幕" : "添加到手机"}
+                        {platformGuide?.title ?? "添加到主屏幕"}
                       </p>
                       <p className="mt-2 text-[13px] leading-relaxed text-muted-foreground">
-                        {showIOSHint
-                          ? "点击 Safari 底部的 分享 按钮，选择「添加到主屏幕」即可。"
-                          : "请用手机浏览器打开本页，或使用 Chrome 地址栏的 ⊕ 安装图标添加应用。"}
+                        {platformGuide?.steps ??
+                          "请使用支持的浏览器（Chrome、Edge、Safari）打开本页，按浏览器提示添加应用。"}
                       </p>
                     </div>
                     <button
                       type="button"
-                      onClick={() => setShowIOSInstructions(false)}
+                      onClick={() => setShowInstructions(false)}
                       className="-m-1 rounded p-1 text-muted-foreground transition-colors hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/30"
                       aria-label="关闭"
                     >
