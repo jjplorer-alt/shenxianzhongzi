@@ -156,7 +156,11 @@ export default function Home() {
           })}
         </div>
 
-        <PWAInstallButton />
+        <div className="mt-8 grid grid-cols-1 gap-2 sm:grid-cols-3 sm:gap-3">
+          <div className="hidden sm:block" aria-hidden />
+          <PWAInstallButton />
+          <div className="hidden sm:block" aria-hidden />
+        </div>
       </section>
 
       <SiteFooter />

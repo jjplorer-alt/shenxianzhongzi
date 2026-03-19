@@ -15,6 +15,10 @@ type PlatformGuide = {
   steps: string;
 };
 
+/** 通用菜单操作提示 */
+const MENU_PHRASE =
+  "点击三个点或三条横线打开菜单，选择「添加到主屏幕」/「添加到桌面」/「安装应用」。";
+
 /** 检测设备与浏览器，返回针对性安装指引 */
 function getPlatformGuide(): PlatformGuide {
   const ua = navigator.userAgent;
@@ -52,20 +56,19 @@ function getPlatformGuide(): PlatformGuide {
       return {
         title: "微信内打开 · 需用 Safari",
         steps:
-          "微信内置浏览器不支持添加到主屏幕。请点击右上角「⋯」→「在 Safari 中打开」，然后用 Safari 打开本页后，点击底部的「分享」按钮（方框带向上箭头），选择「添加到主屏幕」→「添加」。",
+          "微信内置浏览器不支持添加到主屏幕。请点击右上角「⋯」→「在 Safari 中打开」。用 Safari 打开本页后：点击底部的「分享」按钮（方框带向上箭头），选择「添加到主屏幕」→「添加」；或 " + MENU_PHRASE,
       };
     }
     if (isAndroid) {
       return {
         title: "微信内打开 · 需用系统浏览器",
         steps:
-          "微信内置浏览器不支持添加到主屏幕。请点击右上角「⋮」或「⋯」→「在浏览器中打开」或「用默认浏览器打开」。用 Chrome 或系统浏览器打开后，再点击本页的安装指引，按对应浏览器的步骤操作。",
+          "微信内置浏览器不支持添加到主屏幕。请点击右上角「⋮」或「⋯」→「在浏览器中打开」或「用默认浏览器打开」。用系统浏览器打开后：" + MENU_PHRASE,
       };
     }
     return {
       title: "微信内打开",
-      steps:
-        "请点击右上角「⋯」→「在浏览器中打开」，用系统浏览器（Chrome、Edge、Safari）重新打开本页后再进行安装。",
+      steps: "请点击右上角「⋯」→「在浏览器中打开」。用系统浏览器打开后：" + MENU_PHRASE,
     };
   }
 
@@ -74,14 +77,14 @@ function getPlatformGuide(): PlatformGuide {
       return {
         title: "QQ 内打开 · 建议用 Safari",
         steps:
-          "QQ 内置浏览器对「添加到主屏幕」支持有限。建议点击右上角菜单→「在 Safari 中打开」，用 Safari 打开后点击底部「分享」→「添加到主屏幕」→「添加」。",
+          "QQ 内置浏览器对「添加到主屏幕」支持有限。建议点击右上角菜单→「在 Safari 中打开」。用 Safari 打开后：点击底部「分享」→「添加到主屏幕」→「添加」；或 " + MENU_PHRASE,
       };
     }
     if (isAndroid) {
       return {
         title: "QQ 内打开 · 建议用 Chrome",
         steps:
-          "QQ 浏览器对 PWA 支持不稳定。建议复制链接，用 Chrome 或系统自带浏览器打开本页，再点击安装指引按步骤操作。或点击 QQ 右上角菜单→「在浏览器中打开」。",
+          "QQ 浏览器对 PWA 支持不稳定。建议点击 QQ 右上角菜单→「在浏览器中打开」。用系统浏览器打开后：" + MENU_PHRASE,
       };
     }
   }
@@ -91,7 +94,7 @@ function getPlatformGuide(): PlatformGuide {
     return {
       title: "iPhone / iPad 添加到主屏幕",
       steps:
-        "点击 Safari 底部的「分享」按钮（方框带向上箭头），向下滚动选择「添加到主屏幕」，然后点击「添加」。",
+        "点击 Safari 底部的「分享」按钮（方框带向上箭头），向下滚动选择「添加到主屏幕」，然后点击「添加」。或 " + MENU_PHRASE,
     };
   }
 
@@ -102,71 +105,65 @@ function getPlatformGuide(): PlatformGuide {
       return {
         title: deviceHuawei ? "华为 / 鸿蒙 浏览器" : "鸿蒙 添加到主屏幕",
         steps:
-          "点击网页底部右下角的「四个点」按钮，选择「添加至桌面」。若无此选项，可点击右上角 ⋮ 菜单查找「添加至桌面」或「安装应用」。",
+          "点击网页底部右下角的「四个点」按钮，选择「添加至桌面」。若无此选项，" + MENU_PHRASE,
       };
     }
     return {
       title: "华为 / 鸿蒙 设备",
       steps:
-        "鸿蒙原生浏览器：点击底部右下角「四个点」→「添加至桌面」。其他浏览器：点击右上角或右下角菜单（⋮ 或 ≡），查找「添加至桌面」「添加到主屏幕」或「安装应用」。",
+        "鸿蒙原生浏览器：点击底部右下角「四个点」→「添加至桌面」。其他浏览器：" + MENU_PHRASE,
     };
   }
 
   // ═══ Android 各浏览器（品牌浏览器优先于通用 Chrome，因多为 Chromium 内核） ═══
   if (isAndroid) {
-    const menuTip =
-      "点击右上角或右下角的菜单（三个点 ⋮ 或 ≡），选择「添加到主屏幕」或「安装应用」。";
 
     if (isSamsungBrowser) {
       return {
         title: "三星 浏览器安装",
-        steps:
-          "点击右上角或右下角的菜单按钮（三个点 ⋮ 或 ≡），选择「添加到主屏幕」或「添加到页面」。",
+        steps: MENU_PHRASE,
       };
     }
     if (isMiuiBrowser) {
       return {
         title: "小米 浏览器",
-        steps:
-          "点击右下角「菜单」或右上角 ⋮，选择「添加到主屏幕」或「安装应用」。小米浏览器基于 Chromium，操作与 Chrome 类似。",
+        steps: MENU_PHRASE,
       };
     }
     if (isOppoBrowser) {
       return {
         title: "OPPO / 真我 浏览器",
-        steps: "点击右上角 ⋮ 菜单，查找「添加到主屏幕」或「安装应用」。",
+        steps: MENU_PHRASE,
       };
     }
     if (isVivoBrowser) {
       return {
         title: "vivo / iQOO 浏览器",
-        steps: "点击右上角 ⋮ 或右下角菜单，选择「添加到主屏幕」或「安装应用」。",
+        steps: MENU_PHRASE,
       };
     }
     if (isHonorBrowser) {
       return {
         title: "荣耀 浏览器",
-        steps:
-          "点击右上角或右下角菜单（⋮ 或 ≡），查找「添加至桌面」或「添加到主屏幕」。荣耀浏览器与华为浏览器操作类似。",
+        steps: MENU_PHRASE,
       };
     }
     if (isUCBrowser) {
       return {
         title: "UC 浏览器",
-        steps: `UC 浏览器：${menuTip}部分版本可能在「更多」或「工具箱」中。`,
+        steps: `${MENU_PHRASE} 部分版本可能在「更多」或「工具箱」中。`,
       };
     }
     if (isBaiduBrowser) {
       return {
         title: "百度 浏览器",
-        steps: `百度浏览器：${menuTip}`,
+        steps: MENU_PHRASE,
       };
     }
     if (isFirefox) {
       return {
         title: "Android Firefox 安装",
-        steps:
-          "点击右上角或右下角的菜单（三个点 ⋮ 或 ≡），选择「安装」或「添加到主屏幕」。",
+        steps: MENU_PHRASE,
       };
     }
     if (isChrome) {
@@ -174,7 +171,7 @@ function getPlatformGuide(): PlatformGuide {
         deviceXiaomi ? "小米" : deviceOppo ? "OPPO" : deviceVivo ? "vivo" : deviceSamsung ? "三星" : "";
       return {
         title: brand ? `${brand} 手机 · Chrome` : "Android Chrome 安装",
-        steps: `${menuTip}若未看到该选项，请确保使用 HTTPS 访问。`,
+        steps: `${MENU_PHRASE} 若未看到该选项，请确保使用 HTTPS 访问。`,
       };
     }
     return {
@@ -185,7 +182,7 @@ function getPlatformGuide(): PlatformGuide {
           : deviceVivo
             ? "vivo 手机"
             : "Android 添加到主屏幕",
-      steps: `打开浏览器菜单（通常为右上角或右下角的三个点 ⋮ 或 ≡），查找「添加到主屏幕」「安装应用」或类似选项。`,
+      steps: MENU_PHRASE,
     };
   }
 
@@ -194,27 +191,25 @@ function getPlatformGuide(): PlatformGuide {
     return {
       title: "Chrome / Edge 安装",
       steps:
-        "点击地址栏右侧的「⊕」安装图标；或点击右上角/右下角的菜单（三个点 ⋮ 或 ≡）→「安装 神仙种子」/「应用」→「安装此站点作为应用」。",
+        "点击地址栏右侧的「⊕」安装图标；或 " + MENU_PHRASE,
     };
   }
   if (isFirefox) {
     return {
       title: "Firefox 安装",
-      steps:
-        "点击右上角或右下角的菜单（三个点 ⋮ 或 ≡），选择「安装」或「更多工具」→「安装」。",
+      steps: MENU_PHRASE,
     };
   }
   if (isSafari) {
     return {
       title: "Safari 安装",
-      steps: "菜单栏选择「文件」→「添加到 Dock」，或使用「开发」菜单中的 PWA 相关选项。",
+      steps: MENU_PHRASE,
     };
   }
 
   return {
     title: "添加到主屏幕",
-    steps:
-      "请使用 Chrome、Edge、Safari 或华为/鸿蒙浏览器打开本页。Chrome/Edge 可在地址栏找到 ⊕ 安装图标；iOS 请用 Safari 的「分享」→「添加到主屏幕」；鸿蒙原生浏览器可点击底部右下角「四个点」→「添加至桌面」。其他浏览器可在右上角或右下角的菜单（三个点 ⋮ 或 ≡）中查找「添加到主屏幕」或「安装应用」。",
+    steps: MENU_PHRASE,
   };
 }
 
@@ -277,29 +272,24 @@ export function PWAInstallButton() {
           initial={{ opacity: 0, y: 8 }}
           animate={{ opacity: 1, y: 0 }}
           exit={{ opacity: 0, y: -4 }}
-          className="relative mt-8 flex justify-center"
+          className="relative"
         >
           <button
             type="button"
             onClick={handleClick}
             className={cn(
-              "glass-card group flex w-full max-w-sm flex-col items-center gap-3 rounded-xl border border-gold/10 px-5 py-4 text-center",
+              "glass-card group flex w-full items-center gap-2.5 rounded-xl border border-gold/10 px-4 py-3 text-left",
               "transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/20 hover:shadow-[0_4px_16px_-4px_rgba(232,198,120,0.15)]",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/30 sm:max-w-md"
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold/30 sm:px-5 sm:py-3.5"
             )}
           >
             <Smartphone
               className="h-5 w-5 shrink-0 text-gold/80 transition-transform duration-300 group-hover:scale-110"
               aria-hidden
             />
-            <div className="space-y-1.5 text-center">
-              <p className="font-serif text-[15px] leading-snug text-foreground/95">
-                添加到主屏幕 · 像 APP 一样打开
-              </p>
-              <p className="text-[12px] leading-relaxed text-gold/60 underline-offset-2 transition-colors group-hover:text-gold/80 group-hover:underline">
-                点此获取安装指引
-              </p>
-            </div>
+            <span className="font-serif text-[15px] font-medium text-foreground/95">
+              安装APP
+            </span>
           </button>
 
           <AnimatePresence>
