@@ -20,6 +20,36 @@ function numToCN(n: number): string {
     .join("");
 }
 
+/** 道教八节：立春、春分、立夏、夏至、立秋、秋分、立冬、冬至 */
+const BA_JIE = new Set(["立春", "春分", "立夏", "夏至", "立秋", "秋分", "立冬", "冬至"]);
+
+function getBaJieNote(solar: InstanceType<typeof Solar>, lunar: { getPrevJieQi: () => { getName: () => string; getSolar: () => InstanceType<typeof Solar> }; getNextJieQi: () => { getName: () => string; getSolar: () => InstanceType<typeof Solar> } }): string | null {
+  const todayY = solar.getYear();
+  const todayM = solar.getMonth();
+  const todayD = solar.getDay();
+  const prev = lunar.getPrevJieQi();
+  const next = lunar.getNextJieQi();
+  const prevSolar = prev.getSolar();
+  const nextSolar = next.getSolar();
+  if (
+    prevSolar.getYear() === todayY &&
+    prevSolar.getMonth() === todayM &&
+    prevSolar.getDay() === todayD &&
+    BA_JIE.has(prev.getName())
+  ) {
+    return prev.getName() + "（八节）";
+  }
+  if (
+    nextSolar.getYear() === todayY &&
+    nextSolar.getMonth() === todayM &&
+    nextSolar.getDay() === todayD &&
+    BA_JIE.has(next.getName())
+  ) {
+    return next.getName() + "（八节）";
+  }
+  return null;
+}
+
 export function getDaoCalendar(): DaoCalendarInfo {
   const now = new Date();
   const solar = Solar.fromDate(now);
@@ -30,7 +60,7 @@ export function getDaoCalendar(): DaoCalendarInfo {
     daoYear: numToCN(daoYear),
     lunarYearMonthDay: `${lunar.getYearInGanZhi()}${lunar.getYearShengXiao()}年 ${lunar.getMonthInChinese()}月${lunar.getDayInChinese()}`,
     ganZhiMonthDayTime: `${lunar.getMonthInGanZhiExact()}月 ${lunar.getDayInGanZhi()}日 ${lunar.getTimeZhi()}时`,
-    todayNote: getDaoistNote(lunar.getMonth(), lunar.getDay()),
+    todayNote: getDaoistNote(lunar.getMonth(), lunar.getDay(), solar, lunar),
   };
 }
 
@@ -39,7 +69,7 @@ const DAOIST_DATES: Record<string, string> = {
   "1-3": "孙真人圣诞",
   "1-9": "玉皇大帝圣诞",
   "1-13": "关圣帝君飞升",
-  "1-15": "上元天官圣诞",
+  "1-15": "上元节（三元）、上元天官圣诞",
   "1-19": "长春祖师圣诞",
   "1-28": "净明普化天尊圣诞",
   "2-1": "勾陈天皇大帝圣诞",
@@ -54,7 +84,6 @@ const DAOIST_DATES: Record<string, string> = {
   "3-16": "三茅真君得道日",
   "3-18": "后土娘娘圣诞",
   "3-23": "天后妈祖圣诞",
-  "3-26": "鬼谷先师诞",
   "3-28": "东岳大帝圣诞",
   "4-14": "吕祖纯阳祖师圣诞",
   "4-18": "华佗神医先师诞",
@@ -71,7 +100,7 @@ const DAOIST_DATES: Record<string, string> = {
   "6-24": "关圣帝君圣诞",
   "7-7": "道德腊、七夕",
   "7-12": "刘祖长生真人圣诞",
-  "7-15": "中元地官圣诞",
+  "7-15": "中元节（三元）、中元地官圣诞",
   "7-18": "王母圣诞",
   "7-26": "张三丰真人圣诞",
   "8-1": "许真君飞升日",
@@ -85,13 +114,12 @@ const DAOIST_DATES: Record<string, string> = {
   "10-1": "东皇大帝圣诞、民岁腊",
   "10-3": "三茅应化真君圣诞",
   "10-6": "天曹诸司五岳五帝圣诞",
-  "10-15": "下元水官圣诞",
+  "10-15": "下元节（三元）、下元水官圣诞",
   "10-18": "地母娘娘圣诞",
   "10-19": "长春邱祖成道日",
   "11-6": "西岳大帝圣诞",
-  "11-9": "湘子韩祖圣诞",
   "11-11": "太乙救苦天尊圣诞",
-  "11-26": "北方五道圣诞",
+  "12-8": "王侯腊",
   "12-16": "南岳大帝圣诞、福德正神圣诞",
   "12-21": "天猷上帝圣诞",
   "12-22": "重阳祖师圣诞",
@@ -100,11 +128,22 @@ const DAOIST_DATES: Record<string, string> = {
   "12-29": "南北斗星君下降",
 };
 
-function getDaoistNote(month: number, day: number): string {
+function getDaoistNote(
+  month: number,
+  day: number,
+  solar: InstanceType<typeof Solar>,
+  lunar: { getPrevJieQi: () => { getName: () => string; getSolar: () => InstanceType<typeof Solar> }; getNextJieQi: () => { getName: () => string; getSolar: () => InstanceType<typeof Solar> } }
+): string {
   const fastingHint =
     day === 1 ? "初一宜持斋诵经" : day === 15 ? "十五宜持斋诵经" : null;
   const eventNote = DAOIST_DATES[`${month}-${day}`];
-  if (fastingHint && eventNote) return `${fastingHint}；${eventNote}`;
-  if (fastingHint) return fastingHint;
-  return eventNote || "今日无特殊记事";
+  const baJieNote = getBaJieNote(solar, lunar);
+
+  const parts: string[] = [];
+  if (fastingHint) parts.push(fastingHint);
+  if (eventNote) parts.push(eventNote);
+  if (baJieNote) parts.push(baJieNote);
+
+  if (parts.length > 0) return parts.join("；");
+  return "今日无特殊记事";
 }
