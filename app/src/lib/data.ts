@@ -590,4 +590,14 @@ export const ABOUT_THANKS = `
 
 export const ABOUT_DISCLAIMER = `本站内容仅供学习研究道教文化，经典原文来源于公开出版物，其他内容版权归原著作权人所有。如权利人认为本站内容侵犯其合法权益，请联系我们，将在核实后立即删除。`;
 
+/** 共创共建名单：参与本站内容、设计、技术等贡献者 */
+export interface Collaborator {
+  name: string;
+  role?: string;
+}
+
+export const ABOUT_COLLABORATORS: Collaborator[] = [
+  // { name: "示例", role: "内容整理" },
+];
+
 export const FOOTER_COPYRIGHT = `© 2026 ${SITE_CONFIG.name}`;
