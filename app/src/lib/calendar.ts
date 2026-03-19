@@ -102,7 +102,7 @@ const DAOIST_DATES: Record<string, string> = {
 
 function getDaoistNote(month: number, day: number): string {
   const fastingHint =
-    day === 1 ? "今日初一，宜持斋诵经" : day === 15 ? "今日十五，宜持斋诵经" : null;
+    day === 1 ? "初一宜持斋诵经" : day === 15 ? "十五宜持斋诵经" : null;
   const eventNote = DAOIST_DATES[`${month}-${day}`];
   if (fastingHint && eventNote) return `${fastingHint}；${eventNote}`;
   if (fastingHint) return fastingHint;

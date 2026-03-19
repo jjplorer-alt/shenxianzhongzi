@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "round-icons": "node scripts/round-icon-corners.mjs",
     "prebuild": "node ../scripts/inject-sw-version.mjs",
     "postbuild": "node ../scripts/inject-sw-version.mjs --restore",
     "dev": "next dev",
