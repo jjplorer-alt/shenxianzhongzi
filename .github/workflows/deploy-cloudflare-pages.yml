@@ -19,15 +19,22 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     name: Build and Deploy
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # 完整 git 历史，供 inject-sw-version 等脚本使用
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: "22"
           cache: "npm"
-          cache-dependency-path: package-lock.json
+          cache-dependency-path: |
+            package-lock.json
+            app/package-lock.json
 
       - name: Install dependencies
         run: npm ci
@@ -39,16 +46,16 @@ jobs:
           NEXT_PUBLIC_SITE_URL: https://shenxianzhongzi.pages.dev
         run: npm ci && npm run build
 
-      - name: Deploy to Cloudflare Pages
-        id: deploy
-        uses: cloudflare/wrangler-action@v3
-        with:
-          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          command: pages deploy app/out --project-name=shenxianzhongzi
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+      - name: Verify build output
+        run: |
+          echo "Build output contents:"
+          ls -la app/out
+          test -d app/out && test -n "$(ls -A app/out)" || (echo "ERROR: app/out is empty or missing" && exit 1)
 
-      - name: Deployment URL
+      - name: Deploy to Cloudflare Pages
+        run: npx wrangler@latest pages deploy app/out --project-name=shenxianzhongzi --branch=main
+
+      - name: Deployment complete
         run: |
           echo "✅ 部署成功！"
-          echo "站点地址: ${{ steps.deploy.outputs.deployment-url }}"
+          echo "站点地址: https://shenxianzhongzi.pages.dev"
