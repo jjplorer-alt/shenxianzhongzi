@@ -82,6 +82,7 @@ export default function Home() {
 
             <div className="border-t border-white/[0.04] px-5 py-2.5 text-center text-[13px] text-muted-foreground">
               {"\u4eca\u65e5\u9053\u6559\u5927\u4e8b\u8bb0\uff1a"}
+              <br />
               <span className="text-foreground/95">{cal.todayNote}</span>
             </div>
 
