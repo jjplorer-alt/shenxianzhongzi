@@ -240,10 +240,11 @@ export function PWAInstallButton() {
     const isIOS =
       /iPad|iPhone|iPod/.test(navigator.userAgent) ||
       (navigator.platform === "MacIntel" && navigator.maxTouchPoints > 1);
-    if (isIOS) setShowFallbackHint(true);
-
-    setShowButton(true);
-    setPlatformGuide(getPlatformGuide());
+    queueMicrotask(() => {
+      if (isIOS) setShowFallbackHint(true);
+      setShowButton(true);
+      setPlatformGuide(getPlatformGuide());
+    });
 
     return () => window.removeEventListener("beforeinstallprompt", handler);
   }, []);
@@ -287,7 +288,7 @@ export function PWAInstallButton() {
               className="h-5 w-5 shrink-0 text-gold/80 transition-transform duration-300 group-hover:scale-110"
               aria-hidden
             />
-            <span className="font-serif text-[15px] font-medium text-foreground/95">
+            <span className="font-serif text-[15px] font-bold">
               安装APP
             </span>
           </button>

@@ -9,7 +9,6 @@ import { NAV_CARDS } from "@/lib/data";
 import { SiteFooter } from "@/components/site-footer";
 import { PWAInstallButton } from "@/components/pwa-install-button";
 import { FolderOpen, ArrowUpRight, Info, BookMarked } from "lucide-react";
-import { cn } from "@/lib/utils";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
@@ -29,7 +28,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    setChapterOfDay(getChapterOfDay());
+    queueMicrotask(() => setChapterOfDay(getChapterOfDay()));
   }, []);
 
   return (
