@@ -148,27 +148,29 @@ export default function AboutPage() {
               </h2>
               <div className="h-px flex-1 bg-gradient-to-r from-white/[0.07] to-transparent" />
             </div>
+            <p className="text-[12px] leading-[1.85] text-muted-foreground/80">
+              星星之火可以燎原，期待更多有缘人加入，共同完善本站内容。
+              若本站引用了您的内容，或您为本站提供素材、纠正BUG、分享推广、提供建议和帮助，在此郑重邀请您将名字收录于此，以表感谢和纪念。您也可以加一些简短的身份介绍，宣传您的道文化内容账号、组织机构，促进大家的联络互通。若您想保持神秘，亦可留一简短化名。
+            </p>
             {ABOUT_COLLABORATORS.length > 0 ? (
-              <div className="space-y-2">
+              <div className="mt-4 space-y-2">
                 {ABOUT_COLLABORATORS.map((c, i) => (
                   <div
                     key={i}
-                    className="flex flex-wrap items-baseline gap-2 text-[13px] leading-[1.85] text-muted-foreground"
+                    className="text-[13px] leading-[1.85] text-muted-foreground"
                   >
-                    <span className="inline-block h-[3px] w-[3px] shrink-0 rounded-full bg-gold/30" />
+                    <span className="mr-2 inline-block h-[3px] w-[3px] shrink-0 align-[0.35em] rounded-full bg-gold/30" />
                     <span className="font-medium text-foreground/85">{c.name}</span>
-                    {c.role && (
-                      <span className="text-[12px] text-muted-foreground/80">· {c.role}</span>
-                    )}
+                    {c.role ? (
+                      <span className="text-[12px] text-muted-foreground/80">
+                        {" · "}
+                        {c.role}
+                      </span>
+                    ) : null}
                   </div>
                 ))}
               </div>
-            ) : (
-              <p className="text-[13px] leading-[1.85] text-muted-foreground/70">
-                星星之火可以燎原，期待更多有缘人加入，共同完善本站内容。
-                若本站引用了您的内容，或您为本站提供素材、纠正BUG、分享推广、提供建议和帮助，在此郑重邀请您将名字收录于此，以表感谢和纪念。您也可以加一些简短的身份介绍，宣传您的道文化内容账号、组织机构，促进大家的联络互通。若您想保持神秘，亦可留一简短化名。
-              </p>
-            )}
+            ) : null}
           </motion.div>
 
           {/* 联系 */}

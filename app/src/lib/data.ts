@@ -560,7 +560,11 @@ export interface Collaborator {
 }
 
 export const ABOUT_COLLABORATORS: Collaborator[] = [
-  // { name: "示例", role: "内容整理" },
+  {
+    name: "韩持冬",
+    role: "禹会区道教文化研究会秘书长，道教义理学研究会副秘书长，《道教义理》期刊编辑部副主任，《上清崇宁靖室》公众号主编",
+  },
+  { name: "王法达" },
 ];
 
 export const FOOTER_COPYRIGHT = `© 2026 ${SITE_CONFIG.name}`;

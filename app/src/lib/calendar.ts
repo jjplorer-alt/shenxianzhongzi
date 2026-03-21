@@ -132,15 +132,24 @@ function getDaoistNote(
   month: number,
   day: number,
   solar: InstanceType<typeof Solar>,
-  lunar: { getPrevJieQi: () => { getName: () => string; getSolar: () => InstanceType<typeof Solar> }; getNextJieQi: () => { getName: () => string; getSolar: () => InstanceType<typeof Solar> } }
+  lunar: {
+    getPrevJieQi: () => { getName: () => string; getSolar: () => InstanceType<typeof Solar> };
+    getNextJieQi: () => { getName: () => string; getSolar: () => InstanceType<typeof Solar> };
+    getDayInGanZhi: () => string;
+  }
 ): string {
   const fastingHint =
     day === 1 ? "初一宜持斋诵经" : day === 15 ? "十五宜持斋诵经" : null;
+  const dayGan = lunar.getDayInGanZhi().charAt(0);
+  const sanXinNote = dayGan === "辛" ? "三辛日（辛日可修雷斋）" : null;
+  const chuLiuNote = day === 6 ? "初六可修雷斋" : null;
   const eventNote = DAOIST_DATES[`${month}-${day}`];
   const baJieNote = getBaJieNote(solar, lunar);
 
   const parts: string[] = [];
   if (fastingHint) parts.push(fastingHint);
+  if (sanXinNote) parts.push(sanXinNote);
+  if (chuLiuNote) parts.push(chuLiuNote);
   if (eventNote) parts.push(eventNote);
   if (baJieNote) parts.push(baJieNote);
 
