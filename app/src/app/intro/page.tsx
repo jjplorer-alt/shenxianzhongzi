@@ -3,7 +3,7 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { BookMarked, ArrowUpRight, HelpCircle, ChevronDown } from "lucide-react";
+import { BookMarked, ArrowUpRight, Download, HelpCircle, ChevronDown } from "lucide-react";
 import { DAOJING_INTRO_GROUPS, DAOJING_QA, type IntroGroup } from "@/lib/data";
 import { cn } from "@/lib/utils";
 
@@ -68,6 +68,11 @@ function IntroGroupCard({ group }: { group: IntroGroup }) {
         {group.items.map((item) => {
           const isInternal = item.url.startsWith("/");
           const className = "group flex items-center justify-between gap-3 rounded-lg px-3 py-2.5 transition-all duration-200 hover:bg-white/[0.04] hover:pl-4";
+          const trailIcon = item.download ? (
+            <Download className="h-3.5 w-3.5 shrink-0 text-muted-foreground/50 transition-all duration-200 group-hover:text-gold" />
+          ) : (
+            <ArrowUpRight className="h-3 w-3 shrink-0 text-muted-foreground/50 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-gold" />
+          );
           const content = (
             <>
               <div className="min-w-0 flex-1">
@@ -80,11 +85,16 @@ function IntroGroupCard({ group }: { group: IntroGroup }) {
                   </p>
                 )}
               </div>
-              <ArrowUpRight className="h-3 w-3 shrink-0 text-muted-foreground/50 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-gold" />
+              {trailIcon}
             </>
           );
           return isInternal ? (
-            <Link key={item.title} href={item.url} className={className}>
+            <Link
+              key={item.title}
+              href={item.url}
+              className={className}
+              {...(item.download ? { download: true } : {})}
+            >
               {content}
             </Link>
           ) : (

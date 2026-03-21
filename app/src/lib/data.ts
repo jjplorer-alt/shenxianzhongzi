@@ -4,6 +4,8 @@
 
 export const SITE_CONFIG = {
   name: "神仙种子",
+  /** 页头副标题（弱化显示），与 fullName 中的后半段一致 */
+  tagline: "道经入门学习资源",
   fullName: "神仙种子 · 道经入门学习资源",
   description:
     "道经入门学习资源聚合索引 — 经文原文、名家注解、音视频、公众号文章索引，节约时间、少走弯路",
@@ -36,6 +38,8 @@ export interface IntroItem {
   title: string;
   url: string;
   desc?: string;
+  /** 站内静态文件等资源，点击触发浏览器下载 */
+  download?: boolean;
 }
 
 export interface IntroGroup {
@@ -60,12 +64,12 @@ export const DAOJING_INTRO_GROUPS: IntroGroup[] = [
         desc: "全称《太上玄门日诵晚坛功课经》，于酉时（17-19点）讽诵，重在济度幽冥、超拔先祖。",
       },
       {
-        title: "《三官经》",
+        title: "三官经",
         url: "/intro/sanguan",
         desc: "全称《太上三元赐福赦罪解厄消灾延生保命妙经》，天官赐福、地官赦罪、水官解厄，旨在忏悔祈福、利益人间众生。",
       },
       {
-        title: "《北斗经》",
+        title: "北斗经",
         url: "/intro/beidou",
         desc: "全称《太上玄灵北斗本命延生真经》，北斗为造化枢机、人神主宰，主消灾解厄、延生保命。",
       },
@@ -80,6 +84,17 @@ export const DAOJING_INTRO_GROUPS: IntroGroup[] = [
       { title: "道门十规", url: "https://www.daorenjia.com/daozang27-1411", desc: "四十三代天师张宇初所定，规范道士修行与丛林生活的十条准则。" },
       { title: "崆峒问答", url: "http://www.tangnet.cn/novel/87.html", desc: "五十四代天师张继宗所述，正一道入门问答集录，共三百余问。" },
       { title: "陆先生道门科略", url: "https://www.daorenjia.com/daozang14-632", desc: "南朝高道陆修静撰，阐明早期天师道组织制度、行为规范等。" },
+      {
+        title: "坐忘论",
+        url: "https://www.daorenjia.com/daozang22-1088",
+        desc: "唐代高道司马承祯撰，阐述坐忘修心的七个次第。",
+      },
+      {
+        title: "冲虚至道长春刘真人语录",
+        url: "/chongxu-zhidao-changchun-liu-zhenren-yulu.docx",
+        desc: "明代高道刘渊然语录辑本，阐述修道经验与心得，提供文档下载。",
+        download: true,
+      },
     ],
   },
   {
