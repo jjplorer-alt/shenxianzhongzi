@@ -41,12 +41,54 @@ export default function AboutPage() {
         </motion.div>
 
         <div className="space-y-3">
-          {/* 缘起 */}
+          {/* 共创共建名单 */}
           <motion.div
             variants={fadeUp}
             initial="hidden"
             animate="visible"
             custom={0.05}
+            className="glass rounded-xl p-6 transition-all duration-300 hover:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.15)]"
+          >
+            <div className="mb-4 flex items-center gap-2.5">
+              <span className="text-[13px] text-gold/50">{"\u2726"}</span>
+              <h2 className="font-serif text-[12px] font-medium tracking-[0.2em] text-foreground/75">
+                共创共建名单
+              </h2>
+              <div className="h-px flex-1 bg-gradient-to-r from-white/[0.07] to-transparent" />
+            </div>
+            <p className="text-[12px] leading-[1.85] text-muted-foreground/80">
+              星星之火可以燎原，期待更多有缘人加入，共同完善本站内容。
+              若本站引用了您的内容，或您为本站提供素材、纠正BUG、分享推广、提供建议和帮助，在此郑重邀请您将名字收录于此，以表感谢和纪念。您也可以加一些简短的身份介绍，宣传您的道文化内容账号、组织机构，促进大家的联络互通。若您想保持神秘，亦可留一简短化名。
+            </p>
+            {ABOUT_COLLABORATORS.length > 0 ? (
+              <div className="mt-4 space-y-2">
+                {ABOUT_COLLABORATORS.map((c, i) => (
+                  <div
+                    key={i}
+                    className="text-[13px] leading-[1.85] text-muted-foreground"
+                  >
+                    <span className="mr-2 inline-block h-[3px] w-[3px] shrink-0 align-[0.35em] rounded-full bg-gold/30" />
+                    <span className="font-serif font-medium text-gradient-gold">
+                      {c.name}
+                    </span>
+                    {c.role ? (
+                      <span className="text-[12px] text-muted-foreground/80">
+                        {" · "}
+                        {c.role}
+                      </span>
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+            ) : null}
+          </motion.div>
+
+          {/* 缘起 */}
+          <motion.div
+            variants={fadeUp}
+            initial="hidden"
+            animate="visible"
+            custom={0.1}
             className="glass rounded-xl overflow-hidden transition-all duration-300 hover:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.15)]"
           >
             <button
@@ -93,7 +135,7 @@ export default function AboutPage() {
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            custom={0.1}
+            custom={0.15}
             className="glass rounded-xl p-6 transition-all duration-300 hover:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.15)]"
           >
             <div className="mb-4 flex items-center gap-2.5">
@@ -118,7 +160,7 @@ export default function AboutPage() {
             variants={fadeUp}
             initial="hidden"
             animate="visible"
-            custom={0.15}
+            custom={0.2}
             className="glass rounded-xl p-6 transition-all duration-300 hover:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.15)]"
           >
             <div className="mb-4 flex items-center gap-2.5">
@@ -131,48 +173,6 @@ export default function AboutPage() {
             <p className="text-[13px] leading-[1.85] text-muted-foreground">
               {ABOUT_DISCLAIMER}
             </p>
-          </motion.div>
-
-          {/* 共创共建名单 */}
-          <motion.div
-            variants={fadeUp}
-            initial="hidden"
-            animate="visible"
-            custom={0.2}
-            className="glass rounded-xl p-6 transition-all duration-300 hover:shadow-[0_4px_20px_-4px_rgba(0,0,0,0.15)]"
-          >
-            <div className="mb-4 flex items-center gap-2.5">
-              <span className="text-[13px] text-gold/50">{"\u2726"}</span>
-              <h2 className="font-serif text-[12px] font-medium tracking-[0.2em] text-foreground/75">
-                共创共建名单
-              </h2>
-              <div className="h-px flex-1 bg-gradient-to-r from-white/[0.07] to-transparent" />
-            </div>
-            <p className="text-[12px] leading-[1.85] text-muted-foreground/80">
-              星星之火可以燎原，期待更多有缘人加入，共同完善本站内容。
-              若本站引用了您的内容，或您为本站提供素材、纠正BUG、分享推广、提供建议和帮助，在此郑重邀请您将名字收录于此，以表感谢和纪念。您也可以加一些简短的身份介绍，宣传您的道文化内容账号、组织机构，促进大家的联络互通。若您想保持神秘，亦可留一简短化名。
-            </p>
-            {ABOUT_COLLABORATORS.length > 0 ? (
-              <div className="mt-4 space-y-2">
-                {ABOUT_COLLABORATORS.map((c, i) => (
-                  <div
-                    key={i}
-                    className="text-[13px] leading-[1.85] text-muted-foreground"
-                  >
-                    <span className="mr-2 inline-block h-[3px] w-[3px] shrink-0 align-[0.35em] rounded-full bg-gold/30" />
-                    <span className="font-serif font-medium text-gradient-gold">
-                      {c.name}
-                    </span>
-                    {c.role ? (
-                      <span className="text-[12px] text-muted-foreground/80">
-                        {" · "}
-                        {c.role}
-                      </span>
-                    ) : null}
-                  </div>
-                ))}
-              </div>
-            ) : null}
           </motion.div>
 
           {/* 联系 */}
