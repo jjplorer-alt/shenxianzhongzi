@@ -160,7 +160,9 @@ export default function AboutPage() {
                     className="text-[13px] leading-[1.85] text-muted-foreground"
                   >
                     <span className="mr-2 inline-block h-[3px] w-[3px] shrink-0 align-[0.35em] rounded-full bg-gold/30" />
-                    <span className="font-medium text-foreground/85">{c.name}</span>
+                    <span className="font-serif font-medium text-gradient-gold">
+                      {c.name}
+                    </span>
                     {c.role ? (
                       <span className="text-[12px] text-muted-foreground/80">
                         {" · "}
