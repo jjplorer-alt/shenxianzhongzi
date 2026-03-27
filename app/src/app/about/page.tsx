@@ -5,7 +5,13 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { SiteFooter } from "@/components/site-footer";
-import { ABOUT_ORIGIN, ABOUT_THANKS, ABOUT_DISCLAIMER, ABOUT_COLLABORATORS } from "@/lib/data";
+import {
+  ABOUT_ORIGIN,
+  ABOUT_THANKS,
+  ABOUT_DISCLAIMER,
+  ABOUT_COLLABORATORS,
+  ABOUT_DOUYIN_GUIDE,
+} from "@/lib/data";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
@@ -17,7 +23,7 @@ const fadeUp = {
 };
 
 export default function AboutPage() {
-  const [originExpanded, setOriginExpanded] = useState(true);
+  const [originExpanded, setOriginExpanded] = useState(false);
 
   return (
     <div className="min-h-screen">
@@ -195,6 +201,27 @@ export default function AboutPage() {
               <span className="mx-1.5 inline-block rounded-md border border-gold/[0.2] bg-gold/[0.06] px-2 py-0.5 font-mono text-[12px] tracking-wide text-gold/70">
                 rushui13579
               </span>
+            </div>
+            <div className="mb-4 space-y-3 border-t border-gold/[0.08] pt-4 text-left text-[13px] leading-[1.85] text-muted-foreground">
+              <p className="text-center font-serif text-[11px] font-medium tracking-[0.2em] text-foreground/70">
+                抖音
+              </p>
+              <div className="space-y-2.5">
+                <div className="flex gap-2.5">
+                  <span className="mt-[0.35em] inline-block h-[3px] w-[3px] shrink-0 rounded-full bg-gold/35" />
+                  <span>
+                    {ABOUT_DOUYIN_GUIDE.followLinePrefix}
+                    <span className="font-serif font-medium text-gradient-gold">
+                      {ABOUT_DOUYIN_GUIDE.accountName}
+                    </span>
+                    {ABOUT_DOUYIN_GUIDE.followLineSuffix}
+                  </span>
+                </div>
+                <div className="flex gap-2.5">
+                  <span className="mt-[0.35em] inline-block h-[3px] w-[3px] shrink-0 rounded-full bg-gold/35" />
+                  <span>{ABOUT_DOUYIN_GUIDE.fanGroupLine}</span>
+                </div>
+              </div>
             </div>
             <div className="border-t border-gold/[0.08] pt-4 text-center font-serif text-[12px] italic tracking-widest text-muted-foreground/85">
               愿此一站，便利有缘

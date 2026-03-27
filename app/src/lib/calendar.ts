@@ -50,11 +50,10 @@ function getBaJieNote(solar: InstanceType<typeof Solar>, lunar: { getPrevJieQi: 
   return null;
 }
 
-export function getDaoCalendar(): DaoCalendarInfo {
-  const now = new Date();
-  const solar = Solar.fromDate(now);
+export function getDaoCalendar(date: Date = new Date()): DaoCalendarInfo {
+  const solar = Solar.fromDate(date);
   const lunar = solar.getLunar();
-  const daoYear = now.getFullYear() + 2697;
+  const daoYear = date.getFullYear() + 2697;
 
   return {
     daoYear: numToCN(daoYear),
@@ -128,16 +127,55 @@ const DAOIST_DATES: Record<string, string> = {
   "12-29": "南北斗星君下降",
 };
 
-function getDaoistNote(
+export interface DaoistNoteStep {
+  rule: string;
+  matched: boolean;
+  line: string | null;
+}
+
+type LunarForNote = {
+  getPrevJieQi: () => { getName: () => string; getSolar: () => InstanceType<typeof Solar> };
+  getNextJieQi: () => { getName: () => string; getSolar: () => InstanceType<typeof Solar> };
+  getDayInGanZhi: () => string;
+};
+
+const LUNAR_DAY_CN = [
+  "初一", "初二", "初三", "初四", "初五", "初六", "初七", "初八", "初九", "初十",
+  "十一", "十二", "十三", "十四", "十五", "十六", "十七", "十八", "十九", "二十",
+  "廿一", "廿二", "廿三", "廿四", "廿五", "廿六", "廿七", "廿八", "廿九", "三十",
+];
+
+function lunarMonthDayLabel(month: number, day: number): string {
+  const m =
+    month <= 10
+      ? ["", "正", "二", "三", "四", "五", "六", "七", "八", "九", "十"][month]
+      : month === 11
+        ? "十一"
+        : "十二";
+  return `${m}月${LUNAR_DAY_CN[day - 1] ?? `${day}日`}`;
+}
+
+/** 农历月日固定节日全书（与今日合成顺序一致的数据源） */
+export function getAllDaoistFixedDates(): { lunarLabel: string; desc: string }[] {
+  return Object.entries(DAOIST_DATES)
+    .map(([key, desc]) => {
+      const [m, d] = key.split("-").map(Number);
+      return { sortKey: m * 32 + d, lunarLabel: lunarMonthDayLabel(m, d), desc };
+    })
+    .sort((a, b) => a.sortKey - b.sortKey)
+    .map(({ lunarLabel, desc }) => ({ lunarLabel, desc }));
+}
+
+/** 首页「今日道门大事记」合成说明（与 getDaoistNote 顺序一致） */
+export const DAOIST_NOTE_MERGE_INTRO =
+  "按顺序判断是否写入，命中项以全角分号「；」连接：①初一或十五持斋 ②日天干为辛（三辛雷斋）③初六雷斋 ④农历月日固定节日 ⑤当日为道教八节（立春、春分、立夏、夏至、立秋、秋分、立冬、冬至）。均未命中则显示「今日无特殊记事」。";
+
+function buildDaoistNoteSteps(
   month: number,
   day: number,
   solar: InstanceType<typeof Solar>,
-  lunar: {
-    getPrevJieQi: () => { getName: () => string; getSolar: () => InstanceType<typeof Solar> };
-    getNextJieQi: () => { getName: () => string; getSolar: () => InstanceType<typeof Solar> };
-    getDayInGanZhi: () => string;
-  }
-): string {
+  lunar: LunarForNote
+): DaoistNoteStep[] {
   const fastingHint =
     day === 1 ? "初一宜持斋诵经" : day === 15 ? "十五宜持斋诵经" : null;
   const dayGan = lunar.getDayInGanZhi().charAt(0);
@@ -146,13 +184,50 @@ function getDaoistNote(
   const eventNote = DAOIST_DATES[`${month}-${day}`];
   const baJieNote = getBaJieNote(solar, lunar);
 
-  const parts: string[] = [];
-  if (fastingHint) parts.push(fastingHint);
-  if (sanXinNote) parts.push(sanXinNote);
-  if (chuLiuNote) parts.push(chuLiuNote);
-  if (eventNote) parts.push(eventNote);
-  if (baJieNote) parts.push(baJieNote);
+  return [
+    {
+      rule: "初一、十五：持斋诵经提示",
+      matched: !!fastingHint,
+      line: fastingHint,
+    },
+    {
+      rule: "日天干为「辛」：三辛日（可修雷斋）",
+      matched: !!sanXinNote,
+      line: sanXinNote,
+    },
+    {
+      rule: "初六：雷斋",
+      matched: !!chuLiuNote,
+      line: chuLiuNote,
+    },
+    {
+      rule: `农历固定节日（今日 ${lunarMonthDayLabel(month, day)}）`,
+      matched: !!eventNote,
+      line: eventNote,
+    },
+    {
+      rule: "节气八节（立春、春分、立夏、夏至、立秋、秋分、立冬、冬至落在公历当日）",
+      matched: !!baJieNote,
+      line: baJieNote,
+    },
+  ];
+}
 
+function getDaoistNote(
+  month: number,
+  day: number,
+  solar: InstanceType<typeof Solar>,
+  lunar: LunarForNote
+): string {
+  const steps = buildDaoistNoteSteps(month, day, solar, lunar);
+  const parts = steps.filter((s) => s.matched && s.line).map((s) => s.line!);
   if (parts.length > 0) return parts.join("；");
   return "今日无特殊记事";
+}
+
+/** 供弹窗展示：今日各条规则是否命中 */
+export function getDaoistNoteStepsForNow(date: Date = new Date()): DaoistNoteStep[] {
+  const solar = Solar.fromDate(date);
+  const lunar = solar.getLunar();
+  return buildDaoistNoteSteps(lunar.getMonth(), lunar.getDay(), solar, lunar);
 }

@@ -494,6 +494,11 @@ export interface WebsiteLink {
 
 export const WEBSITES: WebsiteLink[] = [
   { name: "识典古籍", url: "https://www.shidianguji.com", desc: "北京大学与字节跳动合作开发的古籍数字化开放平台，免费提供古籍在线阅读、全文检索与注解查询" },
+  {
+    name: "殆知阁",
+    url: "https://daizhige.org/",
+    desc: "中国古典文献全文检索引擎，收录儒藏、史藏、子藏、集藏等多部类典籍，支持书名、正文、作者等检索",
+  },
   { name: "中华典藏", url: "https://www.zhonghuadiancang.com", desc: "旨在推广国学知识，吸取国学精华，传承中华文化" },
   { name: "道人家", url: "https://www.daorenjia.com", desc: "中华道藏在线阅读与下载，根据《中华道藏》DJVU版逐篇人工校对，收书1500多种、约6000余万字" },
   { name: "静山草堂", url: "http://www.tangnet.cn/", desc: "道教文化、古籍经典在线阅读。" },
@@ -567,6 +572,15 @@ export const ABOUT_THANKS = `
 感谢你的使用、支持、分享。`;
 
 export const ABOUT_DISCLAIMER = `本站内容仅供学习研究道教文化，经典原文来源于公开出版物，其他内容版权归原著作权人所有。如权利人认为本站内容侵犯其合法权益，请联系我们，将在核实后立即删除。`;
+
+/** 关于页 — 联系区块内抖音引导（账号名与操作说明） */
+export const ABOUT_DOUYIN_GUIDE = {
+  accountName: "源逸靖室",
+  followLinePrefix: "欢迎打开抖音 App，搜索「",
+  followLineSuffix: "」并关注，获取本站更新动态",
+  fanGroupLine:
+    "关注后可在账号主页点击「粉丝群」入口，申请加入抖音粉丝群，与同好交流。",
+} as const;
 
 /** 共创共建名单：参与本站内容、设计、技术等贡献者 */
 export interface Collaborator {

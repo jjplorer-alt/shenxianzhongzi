@@ -1,14 +1,21 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { getDaoCalendar, type DaoCalendarInfo } from "@/lib/calendar";
+import {
+  getDaoCalendar,
+  getDaoistNoteStepsForNow,
+  getAllDaoistFixedDates,
+  DAOIST_NOTE_MERGE_INTRO,
+  type DaoCalendarInfo,
+  type DaoistNoteStep,
+} from "@/lib/calendar";
 import { getChapterOfDay, formatScriptureBySentences } from "@/lib/daodejing";
 import { NAV_CARDS } from "@/lib/data";
 import { SiteFooter } from "@/components/site-footer";
 import { PWAInstallButton } from "@/components/pwa-install-button";
-import { FolderOpen, ArrowUpRight, Info, BookMarked } from "lucide-react";
+import { FolderOpen, ArrowUpRight, Info, BookMarked, X } from "lucide-react";
 
 const fadeUp = {
   hidden: { opacity: 0, y: 16 },
@@ -21,11 +28,27 @@ const fadeUp = {
 
 export default function Home() {
   const [cal, setCal] = useState<DaoCalendarInfo | null>(null);
+  const [noteSteps, setNoteSteps] = useState<DaoistNoteStep[]>([]);
+  const [showNoteBreakdown, setShowNoteBreakdown] = useState(false);
   const [chapterOfDay, setChapterOfDay] = useState<ReturnType<typeof getChapterOfDay> | null>(null);
+  const allFixedDates = useMemo(() => getAllDaoistFixedDates(), []);
 
   useEffect(() => {
-    queueMicrotask(() => setCal(getDaoCalendar()));
+    queueMicrotask(() => {
+      const d = new Date();
+      setCal(getDaoCalendar(d));
+      setNoteSteps(getDaoistNoteStepsForNow(d));
+    });
   }, []);
+
+  useEffect(() => {
+    if (!showNoteBreakdown) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setShowNoteBreakdown(false);
+    };
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [showNoteBreakdown]);
 
   useEffect(() => {
     queueMicrotask(() => setChapterOfDay(getChapterOfDay()));
@@ -80,9 +103,18 @@ export default function Home() {
             </div>
 
             <div className="border-t border-white/[0.04] px-5 py-2.5 text-center text-[13px] text-muted-foreground">
-              {"\u4eca\u65e5\u9053\u6559\u5927\u4e8b\u8bb0\uff1a"}
+              {"\u4eca\u65e5\u9053\u95e8\u5927\u4e8b\u8bb0"}
               <br />
               <span className="text-foreground/95">{cal.todayNote}</span>
+              <div className="mt-2.5">
+                <button
+                  type="button"
+                  onClick={() => setShowNoteBreakdown(true)}
+                  className="rounded-md border border-gold/25 bg-gold/[0.06] px-3 py-1.5 text-[12px] font-medium text-gold/90 transition-colors hover:border-gold/40 hover:bg-gold/10"
+                >
+                  查看显示列表
+                </button>
+              </div>
             </div>
 
             <div className="flex flex-col items-center border-t border-white/[0.04] px-5 py-3 text-center">
@@ -102,6 +134,70 @@ export default function Home() {
             </div>
           </motion.div>
         </section>
+      )}
+
+      {showNoteBreakdown && (
+        <div
+          className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:items-center sm:p-4"
+          role="presentation"
+        >
+          <button
+            type="button"
+            aria-label="关闭"
+            className="absolute inset-0 bg-black/55 backdrop-blur-[2px]"
+            onClick={() => setShowNoteBreakdown(false)}
+          />
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="note-breakdown-title"
+            className="glass relative z-10 flex max-h-[min(88vh,640px)] w-full max-w-lg flex-col rounded-t-2xl border border-white/[0.08] shadow-2xl sm:rounded-2xl"
+          >
+            <div className="flex shrink-0 items-center justify-between border-b border-white/[0.06] px-4 py-3">
+              <h2 id="note-breakdown-title" className="font-serif text-base font-bold text-gold">
+                今日道门大事记 · 输出说明
+              </h2>
+              <button
+                type="button"
+                aria-label="关闭"
+                onClick={() => setShowNoteBreakdown(false)}
+                className="rounded-lg p-1.5 text-muted-foreground transition-colors hover:bg-white/[0.06] hover:text-foreground"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+            <div className="min-h-0 flex-1 overflow-y-auto px-4 py-3 text-left text-[13px] leading-relaxed text-muted-foreground">
+              <p className="mb-4 text-foreground/90">{DAOIST_NOTE_MERGE_INTRO}</p>
+              <p className="mb-2 font-medium text-foreground/95">今日各条规则</p>
+              <ul className="mb-5 space-y-2 border-l-2 border-gold/20 pl-3">
+                {noteSteps.map((s) => (
+                  <li key={s.rule}>
+                    <span className={s.matched ? "text-emerald-600/90 dark:text-emerald-400/90" : ""}>
+                      {s.matched ? "已命中" : "未命中"}
+                    </span>
+                    <span className="text-foreground/80"> · {s.rule}</span>
+                    {s.line ? (
+                      <div className="mt-0.5 text-foreground/95">→ {s.line}</div>
+                    ) : null}
+                  </li>
+                ))}
+              </ul>
+              <p className="mb-1 font-medium text-foreground/95">当前合成文案</p>
+              <p className="mb-5 rounded-lg border border-white/[0.06] bg-white/[0.03] px-3 py-2 text-foreground/95">
+                {cal?.todayNote ?? "—"}
+              </p>
+              <p className="mb-2 font-medium text-foreground/95">农历月日固定节日全书</p>
+              <ul className="space-y-1.5 pb-2 text-[12px]">
+                {allFixedDates.map((row) => (
+                  <li key={`${row.lunarLabel}-${row.desc}`} className="flex gap-2">
+                    <span className="w-16 shrink-0 text-gold/80">{row.lunarLabel}</span>
+                    <span>{row.desc}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </div>
       )}
 
       {/* Navigation Cards */}

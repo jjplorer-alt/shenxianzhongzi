@@ -35,9 +35,9 @@ const fadeUp = {
 };
 
 export default function ResourcesPage() {
-  const [audioOpen, setAudioOpen] = useState(true);
-  const [articleOpen, setArticleOpen] = useState(true);
-  const [siteOpen, setSiteOpen] = useState(true);
+  const [audioOpen, setAudioOpen] = useState(false);
+  const [articleOpen, setArticleOpen] = useState(false);
+  const [siteOpen, setSiteOpen] = useState(false);
 
   const audioCount = AUDIO_VIDEO_GROUPS.reduce((s, g) => s + g.items.length, 0);
   const articleCount = ARTICLE_GROUPS.reduce((s, g) => s + g.articles.length, 0);
@@ -208,7 +208,7 @@ function SectionHead({
 }
 
 function AudioVideoGroupCard({ group }: { group: AudioVideoGroup }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="glass overflow-hidden rounded-xl">
@@ -265,7 +265,7 @@ function AudioVideoGroupCard({ group }: { group: AudioVideoGroup }) {
 }
 
 function ArticleGroupCard({ group }: { group: ArticleGroup }) {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   return (
     <div className="glass overflow-hidden rounded-xl">
