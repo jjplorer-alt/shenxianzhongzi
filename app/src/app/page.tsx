@@ -138,7 +138,7 @@ export default function Home() {
 
       {showNoteBreakdown && (
         <div
-          className="fixed inset-0 z-50 flex items-end justify-center p-0 sm:items-center sm:p-4"
+          className="fixed inset-0 z-50 flex min-h-0 items-end justify-center overflow-hidden p-0 sm:items-center sm:p-4"
           role="presentation"
         >
           <button
@@ -151,7 +151,7 @@ export default function Home() {
             role="dialog"
             aria-modal="true"
             aria-labelledby="note-breakdown-title"
-            className="glass relative z-10 flex max-h-[min(88vh,640px)] w-full max-w-lg flex-col rounded-t-2xl border border-white/[0.08] shadow-2xl sm:rounded-2xl"
+            className="glass relative z-10 flex max-h-[min(90dvh,640px)] min-h-0 w-full max-w-lg flex-col overflow-hidden rounded-t-2xl border border-white/[0.08] shadow-2xl sm:max-h-[min(88vh,640px)] sm:rounded-2xl"
           >
             <div className="flex shrink-0 items-center justify-between border-b border-white/[0.06] px-4 py-3">
               <h2 id="note-breakdown-title" className="font-serif text-base font-bold text-gold">
@@ -166,7 +166,7 @@ export default function Home() {
                 <X className="h-5 w-5" />
               </button>
             </div>
-            <div className="min-h-0 flex-1 overflow-y-auto px-4 py-3 text-left text-[13px] leading-relaxed text-muted-foreground">
+            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-3 text-left text-[13px] leading-relaxed text-muted-foreground [-webkit-overflow-scrolling:touch]">
               <p className="mb-4 text-foreground/90">{DAOIST_NOTE_MERGE_INTRO}</p>
               <p className="mb-2 font-medium text-foreground/95">今日各条规则</p>
               <ul className="mb-5 space-y-2 border-l-2 border-gold/20 pl-3">
