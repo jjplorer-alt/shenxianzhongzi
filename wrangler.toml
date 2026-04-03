@@ -1,5 +1,5 @@
-# Cloudflare Pages 配置
+# Cloudflare Pages：项目名 sxzz，部署用 `npx wrangler pages deploy app/out`（直传）
 # Next.js 静态导出输出目录
-name = "shenxianzhongzi"
+name = "sxzz"
 pages_build_output_dir = "app/out"
 compatibility_date = "2026-03-07"

@@ -22,7 +22,7 @@ export const viewport: Viewport = {
 
 const siteUrl =
   process.env.NEXT_PUBLIC_SITE_URL ??
-  "https://shenxianzhongzi.pages.dev";
+  "https://sxzz.pages.dev";
 
 export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),

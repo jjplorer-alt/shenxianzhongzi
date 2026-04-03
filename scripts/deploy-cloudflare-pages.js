@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 /**
- * 一键部署到 Cloudflare Pages
- * 推送代码到 main 分支，触发 GitHub Actions 自动构建部署
+ * 仅推送触发 CI：并行部署 Cloudflare Pages 与 GitHub Pages（不在本机跑 wrangler）
  */
 const { execSync, spawn } = require("child_process");
 const path = require("path");
@@ -41,7 +40,7 @@ function getRepoInfo() {
   }
 }
 
-console.log("📦 Cloudflare Pages 一键部署\n");
+console.log("📦 推送以触发 Cloudflare + GitHub Pages（CI）\n");
 
 console.log("🔍 部署前检查...\n");
 const appDir = path.join(__dirname, "..", "app");
@@ -52,9 +51,8 @@ try {
   console.warn("⚠️ Lint 有告警，建议修复后再部署\n");
 }
 
-const repo = getRepoInfo();
-const projectName = repo?.repo || "shenxianzhongzi";
-const siteUrl = `https://${projectName}.pages.dev`;
+const CLOUDFLARE_PAGES_PROJECT = "sxzz";
+const siteUrl = `https://${CLOUDFLARE_PAGES_PROJECT}.pages.dev`;
 
 try {
   run("npm run build", {
@@ -80,7 +78,7 @@ console.log("📤 提交并推送...");
 run("git add -A");
 const status = run("git status --porcelain", { inherit: false }) || "";
 if (status.trim()) {
-  run('git commit -m "deploy: update Cloudflare Pages"');
+  run('git commit -m "deploy: Cloudflare + GitHub Pages"');
 } else {
   console.log("无新更改，直接推送");
 }
@@ -93,7 +91,7 @@ try {
 }
 
 console.log("\n" + "=".repeat(50));
-console.log("📤 推送成功，Cloudflare Pages 部署已触发");
+console.log("📤 推送成功，双站部署工作流已触发");
 console.log("=".repeat(50));
 
 console.log("\n⏳ 监控构建直到完成...\n");

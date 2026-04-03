@@ -432,6 +432,11 @@ export const ARTICLE_GROUPS: ArticleGroup[] = [
     source: "武当山道教学院",
     articles: [
       {
+        title: "何为道教的「三等布施」？",
+        date: "2026.03",
+        url: "https://mp.weixin.qq.com/s/6o2VdGxwqMZxZMJ_rCAZLQ",
+      },
+      {
         title: "凡入道者，必从四品经入手",
         date: "2025.03",
         url: "https://mp.weixin.qq.com/s/chAnfiL4QFA4BS1iv5Hp8w",
