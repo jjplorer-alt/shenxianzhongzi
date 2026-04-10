@@ -13,8 +13,8 @@ import {
 } from "@/lib/calendar";
 import { getChapterOfDay, formatScriptureBySentences } from "@/lib/daodejing";
 import { NAV_CARDS } from "@/lib/data";
-import { SiteFooter } from "@/components/site-footer";
 import { PWAInstallButton } from "@/components/pwa-install-button";
+import { SiteFooter } from "@/components/site-footer";
 import { FolderOpen, ArrowUpRight, Info, BookMarked, X } from "lucide-react";
 
 const fadeUp = {

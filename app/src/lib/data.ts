@@ -392,6 +392,11 @@ export const ARTICLE_GROUPS: ArticleGroup[] = [
     source: "北京白云观",
     articles: [
       {
+        title: "请问，你为什么要修道？",
+        date: "2026.04",
+        url: "https://mp.weixin.qq.com/s/sDAjV2CnIYsq2rFYprNLpg",
+      },
+      {
         title: "什么是《北斗经》？",
         date: "2026.01",
         url: "https://mp.weixin.qq.com/s/jcYlu--4mj1sxBQiEQeWVw",
@@ -425,6 +430,16 @@ export const ARTICLE_GROUPS: ArticleGroup[] = [
         title: "【北斗降日】朝真礼斗，赐福消灾",
         date: "2023.10",
         url: "https://mp.weixin.qq.com/s/NCQ_iICNFyrUKBgCUuSb4g",
+      },
+    ],
+  },
+  {
+    source: "嗣汉天师府",
+    articles: [
+      {
+        title: "经藏玄机，安奉有则：修道者不可不知的经书恭敬之道",
+        date: "2026.04",
+        url: "https://mp.weixin.qq.com/s/bbvZFjxjuFu-RVdtu3h6DA",
       },
     ],
   },

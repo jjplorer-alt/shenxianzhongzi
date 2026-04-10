@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "round-icons": "node scripts/round-icon-corners.mjs",
-    "prebuild": "node ../scripts/inject-sw-version.mjs",
+    "prebuild": "node ../scripts/bump-site-version.mjs && node ../scripts/inject-sw-version.mjs",
     "postbuild": "node ../scripts/inject-sw-version.mjs --restore",
     "dev": "next dev",
     "build": "next build",
