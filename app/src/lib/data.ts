@@ -108,6 +108,22 @@ export const DAOJING_INTRO_GROUPS: IntroGroup[] = [
       { title: "老君五戒", url: "/intro/wujie", desc: "太上老君传授的杀、盗、淫、妄、酒五大基本戒律，所有道教徒共守。" },
     ],
   },
+  {
+    groupTitle: "神仙传记与地理文化",
+    groupDesc: "进一步了解道教成仙途径、仙真修行脉络与地理文化传统。",
+    items: [
+      {
+        title: "历世真仙体道通鉴",
+        url: "https://a.daorenjia.com/daozang30-107",
+        desc: "元代赵道一编纂的道教仙真传记总集，系统梳理历代得道仙真的事迹与传承。",
+      },
+      {
+        title: "洞天福地岳渎名山记",
+        url: "https://a.daorenjia.com/daozang31-16",
+        desc: "唐代杜光庭编撰，是了解道教地理文化的重要文献。",
+      },
+    ],
+  },
 ];
 
 /* ─────────────────────────────────────────────────
@@ -372,7 +388,7 @@ export const BEIDOU_AUDIO_MENG: AudioVideoItem[] = [
 
 export const AUDIO_VIDEO_GROUPS: AudioVideoGroup[] = [
   {
-    groupTitle: "上海道教学院王院长 · 道教经典学修讲座",
+    groupTitle: "王驰老师 · 道教经典学修讲座",
     items: [
       { title: "道教学修概述", platform: "B站视频", url: "https://www.bilibili.com/video/BV14o7dzYEzV/" },
       { title: "道藏七部玄教发微", platform: "B站视频", url: "https://www.bilibili.com/video/BV1u64y1J79e/" },
@@ -446,6 +462,11 @@ export const ARTICLE_GROUPS: ArticleGroup[] = [
   {
     source: "武当山道教学院",
     articles: [
+      {
+        title: "道教居家修行者如何修持",
+        date: "未详",
+        url: "https://mp.weixin.qq.com/s/AUZfZzk6ryKcvT_QtVrDug",
+      },
       {
         title: "何为道教的「三等布施」？",
         date: "2026.03",
