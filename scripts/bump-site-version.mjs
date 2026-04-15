@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 /**
- * prebuild：更新部署编号与时间（上海时区），保留 semver / 起点等手工字段
+ * prebuild：每次构建递增 buildSerial，并写入 buildId、builtAt（上海时区）。
+ * semver、origin* 等保留 JSON 中已有值；发版时请视改动手工调高 app/src/lib/site-version.json 的 semver。
  */
 import { readFileSync, writeFileSync } from "fs";
 import path from "path";
