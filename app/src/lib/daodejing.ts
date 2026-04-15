@@ -95,14 +95,21 @@ export const DAODEJING_CHAPTERS: DaodejingChapter[] = [
   { title: "显质章第八十一", content: "信言不美，美言不信。善者不辩，辩者不善。知者不博，博者不知。圣人不积。既以与人，己愈有。既以与人，己愈多。天之道，利而不害。圣人之道，为而不争。", source: SOURCE_URL },
 ];
 
+export interface ChapterOfDayResult {
+  chapter: DaodejingChapter;
+  /** 1–81，与 DAODEJING_CHAPTERS 下标对应为 chapterOneBased - 1 */
+  chapterOneBased: number;
+}
+
 /** 按日期取当日章节，每日自动轮换 */
-export function getChapterOfDay(): DaodejingChapter {
+export function getChapterOfDay(): ChapterOfDayResult {
   const now = new Date();
   const start = new Date(now.getFullYear(), 0, 0);
   const diff = now.getTime() - start.getTime();
   const dayOfYear = Math.floor(diff / 86400000);
   const index = dayOfYear % DAODEJING_CHAPTERS.length;
-  return DAODEJING_CHAPTERS[index]!;
+  const chapter = DAODEJING_CHAPTERS[index]!;
+  return { chapter, chapterOneBased: index + 1 };
 }
 
 /** 随机取一章，每次调用结果不同（随缘读经） */

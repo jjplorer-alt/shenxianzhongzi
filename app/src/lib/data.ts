@@ -103,6 +103,11 @@ export const DAOJING_INTRO_GROUPS: IntroGroup[] = [
     items: [
       { title: "道德真经", url: "https://www.daorenjia.com/daozang15-649", desc: "太上老君所述，道家哲学之根源，在全球广为流传。" },
       { title: "清静经", url: "/intro/qingjingjing", desc: "全称《太上老君说常清静经》，阐明清静之道与遣欲澄心之法，全文约四百字。" },
+      {
+        title: "南华真经（庄子）",
+        url: "/intro/nanhua",
+        desc: "道教四子真经之一，即《庄子》。",
+      },
       { title: "太上感应篇", url: "https://mp.weixin.qq.com/s/PemvqJawxoUt8xf-lCIu_w", desc: "道教劝善经典，阐述善恶感应、因果报应，为民间流传极广的修身宝典。" },
       { title: "朝真发愿忏悔文", url: "/intro/chaozhen", desc: "用于诚心忏悔、改过迁善的发愿与忏悔文。本站提供经文原文链接及诵经音频。" },
       { title: "老君五戒", url: "/intro/wujie", desc: "太上老君传授的杀、盗、淫、妄、酒五大基本戒律，所有道教徒共守。" },
@@ -329,6 +334,21 @@ export const QINGJING_COMMENTATORS: Commentator[] = [
     ],
   },
 ];
+
+/* ─────────────────────────────────────────────────
+ * 南华真经（庄子）— 道门经典子页面
+ * ───────────────────────────────────────────────── */
+
+/** 道人家《南华真经》书目与全文目录（中华道藏），站内「经文原文」直达此页 */
+export const NANHUA_DAO_REN_JIA_SCRIPTURE_URL =
+  "https://www.daorenjia.com/daozang16-712";
+
+/** 本站推荐的庄子读书笔记（微信公众号） */
+export const NANHUA_NOTES_ARTICLE = {
+  label: "打开读书笔记",
+  url: "https://mp.weixin.qq.com/s/UZLqFI20viUrWrO5caEPVA",
+  note: "本站粉丝精心整理的庄子读书笔记",
+} as const;
 
 /* ─────────────────────────────────────────────────
  * 老君五戒 — 太上老君说五戒经注

@@ -11,7 +11,13 @@ import {
   type DaoCalendarInfo,
   type DaoistNoteStep,
 } from "@/lib/calendar";
+import type { ChapterOfDayResult } from "@/lib/daodejing";
 import { getChapterOfDay, formatScriptureBySentences } from "@/lib/daodejing";
+import {
+  getChenGuyingTranslation,
+  getChenGuyingAttribution,
+  formatChenTranslationLines,
+} from "@/lib/daodejing-chen-guying";
 import { NAV_CARDS } from "@/lib/data";
 import { PWAInstallButton } from "@/components/pwa-install-button";
 import { SiteFooter } from "@/components/site-footer";
@@ -30,7 +36,8 @@ export default function Home() {
   const [cal, setCal] = useState<DaoCalendarInfo | null>(null);
   const [noteSteps, setNoteSteps] = useState<DaoistNoteStep[]>([]);
   const [showNoteBreakdown, setShowNoteBreakdown] = useState(false);
-  const [chapterOfDay, setChapterOfDay] = useState<ReturnType<typeof getChapterOfDay> | null>(null);
+  const [chapterOfDay, setChapterOfDay] = useState<ChapterOfDayResult | null>(null);
+  const [showChenTranslation, setShowChenTranslation] = useState(false);
   const allFixedDates = useMemo(() => getAllDaoistFixedDates(), []);
 
   useEffect(() => {
@@ -112,7 +119,7 @@ export default function Home() {
                   onClick={() => setShowNoteBreakdown(true)}
                   className="rounded-md border border-gold/25 bg-gold/[0.06] px-3 py-1.5 text-[12px] font-medium text-gold/90 transition-colors hover:border-gold/40 hover:bg-gold/10"
                 >
-                  查看显示列表
+                  查看大事记列表
                 </button>
               </div>
             </div>
@@ -120,13 +127,35 @@ export default function Home() {
             <div className="flex flex-col items-center border-t border-white/[0.04] px-5 py-3 text-center">
               {chapterOfDay ? (
                 <>
-                  <div className="mb-1.5 text-[13px] font-medium text-foreground/95">
-                    随缘读经 · 《道德经》
-                    {chapterOfDay.title.replace(/^.+?(第.+)$/, "$1章")}
+                  <div className="mb-1.5 flex flex-wrap items-center justify-center gap-x-2 gap-y-1 text-[13px] font-medium text-foreground/95">
+                    <span>
+                      随缘读经 · 《道德经》
+                      {chapterOfDay.chapter.title.replace(/^.+?(第.+)$/, "$1章")}
+                    </span>
+                    <button
+                      type="button"
+                      aria-pressed={showChenTranslation}
+                      onClick={() => setShowChenTranslation((v) => !v)}
+                      className="rounded-md border border-gold/20 bg-gold/[0.05] px-2 py-0.5 text-[11px] font-medium text-gold/85 transition-colors hover:border-gold/35 hover:bg-gold/[0.09]"
+                    >
+                      {showChenTranslation ? "隐藏译文" : "译文"}
+                    </button>
                   </div>
                   <p className="max-w-[18rem] whitespace-pre-line text-[12px] leading-[1.9] text-muted-foreground">
-                    {formatScriptureBySentences(chapterOfDay.content)}
+                    {formatScriptureBySentences(chapterOfDay.chapter.content)}
                   </p>
+                  {showChenTranslation && (
+                    <div className="mt-2.5 w-full max-w-[20rem] border-t border-white/[0.06] pt-2.5 text-left">
+                      <p className="whitespace-pre-line text-[12px] leading-[1.85] text-foreground/88">
+                        {formatChenTranslationLines(
+                          getChenGuyingTranslation(chapterOfDay.chapterOneBased),
+                        )}
+                      </p>
+                      <p className="mt-2 text-[10px] leading-relaxed text-muted-foreground/85">
+                        今译：{getChenGuyingAttribution()}
+                      </p>
+                    </div>
+                  )}
                 </>
               ) : (
                 <div className="mb-1.5 text-[13px] text-muted-foreground">随缘读经 · 加载中…</div>
