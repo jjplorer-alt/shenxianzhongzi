@@ -15,7 +15,6 @@ import type { ChapterOfDayResult } from "@/lib/daodejing";
 import { getChapterOfDay, formatScriptureBySentences } from "@/lib/daodejing";
 import {
   getChenGuyingTranslation,
-  getChenGuyingAttribution,
   formatChenTranslationLines,
 } from "@/lib/daodejing-chen-guying";
 import { NAV_CARDS } from "@/lib/data";
@@ -152,7 +151,7 @@ export default function Home() {
                         )}
                       </p>
                       <p className="mt-2 text-[10px] leading-relaxed text-muted-foreground/85">
-                        今译：{getChenGuyingAttribution()}
+                        AI生成，仅供参考
                       </p>
                     </div>
                   )}
