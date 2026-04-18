@@ -1,7 +1,6 @@
 #!/usr/bin/env node
 /**
- * 一键部署到 GitHub Pages
- * 推送代码到 main 分支，触发 GitHub Actions 自动构建部署
+ * 校验构建后推送 main（同步仓库）。本站主域名以 Cloudflare 为准：npm run deploy
  */
 const { execSync, spawn } = require("child_process");
 const fs = require("fs");
@@ -125,19 +124,6 @@ try {
   process.exit(1);
 }
 
-// 部署结果反馈
-const repo = getRepoInfo();
-const siteUrl = repo ? `https://${repo.owner}.github.io/${repo.repo}/` : null;
-const actionsUrl = repo ? `https://github.com/${repo.owner}/${repo.repo}/actions` : null;
-
 console.log("\n" + "=".repeat(50));
-console.log("📤 推送成功，GitHub Actions 已触发");
+console.log("📤 推送成功（主站上线: npm run deploy → https://sxzz.pages.dev）");
 console.log("=".repeat(50));
-
-// 每次推送后监控直到 Actions 完成
-console.log("\n⏳ 监控构建直到完成...\n");
-try {
-  run("node scripts/watch-build.js", { cwd: path.join(__dirname, "..") });
-} catch (e) {
-  process.exit(1);
-}

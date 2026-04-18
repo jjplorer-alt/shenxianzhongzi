@@ -25,25 +25,11 @@
 
 4. 保存后，首次部署会自动开始。之后每次 push 到 `main` 都会自动部署。
 
-### 方式 B：GitHub Actions 部署（需 API Token）
+### 方式 B：本机 Wrangler 直传（`npm run deploy`）
 
-使用仓库内的 `.github/workflows/deploy-cloudflare-pages.yml`，在 GitHub Actions 中构建并上传到 Cloudflare。
+本仓库默认用根目录 `npm run deploy`：本地构建后由 Wrangler 上传到 Cloudflare Pages 项目 **sxzz**，无需 GitHub Actions。需先 `npx wrangler login`。
 
-1. **创建空 Pages 项目**
-   - Dashboard → **Workers & Pages** → **Create** → **Pages** → **Direct Upload**
-   - 项目名与仓库名一致（如 `shenxianzhongzi`）
-
-2. **获取 API 凭证**
-   - **Account ID**：Dashboard 右侧边栏
-   - **API Token**：[API Tokens](https://dash.cloudflare.com/profile/api-tokens) → **Create Token** → 使用 **Edit Cloudflare Workers** 模板，勾选 **Account - Cloudflare Pages - Edit**
-
-3. **添加 GitHub Secrets**
-   - 仓库 **Settings** → **Secrets and variables** → **Actions**
-   - 添加 `CLOUDFLARE_API_TOKEN` 和 `CLOUDFLARE_ACCOUNT_ID`
-
-4. 推送到 `main` 或手动运行 **Actions** → **Deploy to Cloudflare Pages** → **Run workflow**
-
-站点地址：`https://<项目名>.pages.dev`（如 `https://shenxianzhongzi.pages.dev`）
+站点地址示例：https://sxzz.pages.dev
 
 ---
 

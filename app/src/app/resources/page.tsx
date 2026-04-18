@@ -244,13 +244,15 @@ function AudioVideoGroupCard({ group }: { group: AudioVideoGroup }) {
                   href={item.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="glass-card group flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/15 hover:shadow-[0_6px_24px_-6px_rgba(232,198,120,0.1)]"
+                  className="glass-card group flex items-start gap-3 rounded-xl px-4 py-3 transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/15 hover:shadow-[0_6px_24px_-6px_rgba(232,198,120,0.1)]"
                 >
-                  <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gold/8 transition-transform duration-300 group-hover:scale-110">
+                  <div className="mt-0.5 flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-gold/8 transition-transform duration-300 group-hover:scale-110">
                     <Play className="h-3.5 w-3.5 text-gold" />
                   </div>
                   <div className="min-w-0 flex-1">
-                    <div className="truncate text-[13px] font-medium">{item.title}</div>
+                    <div className="break-words text-[13px] font-medium leading-snug">
+                      {item.title}
+                    </div>
                     <div className="text-[11px] text-muted-foreground">{item.platform}</div>
                   </div>
                   <ArrowUpRight className="h-3 w-3 shrink-0 text-muted-foreground/50 transition-all duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-gold" />
@@ -301,15 +303,15 @@ function ArticleGroupCard({ group }: { group: ArticleGroup }) {
                   href={a.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group flex items-center gap-3 rounded-lg px-3 py-2 transition-all duration-200 hover:bg-white/[0.03] hover:pl-4"
+                  className="group flex items-start gap-3 rounded-lg px-3 py-2 transition-all duration-200 hover:bg-white/[0.03] hover:pl-4"
                 >
-                  <span className="min-w-0 flex-1 truncate text-[13px] text-muted-foreground transition-colors group-hover:text-foreground">
+                  <span className="min-w-0 flex-1 break-words text-[13px] leading-snug text-muted-foreground transition-colors group-hover:text-foreground">
                     {a.title}
                   </span>
-                  <span className="shrink-0 text-[11px] tabular-nums text-muted-foreground/80">
+                  <span className="mt-0.5 shrink-0 text-[11px] tabular-nums text-muted-foreground/80">
                     {a.date}
                   </span>
-                  <ArrowUpRight className="h-2.5 w-2.5 shrink-0 text-muted-foreground/50 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-gold" />
+                  <ArrowUpRight className="mt-0.5 h-2.5 w-2.5 shrink-0 text-muted-foreground/50 transition-all duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-gold" />
                 </a>
               ))}
             </div>

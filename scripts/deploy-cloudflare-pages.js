@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 /**
- * 仅推送触发 CI：并行部署 Cloudflare Pages 与 GitHub Pages（不在本机跑 wrangler）
+ * 校验构建后推送 GitHub（同步仓库）。站点上线请用本机 Wrangler：npm run deploy
  */
 const { execSync, spawn } = require("child_process");
 const path = require("path");
@@ -40,7 +40,7 @@ function getRepoInfo() {
   }
 }
 
-console.log("📦 推送以触发 Cloudflare + GitHub Pages（CI）\n");
+console.log("📦 校验构建并推送 GitHub（同步仓库）\n");
 
 console.log("🔍 部署前检查...\n");
 const appDir = path.join(__dirname, "..", "app");
@@ -78,7 +78,7 @@ console.log("📤 提交并推送...");
 run("git add -A");
 const status = run("git status --porcelain", { inherit: false }) || "";
 if (status.trim()) {
-  run('git commit -m "deploy: Cloudflare + GitHub Pages"');
+  run('git commit -m "chore: sync GitHub"');
 } else {
   console.log("无新更改，直接推送");
 }
@@ -91,12 +91,5 @@ try {
 }
 
 console.log("\n" + "=".repeat(50));
-console.log("📤 推送成功，双站部署工作流已触发");
+console.log("📤 推送成功（上线请执行: npm run deploy）");
 console.log("=".repeat(50));
-
-console.log("\n⏳ 监控构建直到完成...\n");
-try {
-  run("node scripts/watch-cloudflare-build.js", { cwd: path.join(__dirname, "..") });
-} catch (e) {
-  process.exit(1);
-}
