@@ -56,7 +56,8 @@ jobs:
         run: npx wrangler@latest pages deploy app/out --project-name=sxzz --branch=main
 
       - name: Deployment complete
-        run: echo "✅ Cloudflare Pages: https://sxzz.pages.dev"
+        run: |
+          echo "Cloudflare Pages: https://sxzz.pages.dev"
 
   github-pages:
     runs-on: ubuntu-latest
