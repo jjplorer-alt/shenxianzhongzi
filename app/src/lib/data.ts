@@ -416,6 +416,23 @@ export const AUDIO_VIDEO_GROUPS: AudioVideoGroup[] = [
       { title: "道门经典研修导论", platform: "B站视频", url: "https://www.bilibili.com/video/BV1BN411x7yj/" },
     ],
   },
+  {
+    groupTitle: "白云讲堂",
+    items: [
+      { title: "《太上玄门晚坛功课经》解读", platform: "B站视频", url: "https://www.bilibili.com/video/BV1RqbZz5EQ8/" },
+      { title: "《太上玄门早坛功课经》解读", platform: "B站视频", url: "https://www.bilibili.com/video/BV1GBg7z2E69/" },
+    ],
+  },
+  {
+    groupTitle: "义学讲堂",
+    items: [
+      {
+        title: "言意之间：略谈中古道经中的寓言故事（万明旭 · 义学讲堂 2026年第2期）",
+        platform: "B站视频",
+        url: "https://www.bilibili.com/video/BV1pqzeBeENv/",
+      },
+    ],
+  },
 ];
 
 export interface ArticleGroup {
