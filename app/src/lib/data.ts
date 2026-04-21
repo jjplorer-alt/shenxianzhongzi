@@ -421,6 +421,8 @@ export const AUDIO_VIDEO_GROUPS: AudioVideoGroup[] = [
     items: [
       { title: "《太上玄门晚坛功课经》解读", platform: "B站视频", url: "https://www.bilibili.com/video/BV1RqbZz5EQ8/" },
       { title: "《太上玄门早坛功课经》解读", platform: "B站视频", url: "https://www.bilibili.com/video/BV1GBg7z2E69/" },
+      { title: "周道长讲《修真图》2026.4.19（上）", platform: "B站视频", url: "https://www.bilibili.com/video/BV1E9drBXE6b/" },
+      { title: "周道长讲《修真图》2026.4.19（下）", platform: "B站视频", url: "https://www.bilibili.com/video/BV1sLdSBQEao/" },
     ],
   },
   {

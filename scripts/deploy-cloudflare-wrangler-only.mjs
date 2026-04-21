@@ -16,6 +16,8 @@ const env = {
   ...process.env,
   NEXT_PUBLIC_BASE_PATH: "",
   NEXT_PUBLIC_SITE_URL: "https://sxzz.pages.dev",
+  /** 由 bump-site-version.mjs 读取：仅部署构建时递增 site-version.json 的 semver 补丁位 */
+  SXZZ_DEPLOY: "1",
 };
 
 console.log("📦 Wrangler 直传 → Cloudflare Pages（sxzz）\n");
